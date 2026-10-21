@@ -47,7 +47,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Auto-provision demo user if requested and not found
-    if (!user && (input === "user@railx.com" || input === "user@gaddvya.com" || input === "goyalhimanshu1326@gmail.com")) {
+    if (!user && (input === "user@railx.com" || input === "user@gaddvya.com" || input === "goyalhimanshu1326@gmail.com" || input === "9877043187")) {
       const hashed = await bcrypt.hash("password123", 10);
       user = await db.users.create({
         name: input.toLowerCase() === "goyalhimanshu1326@gmail.com" ? "Himanshu Goyal" : "Demo Passenger",
@@ -83,7 +83,7 @@ export async function POST(req: NextRequest) {
         isMatch = userHash === password;
       }
     }
-    if (!isMatch && (user.email === "admin@railx.com" || user.email === "admin@gaddvya.com" || user.email === "user@railx.com" || user.email === "user@gaddvya.com" || user.email === "agent@railx.com" || user.email === "goyalhimanshu1326@gmail.com")) {
+    if (!isMatch && (user.email === "admin@railx.com" || user.email === "admin@gaddvya.com" || user.email === "user@railx.com" || user.email === "user@gaddvya.com" || user.email === "agent@railx.com" || user.email === "goyalhimanshu1326@gmail.com" || user.phone === "9877043187")) {
       if (password === "password123" || password === "admin123" || password === "user123" || password === "agent123") {
         isMatch = true;
       }

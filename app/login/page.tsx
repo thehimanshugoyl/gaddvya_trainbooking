@@ -83,6 +83,7 @@ export default function Login() {
       setInfoMessage(res.data.message);
       if (res.data.previewOtp) {
         setPreviewOtp(res.data.previewOtp);
+        setOtp(res.data.previewOtp);
       }
     } catch (err: any) {
       setError(err.response?.data?.error || "Failed to send Login OTP.");
@@ -120,7 +121,7 @@ export default function Login() {
 
   const fillCredentials = (id: string, pass: string) => {
     setUserType("user");
-    setLoginMethod("password");
+    if (id.includes("admin")) setLoginMethod("password");
     setIdentifier(id);
     setPassword(pass);
   };
@@ -250,7 +251,14 @@ export default function Login() {
                 onClick={() => fillCredentials("goyalhimanshu1326@gmail.com", "user123")}
                 className="bg-zinc-800 hover:bg-zinc-700 text-blue-300 px-2.5 py-1 rounded-lg text-[11px] font-semibold border border-zinc-700 transition"
               >
-                Citizen User
+                Citizen Mail
+              </button>
+              <button
+                type="button"
+                onClick={() => fillCredentials("9877043187", "user123")}
+                className="bg-zinc-800 hover:bg-zinc-700 text-emerald-300 px-2.5 py-1 rounded-lg text-[11px] font-semibold border border-zinc-700 transition"
+              >
+                Citizen Phone
               </button>
               <button
                 type="button"
@@ -396,7 +404,7 @@ export default function Login() {
                     value={identifier}
                     onChange={(e) => setIdentifier(e.target.value)}
                     className="flex-1 bg-zinc-950/80 dark:bg-zinc-950/80 light:bg-zinc-50 border border-zinc-750 dark:border-zinc-750 light:border-zinc-300 rounded-xl p-3 text-white dark:text-white light:text-zinc-900 text-sm focus:border-blue-500 focus:outline-none disabled:opacity-60"
-                    placeholder="goyalhimanshu1326@gmail.com or 9876501234"
+                    placeholder="goyalhimanshu1326@gmail.com or 9877043187"
                     required
                   />
                   <button

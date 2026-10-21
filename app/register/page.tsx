@@ -96,6 +96,7 @@ export default function Register() {
       setInfoMessage(res.data.message);
       if (res.data.previewOtp) {
         setEmailPreviewOtp(res.data.previewOtp);
+        setEmailOtp(res.data.previewOtp);
       }
     } catch (err: any) {
       setError(err.response?.data?.error || "Failed to send Email OTP");
@@ -147,6 +148,7 @@ export default function Register() {
       setInfoMessage(res.data.message);
       if (res.data.previewOtp) {
         setPhonePreviewOtp(res.data.previewOtp);
+        setPhoneOtp(res.data.previewOtp);
       }
     } catch (err: any) {
       setError(err.response?.data?.error || "Failed to send Phone OTP");
@@ -174,6 +176,94 @@ export default function Register() {
       setInfoMessage("✅ Indian mobile number successfully verified!");
     } catch (err: any) {
       setError(err.response?.data?.error || "Invalid or expired Mobile OTP.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Send OTP to Both Email & Mobile in parallel
+  const handleSendBothOtp = async () => {
+    const cleanMail = form.email.trim().toLowerCase();
+    const cleanPhone = cleanIndianPhone(form.phone);
+
+    if (!cleanMail || !isAllowedEmail(cleanMail)) {
+      setError("Please enter a valid email address (@gmail.com, @outlook.com, @icloud.com, @yahoo.com).");
+      return;
+    }
+    if (!isValidIndianPhone(cleanPhone)) {
+      setError("Please enter a valid 10-digit Indian mobile number starting with 6, 7, 8, or 9.");
+      return;
+    }
+
+    setError("");
+    setLoading(true);
+    try {
+      const [resMail, resPhone] = await Promise.all([
+        axios.post("/api/auth/send-otp", {
+          identifier: cleanMail,
+          type: "email",
+          purpose: "register",
+          name: form.name,
+        }),
+        axios.post("/api/auth/send-otp", {
+          identifier: cleanPhone,
+          type: "phone",
+          purpose: "register",
+        }),
+      ]);
+
+      setEmailOtpSent(true);
+      setEmailTimer(60);
+      if (resMail.data.previewOtp) {
+        setEmailPreviewOtp(resMail.data.previewOtp);
+        setEmailOtp(resMail.data.previewOtp);
+      }
+
+      setPhoneOtpSent(true);
+      setPhoneTimer(60);
+      if (resPhone.data.previewOtp) {
+        setPhonePreviewOtp(resPhone.data.previewOtp);
+        setPhoneOtp(resPhone.data.previewOtp);
+      }
+
+      setInfoMessage("✅ Verification OTPs dispatched to both your Email and Mobile number!");
+    } catch (err: any) {
+      setError(err.response?.data?.error || "Failed to dispatch verification codes.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Verify Both Email & Mobile in 1 Click
+  const handleVerifyBothOtp = async () => {
+    if (!emailOtp || emailOtp.length !== 6 || !phoneOtp || phoneOtp.length !== 6) {
+      setError("Please ensure both 6-digit Email OTP and Mobile OTP are entered.");
+      return;
+    }
+    setError("");
+    setLoading(true);
+    try {
+      const cleanMail = form.email.trim().toLowerCase();
+      const cleanPhone = cleanIndianPhone(form.phone);
+
+      await Promise.all([
+        axios.post("/api/auth/verify-otp", {
+          identifier: cleanMail,
+          otp: emailOtp,
+          purpose: "register",
+        }),
+        axios.post("/api/auth/verify-otp", {
+          identifier: cleanPhone,
+          otp: phoneOtp,
+          purpose: "register",
+        }),
+      ]);
+
+      setIsEmailVerified(true);
+      setIsPhoneVerified(true);
+      setInfoMessage("✅ Both Email and Mobile number verified successfully!");
+    } catch (err: any) {
+      setError(err.response?.data?.error || "Verification failed. Please check OTP codes.");
     } finally {
       setLoading(false);
     }
@@ -397,6 +487,46 @@ export default function Register() {
               <p className="text-xs text-gray-400">
                 Authenticate your email and mobile number using 6-digit one-time passwords (OTP).
               </p>
+            </div>
+
+            {/* 1-Click Dual Verification Quick Banner */}
+            <div className="bg-gradient-to-r from-blue-950/60 via-indigo-950/40 to-purple-950/60 border border-blue-500/30 p-4 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-3 shadow-lg">
+              <div>
+                <div className="text-xs font-bold text-blue-200 flex items-center gap-1.5">
+                  <span>⚡ Quick 1-Click Verification</span>
+                  <span className="bg-blue-500/20 text-blue-300 text-[10px] px-2 py-0.5 rounded-full border border-blue-400/30">Dual Auth</span>
+                </div>
+                <p className="text-[11px] text-gray-300 mt-1">
+                  Dispatch and verify both Email and Mobile number simultaneously in one step.
+                </p>
+              </div>
+              <div className="flex gap-2 w-full sm:w-auto">
+                {(!isEmailVerified || !isPhoneVerified) ? (
+                  (!emailOtpSent && !phoneOtpSent) ? (
+                    <button
+                      type="button"
+                      onClick={handleSendBothOtp}
+                      disabled={loading || !isEmailValidFormat || !isPhoneValidFormat}
+                      className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 disabled:opacity-40 text-white font-bold text-xs px-4 py-2.5 rounded-xl transition shadow-md whitespace-nowrap cursor-pointer"
+                    >
+                      ⚡ Send OTP to Both
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={handleVerifyBothOtp}
+                      disabled={loading || emailOtp.length !== 6 || phoneOtp.length !== 6}
+                      className="w-full sm:w-auto bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 disabled:opacity-40 text-white font-bold text-xs px-4 py-2.5 rounded-xl transition shadow-md whitespace-nowrap cursor-pointer"
+                    >
+                      ✓ Verify Both Now
+                    </button>
+                  )
+                ) : (
+                  <span className="text-xs font-bold text-emerald-400 bg-emerald-950/60 border border-emerald-500/40 px-3 py-1.5 rounded-xl flex items-center gap-1.5">
+                    ✓ Both Channels Verified
+                  </span>
+                )}
+              </div>
             </div>
 
             {/* Email OTP Card */}
