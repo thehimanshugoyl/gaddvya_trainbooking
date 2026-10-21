@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLanguageStore } from "@/store/useLanguageStore";
 
 interface LiveTrainTrackerModalProps {
@@ -16,54 +16,137 @@ export default function LiveTrainTrackerModal({
 }: LiveTrainTrackerModalProps) {
   const { lang, t } = useLanguageStore();
   const [trainNumber, setTrainNumber] = useState(initialTrainNumber);
-  const [trackingData, setTrackingData] = useState<any>({
-    trainNumber: "22436",
-    trainName: "Vande Bharat Express",
-    from: "New Delhi (NDLS)",
-    to: "Varanasi Jn (BSB)",
-    currentStation: "Kanpur Central (CNB)",
-    nextStation: "Prayagraj Jn (PRYJ)",
-    status: "Running On Time",
-    speed: "128 km/h",
-    delayMinutes: 0,
-    platform: "Platform 1",
-    lastUpdated: "Just now (Live GPS Satellite)",
-    stations: [
-      { name: "New Delhi (NDLS)", schDep: "06:00", actDep: "06:00", statusKey: "stationPassed", passed: true },
-      { name: "Kanpur Central (CNB)", schArr: "10:08", actArr: "10:08", statusKey: "stationPassed", passed: true },
-      { name: "Prayagraj Jn (PRYJ)", schArr: "12:08", actArr: "12:10", statusKey: "stationApproaching", current: true },
-      { name: "Varanasi Jn (BSB)", schArr: "14:00", actArr: "14:00", statusKey: "stationExpected", passed: false },
-    ],
-  });
+
+  const getPresetData = (num: string) => {
+    const cleanNum = (num || "22436").trim();
+    if (cleanNum === "22436") {
+      return {
+        trainNumber: "22436",
+        trainName: "Vande Bharat Express",
+        from: "New Delhi (NDLS)",
+        to: "Varanasi Jn (BSB)",
+        currentStation: "Kanpur Central (CNB)",
+        nextStation: "Prayagraj Jn (PRYJ)",
+        status: "Running On Time",
+        speed: "134 km/h",
+        delayMinutes: 0,
+        platform: "Platform 1",
+        lastUpdated: "Just now (Live GPS Satellite)",
+        stations: [
+          { name: "New Delhi (NDLS)", schDep: "06:00", actDep: "06:00", statusKey: "stationPassed", passed: true },
+          { name: "Kanpur Central (CNB)", schArr: "10:08", actArr: "10:08", statusKey: "stationPassed", passed: true },
+          { name: "Prayagraj Jn (PRYJ)", schArr: "12:08", actArr: "12:10", statusKey: "stationApproaching", current: true },
+          { name: "Varanasi Jn (BSB)", schArr: "14:00", actArr: "14:00", statusKey: "stationExpected", passed: false },
+        ],
+      };
+    } else if (cleanNum === "12952") {
+      return {
+        trainNumber: "12952",
+        trainName: "Tejas Rajdhani Express",
+        from: "New Delhi (NDLS)",
+        to: "Mumbai Central (MMCT)",
+        currentStation: "Kota Junction (KOTA)",
+        nextStation: "Ratlam Junction (RTM)",
+        status: "Running On Time",
+        speed: "128 km/h",
+        delayMinutes: 0,
+        platform: "Platform 3",
+        lastUpdated: "Just now (Live GPS Satellite)",
+        stations: [
+          { name: "New Delhi (NDLS)", schDep: "16:55", actDep: "16:55", statusKey: "stationPassed", passed: true },
+          { name: "Kota Jn (KOTA)", schArr: "21:30", actArr: "21:30", statusKey: "stationPassed", passed: true },
+          { name: "Ratlam Jn (RTM)", schArr: "00:25", actArr: "00:27", statusKey: "stationApproaching", current: true },
+          { name: "Vadodara Jn (BRC)", schArr: "03:40", actArr: "03:40", statusKey: "stationExpected", passed: false },
+          { name: "Mumbai Central (MMCT)", schArr: "08:35", actArr: "08:35", statusKey: "stationExpected", passed: false },
+        ],
+      };
+    } else if (cleanNum === "12004") {
+      return {
+        trainNumber: "12004",
+        trainName: "Lucknow Shatabdi Express",
+        from: "New Delhi (NDLS)",
+        to: "Lucknow Charbagh (LKO)",
+        currentStation: "Aligarh Junction (ALJN)",
+        nextStation: "Kanpur Central (CNB)",
+        status: "Running On Time",
+        speed: "122 km/h",
+        delayMinutes: 0,
+        platform: "Platform 2",
+        lastUpdated: "Just now (Live GPS Satellite)",
+        stations: [
+          { name: "New Delhi (NDLS)", schDep: "06:10", actDep: "06:10", statusKey: "stationPassed", passed: true },
+          { name: "Ghaziabad (GZB)", schArr: "06:48", actArr: "06:48", statusKey: "stationPassed", passed: true },
+          { name: "Aligarh Jn (ALJN)", schArr: "07:47", actArr: "07:49", statusKey: "stationApproaching", current: true },
+          { name: "Kanpur Central (CNB)", schArr: "11:20", actArr: "11:20", statusKey: "stationExpected", passed: false },
+          { name: "Lucknow Charbagh (LKO)", schArr: "12:40", actArr: "12:40", statusKey: "stationExpected", passed: false },
+        ],
+      };
+    } else if (cleanNum === "20608") {
+      return {
+        trainNumber: "20608",
+        trainName: "Mysuru - Chennai Vande Bharat",
+        from: "KSR Bengaluru (SBC)",
+        to: "MGR Chennai Central (MAS)",
+        currentStation: "Katpadi Junction (KPD)",
+        nextStation: "MGR Chennai Central (MAS)",
+        status: "Running On Time",
+        speed: "130 km/h",
+        delayMinutes: 0,
+        platform: "Platform 7",
+        lastUpdated: "Just now (Live GPS Satellite)",
+        stations: [
+          { name: "KSR Bengaluru (SBC)", schDep: "14:50", actDep: "14:50", statusKey: "stationPassed", passed: true },
+          { name: "Bengaluru Cantt (BNC)", schArr: "15:00", actArr: "15:00", statusKey: "stationPassed", passed: true },
+          { name: "Katpadi Jn (KPD)", schArr: "17:33", actArr: "17:35", statusKey: "stationApproaching", current: true },
+          { name: "MGR Chennai Central (MAS)", schArr: "19:20", actArr: "19:20", statusKey: "stationExpected", passed: false },
+        ],
+      };
+    }
+
+    return {
+      trainNumber: cleanNum,
+      trainName: cleanNum.startsWith("22")
+        ? "Vande Bharat Express"
+        : cleanNum.startsWith("12")
+        ? "Superfast Express"
+        : "Mail Express",
+      from: "Origin Junction (NDLS)",
+      to: "Destination Terminal (TER)",
+      currentStation: "Intermediate Junction",
+      nextStation: "Next Approaching Station",
+      status: "Running On Time",
+      speed: `${115 + Math.floor(Math.random() * 25)} km/h`,
+      delayMinutes: Math.random() > 0.75 ? 8 : 0,
+      platform: `Platform ${1 + (parseInt(cleanNum || "1") % 6)}`,
+      lastUpdated: "Live NTES GPS Satellite",
+      stations: [
+        { name: "Origin Terminal", schDep: "06:00", actDep: "06:00", statusKey: "stationPassed", passed: true },
+        { name: "Transit Junction", schArr: "10:15", actArr: "10:15", statusKey: "stationPassed", passed: true },
+        { name: "Approaching Station", schArr: "12:45", actArr: "12:47", statusKey: "stationApproaching", current: true },
+        { name: "Destination Terminal", schArr: "16:30", actArr: "16:30", statusKey: "stationExpected", passed: false },
+      ],
+    };
+  };
+
+  const [trackingData, setTrackingData] = useState<any>(getPresetData(initialTrainNumber));
+
+  useEffect(() => {
+    if (initialTrainNumber) {
+      setTrainNumber(initialTrainNumber);
+      setTrackingData(getPresetData(initialTrainNumber));
+    }
+  }, [initialTrainNumber, isOpen]);
 
   if (!isOpen) return null;
 
   const handleTrack = (e: React.FormEvent) => {
     e.preventDefault();
-    const cleanNum = trainNumber.trim();
-    setTrackingData({
-      trainNumber: cleanNum || "12952",
-      trainName: cleanNum.startsWith("22")
-        ? "Vande Bharat Express"
-        : cleanNum.startsWith("12")
-        ? "Tejas Rajdhani Express"
-        : "Superfast Express",
-      from: "New Delhi (NDLS)",
-      to: cleanNum.startsWith("1295") ? "Mumbai Central (MMCT)" : "Varanasi Jn (BSB)",
-      currentStation: "Intermediate Junction",
-      nextStation: "Upcoming Terminal",
-      status: "Running On Time",
-      speed: `${110 + Math.floor(Math.random() * 30)} km/h`,
-      delayMinutes: Math.random() > 0.7 ? 12 : 0,
-      platform: `Platform ${1 + (parseInt(cleanNum || "1") % 6)}`,
-      lastUpdated: "Live NTES Satellite",
-      stations: [
-        { name: "Origin Terminal", schDep: "06:00", actDep: "06:00", statusKey: "stationPassed", passed: true },
-        { name: "Live Crossing Station", schArr: "10:15", actArr: "10:15", statusKey: "stationPassed", passed: true },
-        { name: "Next Halting Station", schArr: "12:45", actArr: "12:45", statusKey: "stationApproaching", current: true },
-        { name: "Destination Terminal", schArr: "16:30", actArr: "16:30", statusKey: "stationExpected", passed: false },
-      ],
-    });
+    setTrackingData(getPresetData(trainNumber));
+  };
+
+  const handleSelectQuickTrain = (num: string) => {
+    setTrainNumber(num);
+    setTrackingData(getPresetData(num));
   };
 
   return (
@@ -93,22 +176,48 @@ export default function LiveTrainTrackerModal({
           </button>
         </div>
 
-        {/* Search input bar */}
-        <form onSubmit={handleTrack} className="p-4 bg-zinc-950/80 border-b border-zinc-800 flex gap-2 shrink-0">
-          <input
-            type="text"
-            value={trainNumber}
-            onChange={(e) => setTrainNumber(e.target.value)}
-            placeholder={t("enterTrainNumber")}
-            className="flex-1 bg-gray-900 border border-zinc-700 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm focus:border-blue-500 focus:outline-none font-mono"
-          />
-          <button
-            type="submit"
-            className="bg-blue-600 hover:bg-blue-500 text-white font-bold px-5 py-2.5 rounded-xl text-xs transition cursor-pointer flex items-center gap-1.5"
-          >
-            <span>🔍 {t("trackLiveBtn")}</span>
-          </button>
-        </form>
+        {/* Search input bar & Quick Selectors */}
+        <div className="p-4 bg-zinc-950/80 border-b border-zinc-800 shrink-0 space-y-3">
+          <form onSubmit={handleTrack} className="flex gap-2">
+            <input
+              type="text"
+              value={trainNumber}
+              onChange={(e) => setTrainNumber(e.target.value)}
+              placeholder={t("enterTrainNumber")}
+              className="flex-1 bg-gray-900 border border-zinc-700 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm focus:border-blue-500 focus:outline-none font-mono"
+            />
+            <button
+              type="submit"
+              className="bg-blue-600 hover:bg-blue-500 text-white font-bold px-5 py-2.5 rounded-xl text-xs transition cursor-pointer flex items-center gap-1.5"
+            >
+              <span>🔍 {t("trackLiveBtn")}</span>
+            </button>
+          </form>
+
+          {/* Quick train pills */}
+          <div className="flex flex-wrap items-center gap-1.5 text-[11px]">
+            <span className="text-zinc-400 mr-1">⚡ Quick:</span>
+            {[
+              { num: "22436", name: "22436 Vande Bharat" },
+              { num: "12952", name: "12952 Tejas Rajdhani" },
+              { num: "12004", name: "12004 Shatabdi" },
+              { num: "20608", name: "20608 Chennai VB" },
+            ].map((p) => (
+              <button
+                key={p.num}
+                type="button"
+                onClick={() => handleSelectQuickTrain(p.num)}
+                className={`px-2.5 py-1 rounded-lg border font-mono transition cursor-pointer ${
+                  trainNumber === p.num
+                    ? "bg-blue-600 text-white border-blue-500 font-bold"
+                    : "bg-zinc-900 text-zinc-300 border-zinc-750 hover:bg-zinc-800"
+                }`}
+              >
+                {p.name}
+              </button>
+            ))}
+          </div>
+        </div>
 
         {/* Live Status Content */}
         <div className="p-6 space-y-6 overflow-y-auto flex-1">
@@ -140,7 +249,7 @@ export default function LiveTrainTrackerModal({
                     : `⚠️ ${t("delayedBy")} ${trackingData.delayMinutes}m`}
                 </span>
                 <span className="text-[11px] text-gray-400 block mt-1 font-mono">
-                  {t("speed")}: {trackingData.speed}
+                  {t("speed")}: <strong className="text-emerald-400">{trackingData.speed}</strong>
                 </span>
               </div>
             </div>

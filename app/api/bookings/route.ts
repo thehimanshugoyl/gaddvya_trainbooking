@@ -93,6 +93,8 @@ export async function POST(req: NextRequest) {
       date: train.date,
       classType: matchedClass ? matchedClass.classType : classType,
       seats: numSeats,
+      passengerName: passengersList[0]?.name || passengerName || decoded.name || "Himanshu Goyal",
+      passengerAge: passengersList[0]?.age || passengerAge || 21,
       totalPrice,
       status: "confirmed",
       paymentStatus: "paid",

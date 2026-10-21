@@ -121,9 +121,13 @@ export default function Bookings() {
                         #{booking.train?.trainNumber}
                       </span>
                       {booking.pnr && (
-                        <span className="bg-yellow-950/70 border border-yellow-500/50 text-yellow-400 text-xs px-2.5 py-1 rounded font-mono font-semibold">
-                          {t("pnr")}: {booking.pnr}
-                        </span>
+                        <Link
+                          href="/pnr"
+                          className="bg-yellow-950/70 border border-yellow-500/50 hover:bg-yellow-900/80 text-yellow-400 text-xs px-2.5 py-1 rounded font-mono font-semibold transition inline-flex items-center gap-1"
+                          title="Track PNR live"
+                        >
+                          <span>{t("pnr")}: {booking.pnr} ↗</span>
+                        </Link>
                       )}
                       {booking.classType && (
                         <span className="bg-blue-900/60 text-blue-300 text-xs px-2 py-0.5 rounded font-semibold">

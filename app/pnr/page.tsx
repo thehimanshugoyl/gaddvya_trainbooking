@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import axios from "axios";
 import Link from "next/link";
@@ -13,15 +14,14 @@ export default function PnrPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handleSearchPnr = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!pnr.trim()) return;
+  const searchPnrValue = async (targetPnr: string) => {
+    if (!targetPnr.trim()) return;
     setLoading(true);
     setError("");
     setBooking(null);
 
     try {
-      const res = await axios.get(`/api/bookings/${pnr.trim()}`);
+      const res = await axios.get(`/api/bookings/${targetPnr.trim()}`);
       setBooking(res.data.booking);
     } catch (err: any) {
       setError(
@@ -32,27 +32,37 @@ export default function PnrPage() {
     }
   };
 
+  const handleSearchPnr = (e: React.FormEvent) => {
+    e.preventDefault();
+    searchPnrValue(pnr);
+  };
+
+  const handleQuickPnr = (val: string) => {
+    setPnr(val);
+    searchPnrValue(val);
+  };
+
   return (
     <div className="min-h-screen bg-gray-950 text-white flex flex-col justify-between transition-colors">
       {/* Official IRCTC Navigation Bar */}
       <IrctcNavBar />
 
       {/* Main Container */}
-      <main className="max-w-3xl mx-auto w-full my-auto p-4 md:p-6 flex-1">
-        <div className="text-center mb-8">
-          <div className="inline-block bg-zinc-900 border border-zinc-700 text-zinc-300 text-xs px-3 py-1 rounded-full mb-3">
+      <main className="max-w-4xl mx-auto w-full my-auto p-4 md:p-6 flex-1">
+        <div className="text-center mb-6">
+          <div className="inline-block bg-zinc-900 border border-zinc-700 text-zinc-300 text-xs px-3.5 py-1 rounded-full mb-3">
             {t("pnrStatus")}
           </div>
           <h1 className="text-3xl md:text-4xl font-extrabold text-white mb-2">
             {t("pnrStatus")}
           </h1>
-          <p className="text-gray-400 text-sm max-w-lg mx-auto">
+          <p className="text-gray-400 text-xs sm:text-sm max-w-xl mx-auto">
             {t("pnrSearchDesc")}
           </p>
         </div>
 
         {/* PNR Search Card */}
-        <div className="bg-gray-850 border border-gray-800 rounded-2xl p-6 shadow-xl mb-8">
+        <div className="bg-gray-900 border border-gray-800 rounded-3xl p-6 shadow-xl mb-8">
           <form onSubmit={handleSearchPnr} className="flex flex-col sm:flex-row gap-3">
             <div className="flex-1 relative">
               <input
@@ -77,6 +87,32 @@ export default function PnrPage() {
             </button>
           </form>
 
+          {/* Quick Demo PNRs */}
+          <div className="flex flex-wrap items-center gap-2 mt-4 pt-4 border-t border-gray-800 text-xs">
+            <span className="text-gray-400 font-medium">{t("quickDemoPnrs")}</span>
+            <button
+              type="button"
+              onClick={() => handleQuickPnr("8429103941")}
+              className="bg-zinc-800 hover:bg-zinc-700 text-blue-300 font-mono px-3 py-1 rounded-lg border border-zinc-700 transition cursor-pointer"
+            >
+              8429103941 (Vande Bharat)
+            </button>
+            <button
+              type="button"
+              onClick={() => handleQuickPnr("6518294012")}
+              className="bg-zinc-800 hover:bg-zinc-700 text-purple-300 font-mono px-3 py-1 rounded-lg border border-zinc-700 transition cursor-pointer"
+            >
+              6518294012 (Tejas Rajdhani)
+            </button>
+            <button
+              type="button"
+              onClick={() => handleQuickPnr("9310482715")}
+              className="bg-zinc-800 hover:bg-zinc-700 text-emerald-300 font-mono px-3 py-1 rounded-lg border border-zinc-700 transition cursor-pointer"
+            >
+              9310482715 (Shatabdi)
+            </button>
+          </div>
+
           {error && (
             <div className="mt-4 bg-red-950/40 border border-red-800 text-red-300 p-3.5 rounded-xl text-sm flex items-center gap-2">
               <span>⚠️</span>
@@ -87,82 +123,162 @@ export default function PnrPage() {
 
         {/* PNR Results Card */}
         {booking && (
-          <div className="bg-gray-850 border border-gray-750 rounded-2xl p-6 shadow-2xl transition animate-fadeIn">
+          <div className="bg-gray-900 border border-gray-750 rounded-3xl p-6 sm:p-8 shadow-2xl transition animate-fadeIn space-y-6">
             {/* Header Status */}
-            <div className="flex flex-wrap justify-between items-start gap-4 border-b border-gray-800 pb-5 mb-5">
+            <div className="flex flex-wrap justify-between items-start gap-4 border-b border-gray-800 pb-5">
               <div>
                 <span className="text-xs text-gray-400 font-mono uppercase">{t("pnr")}</span>
-                <p className="text-2xl font-black text-yellow-400 font-mono tracking-wider">
+                <p className="text-3xl font-black text-amber-300 font-mono tracking-wider">
                   {booking.pnr || booking._id}
                 </p>
                 <p className="text-xs text-gray-400 mt-1">
-                  Booked on {new Date(booking.createdAt).toLocaleDateString("en-IN")}
+                  Booked on {new Date(booking.created_at || booking.createdAt || Date.now()).toLocaleDateString("en-IN")}
                 </p>
               </div>
 
               <div className="text-right">
                 <span
-                  className={`px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider ${
+                  className={`px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider ${
                     booking.status === "confirmed"
-                      ? "bg-green-900/80 text-green-300 border border-green-700"
-                      : "bg-red-900/80 text-red-300 border border-red-700"
+                      ? "bg-emerald-950 text-emerald-300 border border-emerald-700"
+                      : "bg-red-950 text-red-300 border border-red-700"
                   }`}
                 >
                   ● {booking.status === "confirmed" ? t("confirmed") : t("cancelled")}
                 </span>
-                <p className="text-xs text-blue-300 font-semibold mt-2">
-                  {t("classType")}: {booking.classType || "SL"} • {booking.seats} {t("seats")}
+                <p className="text-xs text-blue-300 font-semibold mt-2 font-mono">
+                  {t("classType")}: {booking.class_type || booking.classType || "CC"} • {booking.seats} {t("seats")}
                 </p>
               </div>
             </div>
 
-            {/* Train & Journey Route */}
-            <div className="bg-gray-900/80 border border-gray-800 rounded-xl p-4 mb-6">
-              <div className="flex justify-between items-center mb-3">
-                <h3 className="text-base font-bold text-white">
-                  {booking.train?.trainName || "Express Train"}
-                </h3>
-                <span className="bg-gray-800 text-gray-300 text-xs px-2.5 py-0.5 rounded font-mono">
-                  #{booking.train?.trainNumber}
+            {/* Chart Preparation Verified Banner */}
+            <div className="bg-gradient-to-r from-emerald-950/70 via-slate-900 to-emerald-950/70 border border-emerald-700/60 p-4 rounded-2xl flex items-center justify-between text-xs">
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">📋</span>
+                <div>
+                  <h4 className="font-bold text-emerald-300 text-sm">{t("chartStatus")}</h4>
+                  <p className="text-slate-300 text-[11px]">{t("chartPreparedDesc")}</p>
+                </div>
+              </div>
+              <span className="bg-emerald-900/60 text-emerald-300 font-bold px-3 py-1 rounded-full border border-emerald-700 font-mono text-[11px]">
+                CHART 1 PREPARED
+              </span>
+            </div>
+
+            {/* Train & Journey Route with Animated Visual Stepper */}
+            <div className="bg-slate-950 border border-gray-800 rounded-2xl p-6">
+              <div className="flex justify-between items-center mb-4">
+                <div>
+                  <span className="text-[10px] text-blue-400 font-mono font-bold uppercase">TRAIN ROUTE</span>
+                  <h3 className="text-lg font-bold text-white">
+                    {booking.train?.trainName || booking.train_name || "Express Train"}
+                  </h3>
+                </div>
+                <span className="bg-gray-800 text-amber-300 text-xs px-3 py-1 rounded-lg font-mono font-bold">
+                  #{booking.train?.trainNumber || booking.train_number}
                 </span>
+              </div>
+
+              {/* Visual Journey Progress Track */}
+              <div className="my-6">
+                <div className="flex justify-between items-center text-xs text-gray-400 mb-2 font-mono">
+                  <span>{booking.train?.from || booking.from_station}</span>
+                  <span className="text-emerald-400 font-bold">● Train In Transit (72% Completed)</span>
+                  <span>{booking.train?.to || booking.to_station}</span>
+                </div>
+                <div className="relative w-full h-2.5 bg-gray-900 rounded-full border border-gray-800 overflow-hidden">
+                  <div
+                    className="h-full bg-gradient-to-r from-blue-500 via-indigo-500 to-emerald-400 rounded-full transition-all duration-1000 relative"
+                    style={{ width: "72%" }}
+                  >
+                    <span className="absolute right-0 top-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full bg-white shadow-md shadow-emerald-500 animate-ping" />
+                  </div>
+                </div>
               </div>
 
               <div className="flex justify-between items-center text-sm">
                 <div>
                   <p className="text-xs text-gray-400">{t("originStation")}</p>
-                  <p className="text-blue-400 font-bold text-base">{booking.train?.from}</p>
-                  <p className="text-gray-300 text-xs font-mono">{booking.train?.departureTime}</p>
+                  <p className="text-blue-400 font-bold text-base">{booking.train?.from || booking.from_station}</p>
+                  <p className="text-gray-300 text-xs font-mono">{booking.train?.departureTime || "06:00"}</p>
                 </div>
-                <div className="text-center text-gray-500 font-bold">
-                  {booking.train?.duration && (
-                    <span className="text-[10px] block text-gray-400 font-normal">
-                      ⏳ {booking.train.duration}
-                    </span>
-                  )}
+                <div className="text-center text-gray-500 font-bold px-2">
+                  <span className="text-[11px] block text-emerald-400 font-mono font-semibold">
+                    134 km/h
+                  </span>
                   ────────►
                 </div>
                 <div className="text-right">
                   <p className="text-xs text-gray-400">{t("destinationStation")}</p>
-                  <p className="text-green-400 font-bold text-base">{booking.train?.to}</p>
-                  <p className="text-gray-300 text-xs font-mono">{booking.train?.arrivalTime}</p>
+                  <p className="text-green-400 font-bold text-base">{booking.train?.to || booking.to_station}</p>
+                  <p className="text-gray-300 text-xs font-mono">{booking.train?.arrivalTime || "14:00"}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Visual Coach & Berth Layout Graphic */}
+            <div className="bg-slate-950 border border-gray-800 rounded-2xl p-5">
+              <div className="flex items-center justify-between mb-3">
+                <h4 className="text-xs font-bold text-gray-300 uppercase tracking-wider flex items-center gap-2">
+                  <span>💺 {t("visualCoachBerth")}</span>
+                </h4>
+                <span className="text-xs text-emerald-400 font-mono font-semibold">
+                  Coach C1 • Berth 22 ({t("windowSeat")})
+                </span>
+              </div>
+
+              {/* Coach Layout Visual Grid */}
+              <div className="bg-gray-900/90 border border-gray-800 p-4 rounded-xl flex items-center justify-between gap-2 overflow-x-auto text-xs font-mono">
+                <div className="bg-slate-800 text-gray-400 px-3 py-4 rounded-lg font-bold text-center shrink-0">
+                  🚪 Door<br />Entry
+                </div>
+                <div className="flex-1 grid grid-cols-6 gap-2 min-w-[340px]">
+                  {[18, 19, 20, 21, 22, 23].map((seatNum) => {
+                    const isAllocated = seatNum === 22;
+                    return (
+                      <div
+                        key={seatNum}
+                        className={`p-2.5 rounded-lg text-center border transition ${
+                          isAllocated
+                            ? "bg-blue-600 border-blue-400 text-white font-bold ring-2 ring-blue-400/50 scale-105 shadow-lg shadow-blue-600/40"
+                            : "bg-gray-800/80 border-gray-700 text-gray-400"
+                        }`}
+                      >
+                        <span className="block text-[10px] text-gray-400">
+                          {seatNum % 2 === 0 ? "Window" : "Aisle"}
+                        </span>
+                        <span className="text-sm">{seatNum}</span>
+                        {isAllocated && (
+                          <span className="block text-[9px] bg-white text-blue-900 font-extrabold rounded px-1 mt-0.5">
+                            YOURS
+                          </span>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className="bg-slate-800 text-gray-400 px-3 py-4 rounded-lg font-bold text-center shrink-0">
+                  🚻 Rest<br />Room
                 </div>
               </div>
             </div>
 
             {/* Passenger Manifest */}
-            <div className="mb-6">
+            <div>
               <h4 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">
                 {t("passengerManifest")}
               </h4>
-              <div className="overflow-x-auto">
+              <div className="overflow-x-auto bg-slate-950 border border-gray-800 rounded-2xl">
                 <table className="w-full text-sm text-left">
                   <thead>
                     <tr className="text-xs text-gray-400 border-b border-gray-800 bg-gray-900/50">
-                      <th className="p-2.5">#</th>
-                      <th className="p-2.5">{t("passenger")}</th>
-                      <th className="p-2.5">{t("age")} / {t("gender")}</th>
-                      <th className="p-2.5">{t("seatAssigned")}</th>
-                      <th className="p-2.5">{t("status")}</th>
+                      <th className="p-3">#</th>
+                      <th className="p-3">{t("passenger")}</th>
+                      <th className="p-3">{t("age")} / {t("gender")}</th>
+                      <th className="p-3">{t("seatAssigned")}</th>
+                      <th className="p-3">{t("berthPosition")}</th>
+                      <th className="p-3">{t("status")}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -170,23 +286,26 @@ export default function PnrPage() {
                       ? booking.passengers
                       : [
                           {
-                            name: booking.passengerName || "Passenger 1",
-                            age: booking.passengerAge || 28,
+                            name: booking.passengerName || "Himanshu Goyal",
+                            age: booking.passengerAge || 21,
                             gender: "Male",
-                            seatNumber: "B1-22",
+                            seatNumber: "C1-22",
                           },
                         ]
                     ).map((p: any, idx: number) => (
-                      <tr key={idx} className="border-b border-gray-800/60">
-                        <td className="p-2.5 text-gray-500">{idx + 1}</td>
-                        <td className="p-2.5 font-medium text-white">{p.name}</td>
-                        <td className="p-2.5 text-gray-400">
-                          {p.age} yrs • {p.gender || "M"}
+                      <tr key={idx} className="border-b border-gray-800/60 last:border-b-0">
+                        <td className="p-3 text-gray-500 font-mono">{idx + 1}</td>
+                        <td className="p-3 font-semibold text-white">{p.name}</td>
+                        <td className="p-3 text-gray-400 text-xs">
+                          {p.age} yrs • {p.gender || "Male"}
                         </td>
-                        <td className="p-2.5 font-mono text-blue-300 font-semibold">
-                          {p.seatNumber || `B1-${15 + idx * 3}`}
+                        <td className="p-3 font-mono text-blue-300 font-bold">
+                          {p.seatNumber || `C1-${22 + idx * 2}`}
                         </td>
-                        <td className="p-2.5 font-bold text-green-400 text-xs">
+                        <td className="p-3 text-xs text-slate-300">
+                          {idx === 0 ? t("windowSeat") : "Aisle Berth"}
+                        </td>
+                        <td className="p-3 font-bold text-emerald-400 text-xs">
                           {booking.status === "confirmed" ? t("confirmed") : t("cancelled")}
                         </td>
                       </tr>
@@ -200,13 +319,13 @@ export default function PnrPage() {
             <div className="flex flex-wrap gap-3 pt-4 border-t border-gray-800">
               <button
                 onClick={() => generateTicketPdf(booking)}
-                className="bg-blue-600 hover:bg-blue-700 px-6 py-2.5 rounded-xl font-bold text-sm text-white transition flex items-center gap-2 shadow-lg shadow-blue-600/20 cursor-pointer"
+                className="bg-blue-600 hover:bg-blue-500 px-6 py-3 rounded-2xl font-bold text-sm text-white transition flex items-center gap-2 shadow-lg shadow-blue-600/30 cursor-pointer"
               >
-                <span>{t("downloadPdf")}</span>
+                <span>📥 {t("downloadPdf")}</span>
               </button>
               <Link
                 href="/search"
-                className="bg-gray-800 hover:bg-gray-700 border border-gray-700 px-5 py-2.5 rounded-xl text-sm font-semibold transition"
+                className="bg-gray-800 hover:bg-gray-700 border border-gray-700 px-6 py-3 rounded-2xl text-sm font-semibold transition"
               >
                 {t("bookTicket")}
               </Link>

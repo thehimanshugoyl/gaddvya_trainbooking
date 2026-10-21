@@ -7,6 +7,7 @@ import TatkalCountdownWidget from "@/components/TatkalCountdownWidget";
 import LiveTrainTrackerModal from "@/components/LiveTrainTrackerModal";
 import ECateringModal from "@/components/ECateringModal";
 import RailAlertsModal from "@/components/RailAlertsModal";
+import NetworkRouteVisualizer from "@/components/NetworkRouteVisualizer";
 import { useLanguageStore } from "@/store/useLanguageStore";
 import { useAuthStore } from "@/store/useAuthStore";
 
@@ -15,8 +16,14 @@ export default function Home() {
   const { user } = useAuthStore();
 
   const [showLiveTracker, setShowLiveTracker] = useState(false);
+  const [trackerTrainNumber, setTrackerTrainNumber] = useState("22436");
   const [showECatering, setShowECatering] = useState(false);
   const [showAlerts, setShowAlerts] = useState(false);
+
+  const handleTrackSpecificTrain = (trainNo: string) => {
+    setTrackerTrainNumber(trainNo);
+    setShowLiveTracker(true);
+  };
 
   return (
     <div className="min-h-screen bg-gray-950 text-white flex flex-col justify-between transition-colors">
@@ -34,7 +41,7 @@ export default function Home() {
         </div>
 
         {/* Hero Title */}
-        <h1 className="text-4xl sm:6xl md:text-7xl font-extrabold tracking-tight mb-4 max-w-4xl leading-tight">
+        <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight mb-4 max-w-4xl leading-tight">
           {t("heroTitle1")} <br />
           <span className="bg-gradient-to-r from-blue-400 via-sky-300 to-indigo-300 bg-clip-text text-transparent dark:from-white dark:via-zinc-200 dark:to-zinc-400 light:from-blue-700 light:via-indigo-800 light:to-sky-700">
             {t("heroTitle2")}
@@ -59,7 +66,7 @@ export default function Home() {
             <span>🔍 {t("searchBtn")}</span>
           </Link>
           <button
-            onClick={() => setShowLiveTracker(true)}
+            onClick={() => handleTrackSpecificTrain("22436")}
             className="bg-slate-900 hover:bg-slate-800 text-blue-300 border border-blue-500/40 px-6 py-3.5 rounded-2xl font-semibold text-base sm:text-lg transition flex items-center gap-2 cursor-pointer shadow-lg"
           >
             <span className="w-2 h-2 rounded-full bg-blue-400 animate-ping" />
@@ -88,7 +95,7 @@ export default function Home() {
         {/* Key Features Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 w-full text-left mt-2">
           <div
-            onClick={() => setShowLiveTracker(true)}
+            onClick={() => handleTrackSpecificTrain("22436")}
             className="bg-slate-900/70 border border-slate-800 hover:border-blue-500/50 p-5 rounded-2xl transition cursor-pointer hover:bg-slate-850/80 group"
           >
             <div className="flex items-center justify-between mb-3">
@@ -101,7 +108,7 @@ export default function Home() {
               {t("liveGpsTracker")}
             </h3>
             <p className="text-xs text-gray-400">
-              Real-time satellite GPS tracking with platform numbers and delay alerts.
+              {t("cardGpsDesc")}
             </p>
           </div>
 
@@ -119,7 +126,7 @@ export default function Home() {
               {t("eCateringMeals")}
             </h3>
             <p className="text-xs text-gray-400">
-              Pre-order hygienic hot pantry & restaurant meals straight to your berth.
+              {t("cardMealsDesc")}
             </p>
           </div>
 
@@ -137,7 +144,7 @@ export default function Home() {
               {t("walletTitle")}
             </h3>
             <p className="text-xs text-gray-400">
-              1-click Tatkal checkout with 180ms processing and instant cancellation refunds.
+              {t("cardWalletDesc")}
             </p>
           </Link>
 
@@ -155,10 +162,13 @@ export default function Home() {
               {t("pnrStatus")}
             </h3>
             <p className="text-xs text-gray-400">
-              10-digit PNR live tracking, chart preparation status, and vector PDF passes.
+              {t("cardPnrDesc")}
             </p>
           </Link>
         </div>
+
+        {/* ── INTERACTIVE LIVE NETWORK TELEMETRY & CORRIDORS VISUALIZER ── */}
+        <NetworkRouteVisualizer onTrackTrain={handleTrackSpecificTrain} />
       </main>
 
       {/* Footer */}
@@ -169,7 +179,11 @@ export default function Home() {
       </footer>
 
       {/* Modals */}
-      <LiveTrainTrackerModal isOpen={showLiveTracker} onClose={() => setShowLiveTracker(false)} />
+      <LiveTrainTrackerModal
+        isOpen={showLiveTracker}
+        initialTrainNumber={trackerTrainNumber}
+        onClose={() => setShowLiveTracker(false)}
+      />
       <ECateringModal isOpen={showECatering} onClose={() => setShowECatering(false)} />
       <RailAlertsModal isOpen={showAlerts} onClose={() => setShowAlerts(false)} />
     </div>

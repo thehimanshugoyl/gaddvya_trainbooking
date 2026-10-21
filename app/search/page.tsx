@@ -31,17 +31,15 @@ export default function Search() {
   ]);
   const [stationSuggestions, setStationSuggestions] = useState<string[]>([]);
 
+  const [selectedTypeFilter, setSelectedTypeFilter] = useState<string>("all");
+
   const { user, logout } = useAuthStore();
   const { lang, t } = useLanguageStore();
   const router = useRouter();
 
   useEffect(() => {
-    if (!user) {
-      router.push("/login");
-      return;
-    }
     fetchInitialTrains();
-  }, [user]);
+  }, []);
 
   const fetchInitialTrains = async () => {
     setLoading(true);
@@ -89,6 +87,10 @@ export default function Search() {
   };
 
   const startBooking = (train: any) => {
+    if (!user) {
+      router.push("/login");
+      return;
+    }
     const defaultCls = train.classes?.[0]?.classType || "SL";
     setSelectedClass(defaultCls);
     setBooking(train._id);
@@ -187,9 +189,9 @@ export default function Search() {
               </button>
             </div>
 
-            {/* Search Form */}
-            <form onSubmit={searchTrains} className="grid grid-cols-1 md:grid-cols-4 gap-3">
-              <div>
+            {/* Search Form with Station Swap */}
+            <form onSubmit={searchTrains} className="grid grid-cols-1 md:grid-cols-12 gap-3 items-end">
+              <div className="md:col-span-3">
                 <label className="text-xs text-gray-400 mb-1 block">
                   {t("originStation")}
                 </label>
@@ -202,7 +204,20 @@ export default function Search() {
                   className="w-full bg-gray-900/90 border border-gray-700 rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none"
                 />
               </div>
-              <div>
+
+              {/* Station Swap Button */}
+              <div className="hidden md:flex md:col-span-1 justify-center pb-1">
+                <button
+                  type="button"
+                  title="Swap Origin & Destination"
+                  onClick={() => setForm((prev) => ({ ...prev, from: prev.to, to: prev.from }))}
+                  className="w-10 h-10 rounded-xl bg-gray-800 hover:bg-gray-700 text-blue-300 border border-gray-700 flex items-center justify-center font-bold text-lg transition cursor-pointer shadow"
+                >
+                  ⇄
+                </button>
+              </div>
+
+              <div className="md:col-span-3">
                 <label className="text-xs text-gray-400 mb-1 block">
                   {t("destinationStation")}
                 </label>
@@ -220,7 +235,7 @@ export default function Search() {
                   <option key={i} value={st} />
                 ))}
               </datalist>
-              <div>
+              <div className="md:col-span-2">
                 <label className="text-xs text-gray-400 mb-1 block">
                   {t("travelDate")}
                 </label>
@@ -231,7 +246,7 @@ export default function Search() {
                   className="w-full bg-gray-900/90 border border-gray-700 rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none"
                 />
               </div>
-              <div className="flex items-end">
+              <div className="md:col-span-3">
                 <button
                   type="submit"
                   className="w-full bg-white text-black hover:bg-zinc-200 rounded-xl p-3 font-bold transition shadow-lg shadow-white/10 dark:bg-white dark:text-black light:bg-black light:text-white flex items-center justify-center gap-2 cursor-pointer"
@@ -248,15 +263,58 @@ export default function Search() {
           <TatkalCountdownWidget />
         </div>
 
+        {/* Train Category Filter Chips */}
+        <div className="flex flex-wrap items-center gap-2 mb-4">
+          {[
+            { id: "all", label: `🚆 All (${trains.length})` },
+            { id: "vande", label: "⚡ Vande Bharat" },
+            { id: "rajdhani", label: "🚄 Rajdhani" },
+            { id: "shatabdi", label: "⏱️ Shatabdi" },
+            { id: "superfast", label: "💨 Superfast" },
+            { id: "mail", label: "🚂 Mail Express" },
+          ].map((f) => (
+            <button
+              key={f.id}
+              type="button"
+              onClick={() => setSelectedTypeFilter(f.id)}
+              className={`text-xs px-3.5 py-1.5 rounded-full border transition cursor-pointer font-medium ${
+                selectedTypeFilter === f.id
+                  ? "bg-blue-600 text-white border-blue-500 font-bold shadow-md shadow-blue-600/30"
+                  : "bg-gray-900 text-gray-300 border-gray-750 hover:bg-gray-800 hover:text-white"
+              }`}
+            >
+              {f.label}
+            </button>
+          ))}
+        </div>
+
         {/* Train Results List */}
         <div className="space-y-4">
           <div className="flex justify-between items-center text-sm text-gray-400 px-1">
             <span>
-              {t("availableTrains")}: <strong className="text-white">{trains.length}</strong>
+              {t("availableTrains")}: <strong className="text-white">{trains.filter((t) => {
+                if (selectedTypeFilter === "all") return true;
+                const type = `${t.trainType || ""} ${t.trainName || ""}`.toLowerCase();
+                if (selectedTypeFilter === "vande") return type.includes("vande");
+                if (selectedTypeFilter === "rajdhani") return type.includes("rajdhani");
+                if (selectedTypeFilter === "shatabdi") return type.includes("shatabdi");
+                if (selectedTypeFilter === "superfast") return type.includes("superfast");
+                if (selectedTypeFilter === "mail") return type.includes("mail") || type.includes("express");
+                return true;
+              }).length}</strong>
             </span>
           </div>
 
-          {trains.map((train: any) => {
+          {trains.filter((t) => {
+            if (selectedTypeFilter === "all") return true;
+            const type = `${t.trainType || ""} ${t.trainName || ""}`.toLowerCase();
+            if (selectedTypeFilter === "vande") return type.includes("vande");
+            if (selectedTypeFilter === "rajdhani") return type.includes("rajdhani");
+            if (selectedTypeFilter === "shatabdi") return type.includes("shatabdi");
+            if (selectedTypeFilter === "superfast") return type.includes("superfast");
+            if (selectedTypeFilter === "mail") return type.includes("mail") || type.includes("express");
+            return true;
+          }).map((train: any) => {
             const matchedClass =
               train.classes?.find((c: any) => c.classType === selectedClass) || train.classes?.[0];
             const displayPrice = matchedClass ? matchedClass.price : train.price;

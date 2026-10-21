@@ -232,7 +232,7 @@ export async function generateTicketPdf(booking: any) {
     doc.setFontSize(7);
     doc.setTextColor(156, 163, 175);
     doc.text(
-      `Generated on ${new Date().toLocaleString("en-IN")} • GADDVYA Pan-India Railway Portal • Page 1 of 1`,
+      `Generated on ${new Date().toLocaleString("en-IN")} • GADDVYA Pan-India Rail • Author: Himanshu Goyal (UID: 24BDA70369) • Session 2026-2027`,
       50,
       287
     );
