@@ -47,7 +47,7 @@ export default function PnrPage() {
             {t("pnrStatus")}
           </h1>
           <p className="text-gray-400 text-sm max-w-lg mx-auto">
-            Enter your 10-digit Passenger Name Record (PNR) number to track live booking status, coach allotment, and download your boarding pass.
+            {t("pnrSearchDesc")}
           </p>
         </div>
 
@@ -58,7 +58,7 @@ export default function PnrPage() {
               <input
                 type="text"
                 maxLength={10}
-                placeholder="Enter 10-Digit PNR (e.g. 8429103941)"
+                placeholder={t("enterPnrInput")}
                 value={pnr}
                 onChange={(e) => setPnr(e.target.value.replace(/\D/g, ""))}
                 className="w-full bg-gray-950 border border-gray-700 rounded-xl p-3.5 text-white font-mono text-base tracking-widest placeholder:tracking-normal focus:border-blue-500 focus:outline-none"

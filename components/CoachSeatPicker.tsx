@@ -110,7 +110,7 @@ export default function CoachSeatPicker({
           </div>
           <div className="flex items-center gap-1.5">
             <span className="w-3.5 h-3.5 rounded bg-white border border-zinc-200 inline-block"></span>
-            <span className="text-zinc-200 font-medium">Selected</span>
+            <span className="text-zinc-200 font-medium">{t("selectedLabel")}</span>
           </div>
           <div className="flex items-center gap-1.5">
             <span className="w-3.5 h-3.5 rounded bg-red-950 border border-red-800/80 inline-block"></span>
@@ -181,7 +181,7 @@ export default function CoachSeatPicker({
           )}
         </div>
         <div className="text-gray-500">
-          {selectedSeats.length}/{seatsCount} assigned
+          {selectedSeats.length}/{seatsCount} {t("assignedLabel")}
         </div>
       </div>
     </div>

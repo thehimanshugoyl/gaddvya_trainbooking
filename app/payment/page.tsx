@@ -172,7 +172,7 @@ Thank you for traveling with Indian Railways!
       <div className="bg-gray-850 border border-gray-800 rounded-3xl p-6 sm:p-8 w-full max-w-lg shadow-2xl">
         {/* Step Indicator */}
         <div className="flex justify-between mb-8">
-          {["1. Review Trip", "2. Payment", "3. Boarding Pass"].map((s, i) => (
+          {[t("stepReview"), t("stepPayment"), t("stepPass")].map((s, i) => (
             <div key={i} className="flex items-center">
               <div
                 className={`w-7 h-7 rounded-full flex items-center justify-center font-bold text-xs ${
@@ -190,7 +190,7 @@ Thank you for traveling with Indian Railways!
                   step === i + 1 ? "text-white font-bold" : "text-gray-500"
                 }`}
               >
-                {s.split(". ")[1]}
+                {s.split(". ")[1] || s}
               </span>
               {i < 2 && <div className="w-6 sm:w-10 h-0.5 bg-gray-800 mx-2" />}
             </div>
@@ -200,9 +200,9 @@ Thank you for traveling with Indian Railways!
         {/* Step 1 - Review */}
         {step === 1 && (
           <div>
-            <h2 className="text-xl font-bold text-yellow-400 mb-1">🎫 Booking Summary</h2>
+            <h2 className="text-xl font-bold text-yellow-400 mb-1">🎫 {t("bookingSummary")}</h2>
             <p className="text-xs text-gray-400 mb-5">
-              Review train itinerary and passenger manifest before payment
+              {t("bookingSummaryDesc")}
             </p>
 
             <div className="bg-gray-900 rounded-2xl p-4 space-y-3 mb-6 border border-gray-800">
@@ -217,7 +217,7 @@ Thank you for traveling with Indian Railways!
               {parsedPassengers.length > 0 ? (
                 <div className="space-y-1.5 py-1">
                   <span className="text-xs text-gray-400 block font-semibold">
-                    Passengers ({parsedPassengers.length}):
+                    {t("passenger")} ({parsedPassengers.length}):
                   </span>
                   {parsedPassengers.map((p: any, idx: number) => (
                     <div key={idx} className="flex justify-between text-xs bg-gray-950/60 p-2 rounded">
@@ -248,11 +248,11 @@ Thank you for traveling with Indian Railways!
                 <span className="text-blue-400 font-bold">{classType}</span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-gray-400">Seat Quantity</span>
+                <span className="text-gray-400">{t("seatQuantity")}</span>
                 <span className="text-white">{seats} seat(s)</span>
               </div>
               <div className="border-t border-gray-800 pt-3 flex justify-between items-center">
-                <span className="text-gray-300 font-medium text-sm">Total Payable</span>
+                <span className="text-gray-300 font-medium text-sm">{t("totalPayable")}</span>
                 <span className="text-yellow-400 font-extrabold text-2xl">₹{price}</span>
               </div>
             </div>
@@ -261,7 +261,7 @@ Thank you for traveling with Indian Railways!
               onClick={() => setStep(2)}
               className="w-full bg-white text-black hover:bg-zinc-200 py-3.5 rounded-xl font-bold transition shadow-lg shadow-white/10 dark:bg-white dark:text-black light:bg-black light:text-white cursor-pointer"
             >
-              Proceed to Payment →
+              {t("proceedToPayment")}
             </button>
           </div>
         )}
@@ -269,9 +269,9 @@ Thank you for traveling with Indian Railways!
         {/* Step 2 - Payment Form */}
         {step === 2 && (
           <div>
-            <h2 className="text-xl font-bold text-white mb-1">💳 Choose Payment Mode</h2>
+            <h2 className="text-xl font-bold text-white mb-1">💳 {t("choosePaymentMode")}</h2>
             <p className="text-xs text-gray-400 mb-5">
-              Instant 1-click checkout with GADDVYA Rail Wallet or bank card
+              {t("paymentSubtitle")}
             </p>
 
             {/* Payment Method Switcher */}

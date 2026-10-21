@@ -196,7 +196,7 @@ export default function Search() {
                 <input
                   type="text"
                   list="stations-list"
-                  placeholder="e.g. New Delhi, Mumbai"
+                  placeholder={t("originPlaceholder")}
                   value={form.from}
                   onChange={(e) => setForm({ ...form, from: e.target.value })}
                   className="w-full bg-gray-900/90 border border-gray-700 rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none"
@@ -209,7 +209,7 @@ export default function Search() {
                 <input
                   type="text"
                   list="stations-list"
-                  placeholder="e.g. Varanasi, Chennai"
+                  placeholder={t("destinationPlaceholder")}
                   value={form.to}
                   onChange={(e) => setForm({ ...form, to: e.target.value })}
                   className="w-full bg-gray-900/90 border border-gray-700 rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none"
@@ -428,7 +428,7 @@ export default function Search() {
                             </label>
                             <input
                               type="text"
-                              placeholder="e.g. Himanshu Goyal"
+                              placeholder={t("namePlaceholder")}
                               value={passenger.name}
                               onChange={(e) => updatePassenger(pIdx, "name", e.target.value)}
                               className="w-full bg-gray-900 border border-gray-700 rounded-lg p-2 text-white text-xs"
@@ -542,7 +542,7 @@ export default function Search() {
                             // Validation
                             const isInvalid = passengersList.some((p) => !p.name.trim() || !p.age);
                             if (isInvalid) {
-                              alert("Please fill in the Name and Age for each passenger.");
+                              alert(t("fillPassengerAlert"));
                               return;
                             }
 
@@ -575,9 +575,9 @@ export default function Search() {
 
           {trains.length === 0 && !loading && (
             <div className="text-center py-20 bg-gray-850 rounded-2xl border border-gray-800">
-              <p className="text-gray-400 text-lg mb-2">No trains found for this route</p>
+              <p className="text-gray-400 text-lg mb-2">{t("noTrainsFound")}</p>
               <p className="text-gray-500 text-sm mb-6">
-                Try searching without dates or choose one of the popular routes above.
+                {t("tryOtherRoute")}
               </p>
               <button
                 onClick={fetchInitialTrains}

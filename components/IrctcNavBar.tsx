@@ -12,6 +12,8 @@ import { useWalletStore } from "@/store/useWalletStore";
 import LiveTrainTrackerModal from "@/components/LiveTrainTrackerModal";
 import ECateringModal from "@/components/ECateringModal";
 import RailAlertsModal from "@/components/RailAlertsModal";
+import LoyaltyModal from "@/components/LoyaltyModal";
+import ContactUsModal from "@/components/ContactUsModal";
 
 export default function IrctcNavBar() {
   const { user, logout } = useAuthStore();
@@ -23,7 +25,10 @@ export default function IrctcNavBar() {
   // Modals
   const [showLiveTracker, setShowLiveTracker] = useState(false);
   const [showECatering, setShowECatering] = useState(false);
+  const [cateringCategory, setCateringCategory] = useState("all");
   const [showAlerts, setShowAlerts] = useState(false);
+  const [showLoyalty, setShowLoyalty] = useState(false);
+  const [showContactUs, setShowContactUs] = useState(false);
 
   // Dropdown states
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
@@ -88,9 +93,12 @@ export default function IrctcNavBar() {
               <span>🕒</span> {currentTime || "Live IST"}
             </span>
             <span className="hidden sm:inline text-slate-600">•</span>
-            <span className="hidden sm:flex items-center gap-1 text-slate-300">
+            <button
+              onClick={() => setShowContactUs(true)}
+              className="hidden sm:flex items-center gap-1 text-slate-300 hover:text-white cursor-pointer"
+            >
               <span>📞</span> {t("helplineText")}
-            </span>
+            </button>
             <span className="hidden md:inline text-slate-600">•</span>
             <button
               onClick={() => setShowAlerts(true)}
@@ -216,7 +224,7 @@ export default function IrctcNavBar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-8 pb-3" ref={dropdownRef}>
           <nav className="w-full bg-gradient-to-r from-blue-700 via-blue-800 to-indigo-900 rounded-full px-4 sm:px-6 py-2 shadow-2xl border border-blue-400/30 flex items-center justify-between overflow-x-auto text-xs sm:text-sm font-bold tracking-wide">
             <div className="flex items-center gap-1 sm:gap-4 shrink-0">
-              {/* HOME Tab (with underline matching user image) */}
+              {/* 1. HOME Tab */}
               <Link
                 href="/"
                 className={`px-3 py-1.5 uppercase transition relative whitespace-nowrap ${
@@ -229,7 +237,7 @@ export default function IrctcNavBar() {
                 )}
               </Link>
 
-              {/* TRAINS Dropdown */}
+              {/* 2. TRAINS Dropdown */}
               <div className="relative">
                 <button
                   type="button"
@@ -244,7 +252,7 @@ export default function IrctcNavBar() {
                   <span className="text-[10px]">⌄</span>
                 </button>
                 {openDropdown === "trains" && (
-                  <div className="absolute left-0 mt-2 w-64 rounded-2xl bg-slate-900 border border-slate-700 shadow-2xl p-2 z-50 animate-fadeIn">
+                  <div className="absolute left-0 mt-2 w-72 rounded-2xl bg-slate-900 border border-slate-700 shadow-2xl p-2 z-50 animate-fadeIn">
                     <Link
                       href="/search"
                       onClick={() => setOpenDropdown(null)}
@@ -253,7 +261,7 @@ export default function IrctcNavBar() {
                       <div className="font-bold text-white flex items-center gap-1.5">
                         <span>🔍</span> {t("searchTrains")}
                       </div>
-                      <span className="text-[11px] text-slate-400">Pan-India timetables & class fares</span>
+                      <span className="text-[11px] text-slate-400">{t("subSearchTrains")}</span>
                     </Link>
                     <Link
                       href="/pnr"
@@ -263,7 +271,7 @@ export default function IrctcNavBar() {
                       <div className="font-bold text-white flex items-center gap-1.5">
                         <span>🎫</span> {t("pnrStatus")}
                       </div>
-                      <span className="text-[11px] text-slate-400">Live 10-digit PNR booking tracker</span>
+                      <span className="text-[11px] text-slate-400">{t("subPnrStatus")}</span>
                     </Link>
                     <button
                       type="button"
@@ -276,13 +284,13 @@ export default function IrctcNavBar() {
                       <div className="font-bold text-emerald-400 flex items-center gap-1.5">
                         <span>📡</span> {t("liveRunningStatus")}
                       </div>
-                      <span className="text-[11px] text-slate-400">GPS location, delay, & platform numbers</span>
+                      <span className="text-[11px] text-slate-400">{t("subLiveTracker")}</span>
                     </button>
                   </div>
                 )}
               </div>
 
-              {/* MEALS Dropdown */}
+              {/* 3. MEALS Dropdown */}
               <div className="relative">
                 <button
                   type="button"
@@ -295,11 +303,12 @@ export default function IrctcNavBar() {
                   <span className="text-[10px]">⌄</span>
                 </button>
                 {openDropdown === "meals" && (
-                  <div className="absolute left-0 mt-2 w-64 rounded-2xl bg-slate-900 border border-slate-700 shadow-2xl p-2 z-50 animate-fadeIn">
+                  <div className="absolute left-0 mt-2 w-72 rounded-2xl bg-slate-900 border border-slate-700 shadow-2xl p-2 z-50 animate-fadeIn">
                     <button
                       type="button"
                       onClick={() => {
                         setOpenDropdown(null);
+                        setCateringCategory("all");
                         setShowECatering(true);
                       }}
                       className="w-full text-left p-2.5 rounded-xl hover:bg-slate-800 text-xs text-slate-200 hover:text-white font-medium cursor-pointer"
@@ -307,13 +316,41 @@ export default function IrctcNavBar() {
                       <div className="font-bold text-orange-400 flex items-center gap-1.5">
                         <span>🍱</span> {t("eCateringMeals")}
                       </div>
-                      <span className="text-[11px] text-slate-400">Order hot food delivered to seat</span>
+                      <span className="text-[11px] text-slate-400">{t("subEcatering")}</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setOpenDropdown(null);
+                        setCateringCategory("jain");
+                        setShowECatering(true);
+                      }}
+                      className="w-full text-left p-2.5 rounded-xl hover:bg-slate-800 text-xs text-slate-200 hover:text-white font-medium cursor-pointer"
+                    >
+                      <div className="font-bold text-emerald-400 flex items-center gap-1.5">
+                        <span>🥗</span> {t("catJain")}
+                      </div>
+                      <span className="text-[11px] text-slate-400">{t("subJainFood")}</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setOpenDropdown(null);
+                        setCateringCategory("snacks");
+                        setShowECatering(true);
+                      }}
+                      className="w-full text-left p-2.5 rounded-xl hover:bg-slate-800 text-xs text-slate-200 hover:text-white font-medium cursor-pointer"
+                    >
+                      <div className="font-bold text-amber-300 flex items-center gap-1.5">
+                        <span>🍕</span> {t("catSnacks")}
+                      </div>
+                      <span className="text-[11px] text-slate-400">{t("subSnacksDelivery")}</span>
                     </button>
                   </div>
                 )}
               </div>
 
-              {/* LOYALTY Dropdown */}
+              {/* 4. LOYALTY (Interactive Modal & Dropdown) */}
               <div className="relative">
                 <button
                   type="button"
@@ -326,21 +363,36 @@ export default function IrctcNavBar() {
                   <span className="text-[10px]">⌄</span>
                 </button>
                 {openDropdown === "loyalty" && (
-                  <div className="absolute left-0 mt-2 w-64 rounded-2xl bg-slate-900 border border-slate-700 shadow-2xl p-2 z-50 animate-fadeIn text-xs">
-                    <div className="p-2.5">
-                      <p className="font-bold text-amber-300">👑 Rail Citizen Loyalty Program</p>
-                      <p className="text-[11px] text-slate-400 mt-1">
-                        Earn 5 reward points for every ₹100 spent. Redeem for free berth upgrades.
-                      </p>
-                      <div className="mt-2 pt-2 border-t border-slate-800 text-[11px] text-emerald-400">
-                        Tier: <strong>Gold Citizen Pass</strong>
-                      </div>
+                  <div className="absolute left-0 mt-2 w-72 rounded-2xl bg-slate-900 border border-slate-700 shadow-2xl p-3 z-50 animate-fadeIn text-xs">
+                    <p className="font-bold text-amber-300 flex items-center gap-1.5">
+                      <span>👑</span> {t("loyaltyTitle")}
+                    </p>
+                    <p className="text-[11px] text-slate-400 mt-1 leading-relaxed">
+                      {t("loyaltySubtitle")}
+                    </p>
+                    <div className="mt-2.5 pt-2.5 border-t border-slate-800 flex items-center justify-between text-[11px]">
+                      <span className="text-slate-300">
+                        {t("rewardPoints")}: <strong className="text-amber-400 font-mono">580</strong>
+                      </span>
+                      <span className="bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded font-bold">
+                        {t("loyaltyTier")}
+                      </span>
                     </div>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setOpenDropdown(null);
+                        setShowLoyalty(true);
+                      }}
+                      className="mt-3 w-full bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-500 hover:to-yellow-500 text-black font-bold py-2 rounded-xl text-xs transition cursor-pointer shadow-md text-center"
+                    >
+                      🎁 {t("redeemPerk")} →
+                    </button>
                   </div>
                 )}
               </div>
 
-              {/* E-WALLET Dropdown */}
+              {/* 5. E-WALLET Dropdown */}
               <div className="relative">
                 <button
                   type="button"
@@ -353,7 +405,7 @@ export default function IrctcNavBar() {
                   <span className="text-[10px]">⌄</span>
                 </button>
                 {openDropdown === "wallet" && (
-                  <div className="absolute left-0 mt-2 w-64 rounded-2xl bg-slate-900 border border-slate-700 shadow-2xl p-2 z-50 animate-fadeIn">
+                  <div className="absolute left-0 mt-2 w-72 rounded-2xl bg-slate-900 border border-slate-700 shadow-2xl p-2 z-50 animate-fadeIn">
                     <Link
                       href="/wallet"
                       onClick={() => setOpenDropdown(null)}
@@ -363,7 +415,7 @@ export default function IrctcNavBar() {
                         <span>💳 {t("walletTitle")}</span>
                         <span className="text-white font-mono">₹{balance.toLocaleString("en-IN")}</span>
                       </div>
-                      <span className="text-[11px] text-slate-400">1-Click Tatkal checkout & instant refunds</span>
+                      <span className="text-[11px] text-slate-400 block mt-0.5">{t("subWallet")}</span>
                     </Link>
                     <Link
                       href="/wallet"
@@ -376,7 +428,7 @@ export default function IrctcNavBar() {
                 )}
               </div>
 
-              {/* ALERTS Button */}
+              {/* 6. ALERTS Button */}
               <button
                 type="button"
                 onClick={() => setShowAlerts(true)}
@@ -386,15 +438,14 @@ export default function IrctcNavBar() {
                 <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
               </button>
 
-              {/* CONTACT US */}
+              {/* 7. CONTACT US (Interactive Grievance & Helpline Portal) */}
               <button
                 type="button"
-                onClick={() =>
-                  alert("📞 24x7 Indian Railways Passenger Helpline: 139\n\nFor grievances: support@gaddvya.rail.gov.in")
-                }
-                className="px-3 py-1.5 uppercase transition text-blue-100 hover:text-white cursor-pointer whitespace-nowrap"
+                onClick={() => setShowContactUs(true)}
+                className="px-3 py-1.5 uppercase transition text-blue-100 hover:text-white cursor-pointer whitespace-nowrap flex items-center gap-1"
               >
-                {t("navContact")}
+                <span>{t("navContact")}</span>
+                <span className="text-[10px]">📞</span>
               </button>
             </div>
 
@@ -449,8 +500,14 @@ export default function IrctcNavBar() {
 
       {/* Modals */}
       <LiveTrainTrackerModal isOpen={showLiveTracker} onClose={() => setShowLiveTracker(false)} />
-      <ECateringModal isOpen={showECatering} onClose={() => setShowECatering(false)} />
+      <ECateringModal
+        isOpen={showECatering}
+        onClose={() => setShowECatering(false)}
+        initialCategory={cateringCategory}
+      />
       <RailAlertsModal isOpen={showAlerts} onClose={() => setShowAlerts(false)} />
+      <LoyaltyModal isOpen={showLoyalty} onClose={() => setShowLoyalty(false)} />
+      <ContactUsModal isOpen={showContactUs} onClose={() => setShowContactUs(false)} />
     </>
   );
 }
