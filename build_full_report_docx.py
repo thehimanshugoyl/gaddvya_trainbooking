@@ -238,24 +238,10 @@ def create_report():
 
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    p.paragraph_format.space_after = Pt(2)
-    r = p.add_run("HIMANSHU GOYAL\n24BDA70369")
-    r.bold = True
-    r.font.size = Pt(13)
-
-    p = doc.add_paragraph()
-    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    p.paragraph_format.space_after = Pt(2)
-    r = p.add_run("&")
-    r.bold = True
-    r.font.size = Pt(12)
-
-    p = doc.add_paragraph()
-    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p.paragraph_format.space_after = Pt(28)
-    r = p.add_run("ABHISHEK YADAV\n24BDA70298")
+    r = p.add_run("HIMANSHU GOYAL\nUID: 24BDA70369")
     r.bold = True
-    r.font.size = Pt(13)
+    r.font.size = Pt(14)
 
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
@@ -281,7 +267,7 @@ def create_report():
 
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    p.paragraph_format.space_after = Pt(2)
+    p.paragraph_format.space_after = Pt(28)
     r = p.add_run("Chandigarh University")
     r.bold = True
     r.font.size = Pt(13)
@@ -289,7 +275,7 @@ def create_report():
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p.paragraph_format.space_after = Pt(0)
-    r = p.add_run("2025 – 2026")
+    r = p.add_run("2026 – 2027")
     r.font.size = Pt(12)
 
     doc.add_page_break()
@@ -301,7 +287,7 @@ def create_report():
     add_page_heading("BONAFIDE CERTIFICATE")
 
     add_para(
-        'Certified that this project report "TRAIN TICKET BOOKING SYSTEM" is the bonafide work of "HIMANSHU GOYAL (24BDA70369) & ABHISHEK YADAV (24BDA70298)" who carried out the project work under my/our supervision.',
+        'Certified that this project report "TRAIN TICKET BOOKING SYSTEM" is the bonafide work of "HIMANSHU GOYAL (UID: 24BDA70369)" who carried out the project work under my supervision.',
         space_after=40
     )
 
@@ -355,7 +341,7 @@ def create_report():
     add_page_heading("DECLARATION")
 
     add_para(
-        'I hereby declare that the project report entitled "Train Ticket Booking System" submitted to Chandigarh University in partial fulfillment of the requirements for the award of the degree of Bachelor of Engineering (Hons.) in Computer Science and Engineering (Data Science) is a record of original work done by us under the supervision of Mr. Dheeresh Aggarwal, Assistant Professor, Department of AIT-CSE, Chandigarh University.'
+        'I hereby declare that the project report entitled "Train Ticket Booking System" submitted to Chandigarh University in partial fulfillment of the requirements for the award of the degree of Bachelor of Engineering (Hons.) in Computer Science and Engineering (Data Science) is a record of original work done by me under the supervision of Mr. Dheeresh Aggarwal, Assistant Professor, Department of AIT-CSE, Chandigarh University.'
     )
     add_para(
         'I further declare that this project work has not been submitted for the award of any other degree/diploma of Chandigarh University or any other University/Institute. The matter embodied in this project work is genuine and has not been copied from any source without proper citation.'
@@ -369,7 +355,7 @@ def create_report():
     p_sig = doc.add_paragraph()
     p_sig.paragraph_format.space_before = Pt(40)
     p_sig.add_run("________________________\n").bold = True
-    p_sig.add_run("Himanshu Goyal\n24BDA70369\n\nAbhishek Yadav\n24BDA70298\n\n").bold = True
+    p_sig.add_run("Himanshu Goyal\nUID: 24BDA70369\n\n").bold = True
     p_sig.add_run("B.E. (Hons.) CSE (Data Science)")
 
     doc.add_page_break()
@@ -388,7 +374,7 @@ def create_report():
 
     p_ack_names = doc.add_paragraph()
     p_ack_names.paragraph_format.space_before = Pt(30)
-    p_ack_names.add_run("Himanshu Goyal\n24BDA70369\n\nAbhishek Yadav\n24BDA70298").bold = True
+    p_ack_names.add_run("Himanshu Goyal\nUID: 24BDA70369").bold = True
 
     doc.add_page_break()
 
@@ -1233,13 +1219,13 @@ def create_report():
     meta_headers = ["Metadata Field", "Configuration Details"]
     meta_data = [
         ["Project Title", "Train Ticket Booking System (GADDVYA Indian Railways Reservation)"],
-        ["Candidate Names", "Himanshu Goyal & Abhishek Yadav"],
-        ["University Roll Nos.", "24BDA70369 & 24BDA70298"],
+        ["Candidate Name", "Himanshu Goyal"],
+        ["University Roll No. (UID)", "24BDA70369"],
         ["Degree Programme", "B.E. (Hons.) Computer Science & Engineering (Data Science)"],
         ["Project Supervisor", "Mr. Dheeresh Aggarwal, Assistant Professor"],
         ["Academic Department", "Department of AIT-CSE, Chandigarh University"],
-        ["Academic Session", "2025 – 2026"],
-        ["GitHub Repository", "https://github.com/thehimanshugoyl/train-booking-24bda70369"],
+        ["Academic Session", "2026 – 2027"],
+        ["GitHub Repository", "https://github.com/thehimanshugoyl/gaddvya_trainbooking"],
         ["Production URL", "https://train-booking-24bda70369-lgzn.vercel.app"],
         ["Core Technology Stack", "Next.js 16, TypeScript, Supabase PostgreSQL, Tailwind CSS v4, Zustand, Vercel"]
     ]

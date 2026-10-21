@@ -167,7 +167,7 @@ export function ensureInitialBookings(): any[] {
         class_type: "3A",
         seats: 1,
         total_price: 2450,
-        passengerName: "Abhishek Yadav",
+        passengerName: "Himanshu Goyal",
         passengerAge: 22,
         status: "confirmed",
         created_at: new Date(Date.now() - 3600000 * 8).toISOString(),

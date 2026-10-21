@@ -9,10 +9,11 @@
 An advanced, production-grade, full-stack railway transit web application engineered to solve chronic Tatkal concurrency timeouts, payment gateway dropouts, delayed refund lifecycles, and user interface complexity across Indian Railways.
 
 - **🌐 Live Production URL:** [https://train-booking-24bda70369-lgzn.vercel.app/](https://train-booking-24bda70369-lgzn.vercel.app/)
-- **📦 GitHub Repository:** [https://github.com/thehimanshugoyl/train-booking-24bda70369](https://github.com/thehimanshugoyl/train-booking-24bda70369)
+- **📦 GitHub Repository:** [https://github.com/thehimanshugoyl/gaddvya_trainbooking](https://github.com/thehimanshugoyl/gaddvya_trainbooking)
 - **🎓 Institution:** Department of AIT-CSE, Chandigarh University
-- **👥 Candidates:** **Himanshu Goyal** (24BDA70369) & **Abhishek Yadav** (24BDA70298)
+- **👤 Candidate:** **Himanshu Goyal** (UID: 24BDA70369)
 - **👨‍🏫 Project Supervisor:** **Er. Dheeresh Aggarwal**, Assistant Professor, Dept. of AIT-CSE
+- **📅 Academic Session:** 2026 – 2027
 
 ---
 
@@ -219,10 +220,9 @@ train-booking-24bda70369/
 
 ## 👨‍💻 Author Information
 
-- **Student 1:** Himanshu Goyal (`24BDA70369`) — [himanshugoya786@gmail.com](mailto:himanshugoya786@gmail.com)
-- **Student 2:** Abhishek Yadav (`24BDA70298`)
+- **Author & Developer:** Himanshu Goyal (`24BDA70369`) — [himanshugoya786@gmail.com](mailto:himanshugoya786@gmail.com)
 - **Institution:** Department of AIT-CSE, Chandigarh University
-- **Academic Session:** 2025 – 2026
+- **Academic Session:** 2026 – 2027
 
 ---
 

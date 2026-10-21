@@ -99,7 +99,7 @@ def create_presentation():
         tf_f.margin_top = tf_f.margin_bottom = tf_f.margin_left = tf_f.margin_right = 0
         p_f = tf_f.paragraphs[0]
         r_f = p_f.add_run()
-        r_f.text = "Chandigarh University • Dept of AIT-CSE • Himanshu Goyal (24BDA70369) & Abhishek Yadav (24BDA70298) • Supervisor: Er. Dheeresh Aggarwal"
+        r_f.text = "Chandigarh University • Dept of AIT-CSE • Himanshu Goyal (24BDA70369) • Supervisor: Er. Dheeresh Aggarwal"
         r_f.font.size = Pt(9.5)
         r_f.font.color.rgb = c_slate
 
@@ -175,12 +175,12 @@ def create_presentation():
     r.font.color.rgb = RGBColor(148, 163, 184)
     
     p2 = tf_m.add_paragraph()
-    r = p2.add_run("HIMANSHU GOYAL  (24BDA70369)                              Er. Dheeresh Aggarwal\n")
+    r = p2.add_run("HIMANSHU GOYAL (Sole Author)                              Er. Dheeresh Aggarwal\n")
     r.font.size = Pt(13)
     r.font.bold = True
     r.font.color.rgb = RGBColor(255, 255, 255)
 
-    r_ab = p2.add_run("ABHISHEK YADAV  (24BDA70298)                              Assistant Professor, Dept of AIT-CSE")
+    r_ab = p2.add_run("UID: 24BDA70369 • Session: 2026–2027                     Assistant Professor, Dept of AIT-CSE")
     r_ab.font.size = Pt(13)
     r_ab.font.bold = True
     r_ab.font.color.rgb = RGBColor(255, 255, 255)
@@ -981,7 +981,7 @@ def create_presentation():
 
     p3 = tf_ty.add_paragraph()
     p3.alignment = PP_ALIGN.CENTER
-    r3 = p3.add_run("Himanshu Goyal (24BDA70369)\nAbhishek Yadav (24BDA70298)\n\nSupervisor: Er. Dheeresh Aggarwal\nDept of AIT-CSE, Chandigarh University")
+    r3 = p3.add_run("Himanshu Goyal (UID: 24BDA70369)\nSole Author • Academic Session: 2026 – 2027\n\nSupervisor: Er. Dheeresh Aggarwal\nDept of AIT-CSE, Chandigarh University")
     r3.font.size = Pt(10)
     r3.font.color.rgb = RGBColor(203, 213, 225)
 
