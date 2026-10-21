@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { useLanguageStore } from "@/store/useLanguageStore";
 
 interface CoachSeatPickerProps {
   classType: string; // "SL", "3A", "2A", "CC", "EC"
@@ -14,6 +15,7 @@ export default function CoachSeatPicker({
   onSeatsSelected,
   initiallySelected = [],
 }: CoachSeatPickerProps) {
+  const { lang, t } = useLanguageStore();
   const [selectedSeats, setSelectedSeats] = useState<string[]>(initiallySelected);
 
   // Coach prefix based on class
@@ -90,13 +92,13 @@ export default function CoachSeatPicker({
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4 border-b border-gray-850 pb-3">
         <div>
           <h4 className="text-white font-bold text-sm flex items-center gap-2">
-            <span>💺 Coach Compartment:</span>
+            <span>💺 {t("selectBerthMap")}:</span>
             <span className="bg-zinc-800 text-zinc-200 border border-zinc-700 font-mono px-2 py-0.5 rounded text-xs">
               {coachCode} ({classType})
             </span>
           </h4>
           <p className="text-xs text-gray-400 mt-0.5">
-            Select {seatsCount} seat{seatsCount > 1 ? "s" : ""} on the interactive coach diagram below
+            {t("berthLegend")}
           </p>
         </div>
 
@@ -104,7 +106,7 @@ export default function CoachSeatPicker({
         <div className="flex items-center gap-4 text-xs">
           <div className="flex items-center gap-1.5">
             <span className="w-3.5 h-3.5 rounded bg-gray-800 border border-gray-600 inline-block"></span>
-            <span className="text-gray-400">Available</span>
+            <span className="text-gray-400">{t("seatAvailable")}</span>
           </div>
           <div className="flex items-center gap-1.5">
             <span className="w-3.5 h-3.5 rounded bg-white border border-zinc-200 inline-block"></span>
@@ -112,7 +114,7 @@ export default function CoachSeatPicker({
           </div>
           <div className="flex items-center gap-1.5">
             <span className="w-3.5 h-3.5 rounded bg-red-950 border border-red-800/80 inline-block"></span>
-            <span className="text-gray-500">Booked</span>
+            <span className="text-gray-500">{t("soldOut")}</span>
           </div>
         </div>
       </div>
@@ -169,7 +171,7 @@ export default function CoachSeatPicker({
       {/* Selected Seats summary pill */}
       <div className="mt-3 flex flex-wrap items-center justify-between text-xs text-gray-400 pt-2 border-t border-gray-850">
         <div>
-          Selected Seat(s):{" "}
+          {t("seatAssigned")}:{" "}
           {selectedSeats.length > 0 ? (
             <span className="text-white font-mono font-bold">
               {selectedSeats.join(", ")}

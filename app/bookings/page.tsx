@@ -13,7 +13,7 @@ export default function Bookings() {
   const [bookings, setBookings] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const { user, token, logout } = useAuthStore();
-  const { t } = useLanguageStore();
+  const { lang, t } = useLanguageStore();
   const { refundFunds } = useWalletStore();
   const router = useRouter();
 
@@ -39,7 +39,14 @@ export default function Bookings() {
   };
 
   const cancelBooking = async (id: string, pnr?: string, amount?: number) => {
-    if (!confirm(`Are you sure you want to cancel booking ${pnr ? `(PNR: ${pnr})` : ""}? 100% of your fare (₹${amount || 0}) will be refunded instantly to your GADDVYA Rail Wallet.`)) return;
+    if (
+      !confirm(
+        `Are you sure you want to cancel booking ${
+          pnr ? `(PNR: ${pnr})` : ""
+        }? 100% of your fare (₹${amount || 0}) will be refunded instantly to your GADDVYA Rail Wallet.`
+      )
+    )
+      return;
     try {
       await axios.put(
         `/api/bookings/${id}`,
@@ -51,7 +58,11 @@ export default function Bookings() {
       if (amount && amount > 0) {
         refundFunds(amount, `Cancelled Ticket PNR: ${pnr || id}`, pnr);
       }
-      alert(`Booking cancelled successfully. ₹${amount || 0} has been refunded immediately to your GADDVYA Rail Wallet!`);
+      alert(
+        `Booking cancelled successfully. ₹${
+          amount || 0
+        } has been refunded immediately to your GADDVYA Rail Wallet!`
+      );
       fetchBookings();
     } catch (err: any) {
       alert("Cancellation failed: " + (err.response?.data?.error || err.message));
@@ -64,143 +75,146 @@ export default function Bookings() {
       <IrctcNavBar />
 
       <main className="max-w-6xl mx-auto w-full p-4 md:p-6 flex-1">
-
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-6">
-        <div>
-          <h1 className="text-2xl font-bold">{t("myBookings")}</h1>
-          <p className="text-xs text-gray-400 mt-0.5">Active and past train reservation slips</p>
-        </div>
-        <Link
-          href="/wallet"
-          className="bg-zinc-900 border border-zinc-750 hover:border-zinc-600 px-4 py-2 rounded-xl text-xs font-medium text-amber-300 flex items-center gap-2"
-        >
-          <span>⚡ Instant Auto-Refunds enabled with Rail Wallet</span>
-        </Link>
-      </div>
-
-      {loading ? (
-        <div className="text-center py-20">
-          <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-white mx-auto mb-3"></div>
-          <p className="text-gray-400 text-sm">Loading your bookings...</p>
-        </div>
-      ) : bookings.length === 0 ? (
-        <div className="text-center py-20 bg-gray-900 rounded-2xl border border-gray-800">
-          <p className="text-gray-400 text-lg mb-2">No bookings found</p>
-          <p className="text-gray-500 text-sm mb-6">
-            You haven't reserved any train tickets yet.
-          </p>
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-6">
+          <div>
+            <h1 className="text-2xl font-bold">{t("bookingsTitle")}</h1>
+            <p className="text-xs text-gray-400 mt-0.5">{t("bookingsSubtitle")}</p>
+          </div>
           <Link
-            href="/search"
-            className="bg-white text-black hover:bg-zinc-200 font-bold px-6 py-2.5 rounded-xl text-sm transition shadow-lg shadow-white/10 dark:bg-white dark:text-black light:bg-black light:text-white"
+            href="/wallet"
+            className="bg-zinc-900 border border-zinc-750 hover:border-zinc-600 px-4 py-2 rounded-xl text-xs font-medium text-amber-300 flex items-center gap-2"
           >
-            Search Trains Now
+            <span>⚡ {t("instantRefund")}</span>
           </Link>
         </div>
-      ) : (
-        <div className="space-y-4">
-          {bookings.map((booking: any) => (
-            <div
-              key={booking._id}
-              className="bg-gray-800 rounded-xl p-6 border border-gray-750 hover:border-gray-700 transition"
+
+        {loading ? (
+          <div className="text-center py-20">
+            <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-white mx-auto mb-3"></div>
+            <p className="text-gray-400 text-sm">{t("searching")}</p>
+          </div>
+        ) : bookings.length === 0 ? (
+          <div className="text-center py-20 bg-gray-900 rounded-2xl border border-gray-800">
+            <p className="text-gray-400 text-lg mb-2">{t("noBookings")}</p>
+            <p className="text-gray-500 text-sm mb-6">{t("noBookingsDesc")}</p>
+            <Link
+              href="/search"
+              className="bg-white text-black hover:bg-zinc-200 font-bold px-6 py-2.5 rounded-xl text-sm transition shadow-lg shadow-white/10 dark:bg-white dark:text-black light:bg-black light:text-white"
             >
-              <div className="flex flex-col md:flex-row justify-between items-start gap-4">
-                <div className="flex-1">
-                  <div className="flex flex-wrap items-center gap-3 mb-2">
-                    <h3 className="text-xl font-bold text-white">
-                      {booking.train?.trainName || "Express Train"}
-                    </h3>
-                    <span className="bg-gray-700 text-gray-300 text-xs px-2.5 py-1 rounded font-mono">
-                      #{booking.train?.trainNumber}
-                    </span>
-                    {booking.pnr && (
-                      <span className="bg-yellow-950/70 border border-yellow-500/50 text-yellow-400 text-xs px-2.5 py-1 rounded font-mono font-semibold">
-                        PNR: {booking.pnr}
+              {t("bookNowBtn")}
+            </Link>
+          </div>
+        ) : (
+          <div className="space-y-4">
+            {bookings.map((booking: any) => (
+              <div
+                key={booking._id}
+                className="bg-gray-800 rounded-xl p-6 border border-gray-750 hover:border-gray-700 transition"
+              >
+                <div className="flex flex-col md:flex-row justify-between items-start gap-4">
+                  <div className="flex-1">
+                    <div className="flex flex-wrap items-center gap-3 mb-2">
+                      <h3 className="text-xl font-bold text-white">
+                        {booking.train?.trainName || "Express Train"}
+                      </h3>
+                      <span className="bg-gray-700 text-gray-300 text-xs px-2.5 py-1 rounded font-mono">
+                        #{booking.train?.trainNumber}
                       </span>
-                    )}
-                    {booking.classType && (
-                      <span className="bg-blue-900/60 text-blue-300 text-xs px-2 py-0.5 rounded font-semibold">
-                        Class: {booking.classType}
-                      </span>
-                    )}
-                  </div>
-
-                  <div className="flex gap-6 mt-3 items-center">
-                    <div>
-                      <p className="text-blue-400 font-semibold text-lg">{booking.train?.from}</p>
-                      <p className="text-gray-300 text-sm font-mono">{booking.train?.departureTime}</p>
+                      {booking.pnr && (
+                        <span className="bg-yellow-950/70 border border-yellow-500/50 text-yellow-400 text-xs px-2.5 py-1 rounded font-mono font-semibold">
+                          {t("pnr")}: {booking.pnr}
+                        </span>
+                      )}
+                      {booking.classType && (
+                        <span className="bg-blue-900/60 text-blue-300 text-xs px-2 py-0.5 rounded font-semibold">
+                          {t("classType")}: {booking.classType}
+                        </span>
+                      )}
                     </div>
-                    <div className="text-gray-500 text-xl font-bold">→</div>
-                    <div>
-                      <p className="text-green-400 font-semibold text-lg">{booking.train?.to}</p>
-                      <p className="text-gray-300 text-sm font-mono">{booking.train?.arrivalTime}</p>
-                    </div>
-                    {booking.train?.date && (
-                      <div className="ml-auto md:ml-4 text-xs text-gray-400 bg-gray-900/80 px-3 py-1.5 rounded-lg">
-                        📅 {booking.train.date}
-                      </div>
-                    )}
-                  </div>
 
-                  <div className="mt-4 pt-3 border-t border-gray-700/60 flex flex-wrap gap-4 text-sm">
-                    {booking.passengers && booking.passengers.length > 0 ? (
-                      <div className="flex flex-wrap gap-2 items-center">
-                        <span className="text-gray-400">Passengers:</span>
-                        {booking.passengers.map((p: any, idx: number) => (
-                          <span
-                            key={idx}
-                            className="bg-gray-900 text-gray-200 px-2 py-1 rounded text-xs"
-                          >
-                            👤 {p.name} ({p.age}y)
-                          </span>
-                        ))}
+                    <div className="flex gap-6 mt-3 items-center">
+                      <div>
+                        <p className="text-blue-400 font-semibold text-lg">{booking.train?.from}</p>
+                        <p className="text-gray-300 text-sm font-mono">
+                          {t("departs")}: {booking.train?.departureTime}
+                        </p>
                       </div>
-                    ) : (
-                      <p className="text-gray-300">
-                        👤 {booking.passengerName}, Age: {booking.passengerAge}
+                      <div className="text-gray-500 text-xl font-bold">→</div>
+                      <div>
+                        <p className="text-green-400 font-semibold text-lg">{booking.train?.to}</p>
+                        <p className="text-gray-300 text-sm font-mono">
+                          {t("arrives")}: {booking.train?.arrivalTime}
+                        </p>
+                      </div>
+                      {booking.train?.date && (
+                        <div className="ml-auto md:ml-4 text-xs text-gray-400 bg-gray-900/80 px-3 py-1.5 rounded-lg">
+                          📅 {booking.train.date}
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="mt-4 pt-3 border-t border-gray-700/60 flex flex-wrap gap-4 text-sm">
+                      {booking.passengers && booking.passengers.length > 0 ? (
+                        <div className="flex flex-wrap gap-2 items-center">
+                          <span className="text-gray-400">{t("passenger")}:</span>
+                          {booking.passengers.map((p: any, idx: number) => (
+                            <span
+                              key={idx}
+                              className="bg-gray-900 text-gray-200 px-2 py-1 rounded text-xs"
+                            >
+                              👤 {p.name} ({p.age}y)
+                            </span>
+                          ))}
+                        </div>
+                      ) : (
+                        <p className="text-gray-300">
+                          👤 {booking.passengerName}, {t("age")}: {booking.passengerAge}
+                        </p>
+                      )}
+                      <p className="text-gray-400">
+                        💺 {t("seats")}: <span className="text-white font-medium">{booking.seats}</span>
                       </p>
-                    )}
-                    <p className="text-gray-400">
-                      💺 Seats: <span className="text-white font-medium">{booking.seats}</span>
-                    </p>
-                    <p className="text-yellow-400 font-bold ml-auto">
-                      Total: ₹{booking.totalPrice}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex flex-col items-end gap-2 w-full md:w-auto">
-                  <span
-                    className={`px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider ${
-                      booking.status === "confirmed"
-                        ? "bg-green-900/80 text-green-300 border border-green-700"
-                        : "bg-red-900/80 text-red-300 border border-red-700"
-                    }`}
-                  >
-                    {booking.status}
-                  </span>
-
-                  {booking.status === "confirmed" && (
-                    <div className="flex flex-col gap-2 mt-2 w-full sm:w-auto">
-                      <button
-                        onClick={() => generateTicketPdf(booking)}
-                        className="bg-blue-600 hover:bg-blue-700 text-white text-xs px-3.5 py-1.5 rounded-lg font-semibold transition flex items-center justify-center gap-1.5 shadow"
-                      >
-                        <span>📥 Download PDF</span>
-                      </button>
-                      <button
-                        onClick={() => cancelBooking(booking._id, booking.pnr, booking.totalPrice)}
-                        className="bg-red-600/80 hover:bg-red-600 text-white px-3.5 py-1.5 rounded-lg text-xs font-medium transition cursor-pointer"
-                      >
-                        Cancel & Instant Refund
-                      </button>
+                      <p className="text-yellow-400 font-bold ml-auto">
+                        {t("totalFare")}: ₹{booking.totalPrice}
+                      </p>
                     </div>
-                  )}
+                  </div>
+
+                  <div className="flex flex-col items-end gap-2 w-full md:w-auto">
+                    <span
+                      className={`px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider ${
+                        booking.status === "confirmed"
+                          ? "bg-green-900/80 text-green-300 border border-green-700"
+                          : "bg-red-900/80 text-red-300 border border-red-700"
+                      }`}
+                    >
+                      {booking.status === "confirmed" ? t("confirmed") : t("cancelled")}
+                    </span>
+
+                    {booking.status === "confirmed" && (
+                      <div className="flex flex-col gap-2 mt-2 w-full sm:w-auto">
+                        <button
+                          onClick={() => generateTicketPdf(booking)}
+                          className="bg-blue-600 hover:bg-blue-700 text-white text-xs px-3.5 py-1.5 rounded-lg font-semibold transition flex items-center justify-center gap-1.5 shadow cursor-pointer"
+                        >
+                          <span>{t("downloadPdf")}</span>
+                        </button>
+                        <button
+                          onClick={() =>
+                            cancelBooking(booking._id, booking.pnr, booking.totalPrice)
+                          }
+                          className="bg-red-600/80 hover:bg-red-600 text-white px-3.5 py-1.5 rounded-lg text-xs font-medium transition cursor-pointer"
+                        >
+                          {t("cancelBooking")}
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
-      )}
+            ))}
+          </div>
+        )}
       </main>
     </div>
   );

@@ -2,8 +2,10 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { useLanguageStore } from "@/store/useLanguageStore";
 
 export default function TatkalCountdownWidget() {
+  const { lang, t } = useLanguageStore();
   const [timeLeftAC, setTimeLeftAC] = useState("");
   const [timeLeftNonAC, setTimeLeftNonAC] = useState("");
   const [isACActive, setIsACActive] = useState(false);
@@ -65,15 +67,15 @@ export default function TatkalCountdownWidget() {
           <div className="flex items-center gap-2 mb-1">
             <span className="bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
-              Live Tatkal Window Clock
+              {t("tatkalLiveClocks")}
             </span>
-            <span className="text-xs text-gray-400 font-mono">IST Indian Standard Time</span>
+            <span className="text-xs text-gray-400 font-mono">IST (Indian Standard Time)</span>
           </div>
           <h3 className="text-lg font-bold text-white flex items-center gap-2">
-            <span>⚡ High-Speed Tatkal Booking Gauge</span>
+            <span>⚡ {t("tatkalLiveClocks")}</span>
           </h3>
           <p className="text-xs text-gray-400 mt-0.5">
-            Auto-sync your checkout with the official railway opening times to secure confirmed berths
+            {t("tatkalNotice")}
           </p>
         </div>
 
@@ -82,44 +84,44 @@ export default function TatkalCountdownWidget() {
           {/* AC Tatkal Card */}
           <div className="bg-zinc-950/80 border border-zinc-800 rounded-2xl p-3 min-w-[150px] flex-1 md:flex-initial">
             <div className="flex justify-between items-center text-[11px] text-gray-400 mb-0.5">
-              <span>❄️ AC Classes (3A, 2A, 1A)</span>
+              <span>❄️ {t("acTatkalClock")}</span>
               <span className="text-amber-400 font-bold">10:00 AM</span>
             </div>
             <div className="text-xl font-extrabold font-mono text-white flex items-center gap-2">
               {isACActive ? (
-                <span className="text-emerald-400 text-sm animate-pulse">🟢 WINDOW OPEN</span>
+                <span className="text-emerald-400 text-sm animate-pulse">🟢 {t("windowActive")}</span>
               ) : (
                 <span>{timeLeftAC || "10:00:00"}</span>
               )}
             </div>
             <span className="text-[10px] text-gray-500 font-medium">
-              {isACActive ? "Rush hours live" : "Countdown to open"}
+              {isACActive ? "Rush hours live" : t("opensAt10")}
             </span>
           </div>
 
           {/* Non-AC Tatkal Card */}
           <div className="bg-zinc-950/80 border border-zinc-800 rounded-2xl p-3 min-w-[150px] flex-1 md:flex-initial">
             <div className="flex justify-between items-center text-[11px] text-gray-400 mb-0.5">
-              <span>💺 Sleeper & 2S</span>
+              <span>💺 {t("nonAcTatkalClock")}</span>
               <span className="text-amber-400 font-bold">11:00 AM</span>
             </div>
             <div className="text-xl font-extrabold font-mono text-white flex items-center gap-2">
               {isNonACActive ? (
-                <span className="text-emerald-400 text-sm animate-pulse">🟢 WINDOW OPEN</span>
+                <span className="text-emerald-400 text-sm animate-pulse">🟢 {t("windowActive")}</span>
               ) : (
                 <span>{timeLeftNonAC || "11:00:00"}</span>
               )}
             </div>
             <span className="text-[10px] text-gray-500 font-medium">
-              {isNonACActive ? "Rush hours live" : "Countdown to open"}
+              {isNonACActive ? "Rush hours live" : t("opensAt11")}
             </span>
           </div>
 
           <Link
             href="/search"
-            className="bg-amber-500 hover:bg-amber-400 text-black font-bold px-4 py-3 rounded-2xl text-xs transition shadow-lg shadow-amber-500/20 whitespace-nowrap self-stretch md:self-auto flex items-center justify-center gap-1"
+            className="bg-amber-500 hover:bg-amber-400 text-black font-bold px-4 py-3 rounded-2xl text-xs transition shadow-lg shadow-amber-500/20 whitespace-nowrap self-stretch md:self-auto flex items-center justify-center gap-1 cursor-pointer"
           >
-            <span>Book Tatkal Now →</span>
+            <span>{t("bookTicket")} →</span>
           </Link>
         </div>
       </div>

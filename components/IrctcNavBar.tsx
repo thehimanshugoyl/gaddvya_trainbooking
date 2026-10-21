@@ -16,7 +16,7 @@ import RailAlertsModal from "@/components/RailAlertsModal";
 export default function IrctcNavBar() {
   const { user, logout } = useAuthStore();
   const { balance } = useWalletStore();
-  const { t } = useLanguageStore();
+  const { lang, t } = useLanguageStore();
   const router = useRouter();
   const pathname = usePathname();
 
@@ -89,7 +89,7 @@ export default function IrctcNavBar() {
             </span>
             <span className="hidden sm:inline text-slate-600">•</span>
             <span className="hidden sm:flex items-center gap-1 text-slate-300">
-              <span>📞</span> 24x7 Rail Helpline: <strong className="text-white">139</strong>
+              <span>📞</span> {t("helplineText")}
             </span>
             <span className="hidden md:inline text-slate-600">•</span>
             <button
@@ -97,7 +97,7 @@ export default function IrctcNavBar() {
               className="text-amber-400 hover:text-amber-300 font-bold flex items-center gap-1 cursor-pointer"
             >
               <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
-              <span>🚨 Live Rail Alerts</span>
+              <span>🚨 {t("liveRailAlerts")}</span>
             </button>
           </div>
 
@@ -144,7 +144,7 @@ export default function IrctcNavBar() {
                   }}
                   className="text-red-400 hover:text-red-300 text-[11px] px-1 font-semibold cursor-pointer"
                 >
-                  Logout
+                  {t("logout")}
                 </button>
               </div>
             ) : (
@@ -153,13 +153,13 @@ export default function IrctcNavBar() {
                   href="/login"
                   className="text-slate-300 hover:text-white font-semibold transition"
                 >
-                  Login
+                  {t("login")}
                 </Link>
                 <Link
                   href="/register"
                   className="bg-white text-black hover:bg-slate-200 px-2.5 py-0.5 rounded-full font-bold transition"
                 >
-                  Register
+                  {t("register")}
                 </Link>
               </div>
             )}
@@ -175,10 +175,10 @@ export default function IrctcNavBar() {
             </Link>
             <div className="hidden lg:block border-l border-slate-700 pl-3">
               <span className="text-[10px] font-mono tracking-widest text-emerald-400 font-bold uppercase block">
-                Official Rail Booking Platform
+                {t("officialPlatform")}
               </span>
               <span className="text-xs text-slate-300">
-                Ministry of Railways • Indian Railway Catering & Tourism Corporation
+                {t("ministryRailways")}
               </span>
             </div>
           </div>
@@ -191,7 +191,7 @@ export default function IrctcNavBar() {
               className="bg-blue-600/20 hover:bg-blue-600/30 border border-blue-500/40 text-blue-300 text-xs px-3.5 py-1.5 rounded-xl font-bold flex items-center gap-1.5 transition cursor-pointer"
             >
               <span className="w-2 h-2 rounded-full bg-blue-400 animate-ping" />
-              <span>📡 Live GPS Train Tracker</span>
+              <span>📡 {t("liveGpsTracker")}</span>
             </button>
 
             {/* Indian Railways Crest Badge */}
@@ -223,7 +223,7 @@ export default function IrctcNavBar() {
                   isHome ? "text-white" : "text-blue-100 hover:text-white"
                 }`}
               >
-                HOME
+                {t("navHome")}
                 {isHome && (
                   <span className="absolute bottom-0 left-3 right-3 h-0.5 bg-white rounded-full shadow-sm" />
                 )}
@@ -240,7 +240,7 @@ export default function IrctcNavBar() {
                       : "text-blue-100 hover:text-white"
                   }`}
                 >
-                  <span>TRAINS</span>
+                  <span>{t("navTrains")}</span>
                   <span className="text-[10px]">⌄</span>
                 </button>
                 {openDropdown === "trains" && (
@@ -251,7 +251,7 @@ export default function IrctcNavBar() {
                       className="block p-2.5 rounded-xl hover:bg-slate-800 text-xs text-slate-200 hover:text-white font-medium"
                     >
                       <div className="font-bold text-white flex items-center gap-1.5">
-                        <span>🔍</span> Search 25,500+ Trains
+                        <span>🔍</span> {t("searchTrains")}
                       </div>
                       <span className="text-[11px] text-slate-400">Pan-India timetables & class fares</span>
                     </Link>
@@ -261,7 +261,7 @@ export default function IrctcNavBar() {
                       className="block p-2.5 rounded-xl hover:bg-slate-800 text-xs text-slate-200 hover:text-white font-medium"
                     >
                       <div className="font-bold text-white flex items-center gap-1.5">
-                        <span>🎫</span> PNR Status & Confirmation
+                        <span>🎫</span> {t("pnrStatus")}
                       </div>
                       <span className="text-[11px] text-slate-400">Live 10-digit PNR booking tracker</span>
                     </Link>
@@ -274,7 +274,7 @@ export default function IrctcNavBar() {
                       className="w-full text-left p-2.5 rounded-xl hover:bg-slate-800 text-xs text-slate-200 hover:text-white font-medium cursor-pointer"
                     >
                       <div className="font-bold text-emerald-400 flex items-center gap-1.5">
-                        <span>📡</span> Live Train Running Status
+                        <span>📡</span> {t("liveRunningStatus")}
                       </div>
                       <span className="text-[11px] text-slate-400">GPS location, delay, & platform numbers</span>
                     </button>
@@ -291,7 +291,7 @@ export default function IrctcNavBar() {
                     openDropdown === "meals" ? "text-white" : "text-blue-100 hover:text-white"
                   }`}
                 >
-                  <span>MEALS</span>
+                  <span>{t("navMeals")}</span>
                   <span className="text-[10px]">⌄</span>
                 </button>
                 {openDropdown === "meals" && (
@@ -305,35 +305,9 @@ export default function IrctcNavBar() {
                       className="w-full text-left p-2.5 rounded-xl hover:bg-slate-800 text-xs text-slate-200 hover:text-white font-medium cursor-pointer"
                     >
                       <div className="font-bold text-orange-400 flex items-center gap-1.5">
-                        <span>🍱</span> IRCTC e-Catering Food on Track
+                        <span>🍱</span> {t("eCateringMeals")}
                       </div>
                       <span className="text-[11px] text-slate-400">Order hot food delivered to seat</span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setOpenDropdown(null);
-                        setShowECatering(true);
-                      }}
-                      className="w-full text-left p-2.5 rounded-xl hover:bg-slate-800 text-xs text-slate-200 hover:text-white font-medium cursor-pointer"
-                    >
-                      <div className="font-bold text-emerald-400 flex items-center gap-1.5">
-                        <span>🥗</span> Pure Jain Satvik Food
-                      </div>
-                      <span className="text-[11px] text-slate-400">No onion, no garlic certified meals</span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setOpenDropdown(null);
-                        setShowECatering(true);
-                      }}
-                      className="w-full text-left p-2.5 rounded-xl hover:bg-slate-800 text-xs text-slate-200 hover:text-white font-medium cursor-pointer"
-                    >
-                      <div className="font-bold text-amber-300 flex items-center gap-1.5">
-                        <span>🍕</span> Domino's & Haldiram's Delivery
-                      </div>
-                      <span className="text-[11px] text-slate-400">Pre-ordered station delivery</span>
                     </button>
                   </div>
                 )}
@@ -348,7 +322,7 @@ export default function IrctcNavBar() {
                     openDropdown === "loyalty" ? "text-white" : "text-blue-100 hover:text-white"
                   }`}
                 >
-                  <span>LOYALTY</span>
+                  <span>{t("navLoyalty")}</span>
                   <span className="text-[10px]">⌄</span>
                 </button>
                 {openDropdown === "loyalty" && (
@@ -375,7 +349,7 @@ export default function IrctcNavBar() {
                     isWallet || openDropdown === "wallet" ? "text-white" : "text-blue-100 hover:text-white"
                   }`}
                 >
-                  <span>E-WALLET</span>
+                  <span>{t("navEwallet")}</span>
                   <span className="text-[10px]">⌄</span>
                 </button>
                 {openDropdown === "wallet" && (
@@ -386,7 +360,7 @@ export default function IrctcNavBar() {
                       className="block p-2.5 rounded-xl hover:bg-slate-800 text-xs font-medium"
                     >
                       <div className="font-bold text-amber-300 flex items-center justify-between">
-                        <span>💳 GADDVYA Rail Wallet</span>
+                        <span>💳 {t("walletTitle")}</span>
                         <span className="text-white font-mono">₹{balance.toLocaleString("en-IN")}</span>
                       </div>
                       <span className="text-[11px] text-slate-400">1-Click Tatkal checkout & instant refunds</span>
@@ -396,7 +370,7 @@ export default function IrctcNavBar() {
                       onClick={() => setOpenDropdown(null)}
                       className="block p-2.5 rounded-xl hover:bg-slate-800 text-xs font-medium text-emerald-300"
                     >
-                      <span>➕ Add Money / Top-up</span>
+                      <span>➕ {t("addMoney")}</span>
                     </Link>
                   </div>
                 )}
@@ -408,7 +382,7 @@ export default function IrctcNavBar() {
                 onClick={() => setShowAlerts(true)}
                 className="px-3 py-1.5 uppercase transition text-blue-100 hover:text-white cursor-pointer whitespace-nowrap flex items-center gap-1"
               >
-                <span>ALERTS</span>
+                <span>{t("navAlerts")}</span>
                 <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
               </button>
 
@@ -420,7 +394,7 @@ export default function IrctcNavBar() {
                 }
                 className="px-3 py-1.5 uppercase transition text-blue-100 hover:text-white cursor-pointer whitespace-nowrap"
               >
-                CONTACT US
+                {t("navContact")}
               </button>
             </div>
 
@@ -435,18 +409,18 @@ export default function IrctcNavBar() {
                       : "bg-purple-950/80 hover:bg-purple-900 text-purple-200 border border-purple-500/50"
                   }`}
                 >
-                  <span>⚙️ Admin Panel</span>
+                  <span>⚙️ {t("adminPanel")}</span>
                 </Link>
               ) : user?.role === "agent" ? (
                 <div className="flex items-center gap-2">
                   <span className="bg-amber-950/90 border border-amber-500/60 text-amber-300 text-[11px] px-2.5 py-1 rounded-full font-bold flex items-center gap-1">
-                    <span>🎧</span> Agent Portal
+                    <span>🎧</span> {t("agentPortal")}
                   </span>
                   <Link
                     href="/bookings"
                     className="px-3 py-1.5 rounded-full text-xs font-bold bg-white text-blue-950 hover:bg-blue-50 transition shadow-md"
                   >
-                    Client Slips
+                    {t("clientSlips")}
                   </Link>
                 </div>
               ) : user ? (
@@ -458,14 +432,14 @@ export default function IrctcNavBar() {
                       : "bg-blue-900/60 hover:bg-blue-800 text-white border border-blue-400/40"
                   }`}
                 >
-                  <span>🎫 My Bookings</span>
+                  <span>🎫 {t("myBookings")}</span>
                 </Link>
               ) : (
                 <Link
                   href="/login"
                   className="px-3 py-1.5 rounded-full text-xs font-bold bg-white text-blue-950 hover:bg-blue-50 transition shadow-md"
                 >
-                  Sign In →
+                  {t("signInPill")}
                 </Link>
               )}
             </div>

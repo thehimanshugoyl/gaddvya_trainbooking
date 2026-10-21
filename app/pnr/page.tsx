@@ -4,8 +4,10 @@ import axios from "axios";
 import Link from "next/link";
 import { generateTicketPdf } from "@/lib/ticketPdf";
 import IrctcNavBar from "@/components/IrctcNavBar";
+import { useLanguageStore } from "@/store/useLanguageStore";
 
 export default function PnrPage() {
+  const { lang, t } = useLanguageStore();
   const [pnr, setPnr] = useState("");
   const [booking, setBooking] = useState<any>(null);
   const [loading, setLoading] = useState(false);
@@ -36,13 +38,13 @@ export default function PnrPage() {
       <IrctcNavBar />
 
       {/* Main Container */}
-      <main className="max-w-3xl mx-auto w-full my-auto">
+      <main className="max-w-3xl mx-auto w-full my-auto p-4 md:p-6 flex-1">
         <div className="text-center mb-8">
           <div className="inline-block bg-zinc-900 border border-zinc-700 text-zinc-300 text-xs px-3 py-1 rounded-full mb-3">
-            Live PNR Inquiry & Status
+            {t("pnrStatus")}
           </div>
           <h1 className="text-3xl md:text-4xl font-extrabold text-white mb-2">
-            Passenger Current Status Enquiries
+            {t("pnrStatus")}
           </h1>
           <p className="text-gray-400 text-sm max-w-lg mx-auto">
             Enter your 10-digit Passenger Name Record (PNR) number to track live booking status, coach allotment, and download your boarding pass.
@@ -71,7 +73,7 @@ export default function PnrPage() {
               disabled={loading || pnr.length !== 10}
               className="bg-white text-black hover:bg-zinc-200 disabled:opacity-50 px-8 py-3.5 rounded-xl font-bold transition shadow-lg shadow-white/10 dark:bg-white dark:text-black light:bg-black light:text-white flex items-center justify-center gap-2 cursor-pointer"
             >
-              {loading ? "Checking..." : "Get Status"}
+              {loading ? t("searching") : t("pnrStatus")}
             </button>
           </form>
 
@@ -89,7 +91,7 @@ export default function PnrPage() {
             {/* Header Status */}
             <div className="flex flex-wrap justify-between items-start gap-4 border-b border-gray-800 pb-5 mb-5">
               <div>
-                <span className="text-xs text-gray-400 font-mono uppercase">PNR Number</span>
+                <span className="text-xs text-gray-400 font-mono uppercase">{t("pnr")}</span>
                 <p className="text-2xl font-black text-yellow-400 font-mono tracking-wider">
                   {booking.pnr || booking._id}
                 </p>
@@ -106,10 +108,10 @@ export default function PnrPage() {
                       : "bg-red-900/80 text-red-300 border border-red-700"
                   }`}
                 >
-                  ● {booking.status === "confirmed" ? "CONFIRMED (CNF)" : "CANCELLED"}
+                  ● {booking.status === "confirmed" ? t("confirmed") : t("cancelled")}
                 </span>
                 <p className="text-xs text-blue-300 font-semibold mt-2">
-                  Class: {booking.classType || "SL"} • {booking.seats} Seat(s)
+                  {t("classType")}: {booking.classType || "SL"} • {booking.seats} {t("seats")}
                 </p>
               </div>
             </div>
@@ -127,7 +129,7 @@ export default function PnrPage() {
 
               <div className="flex justify-between items-center text-sm">
                 <div>
-                  <p className="text-xs text-gray-400">Boarding Station</p>
+                  <p className="text-xs text-gray-400">{t("originStation")}</p>
                   <p className="text-blue-400 font-bold text-base">{booking.train?.from}</p>
                   <p className="text-gray-300 text-xs font-mono">{booking.train?.departureTime}</p>
                 </div>
@@ -140,7 +142,7 @@ export default function PnrPage() {
                   ────────►
                 </div>
                 <div className="text-right">
-                  <p className="text-xs text-gray-400">Destination Station</p>
+                  <p className="text-xs text-gray-400">{t("destinationStation")}</p>
                   <p className="text-green-400 font-bold text-base">{booking.train?.to}</p>
                   <p className="text-gray-300 text-xs font-mono">{booking.train?.arrivalTime}</p>
                 </div>
@@ -150,17 +152,17 @@ export default function PnrPage() {
             {/* Passenger Manifest */}
             <div className="mb-6">
               <h4 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">
-                Passenger Berth / Coach Allocation
+                {t("passengerManifest")}
               </h4>
               <div className="overflow-x-auto">
                 <table className="w-full text-sm text-left">
                   <thead>
                     <tr className="text-xs text-gray-400 border-b border-gray-800 bg-gray-900/50">
                       <th className="p-2.5">#</th>
-                      <th className="p-2.5">Passenger</th>
-                      <th className="p-2.5">Age / Gender</th>
-                      <th className="p-2.5">Allocated Berth</th>
-                      <th className="p-2.5">Current Status</th>
+                      <th className="p-2.5">{t("passenger")}</th>
+                      <th className="p-2.5">{t("age")} / {t("gender")}</th>
+                      <th className="p-2.5">{t("seatAssigned")}</th>
+                      <th className="p-2.5">{t("status")}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -185,7 +187,7 @@ export default function PnrPage() {
                           {p.seatNumber || `B1-${15 + idx * 3}`}
                         </td>
                         <td className="p-2.5 font-bold text-green-400 text-xs">
-                          {booking.status === "confirmed" ? "CNF / CONFIRMED" : "CAN / CANCELLED"}
+                          {booking.status === "confirmed" ? t("confirmed") : t("cancelled")}
                         </td>
                       </tr>
                     ))}
@@ -198,15 +200,15 @@ export default function PnrPage() {
             <div className="flex flex-wrap gap-3 pt-4 border-t border-gray-800">
               <button
                 onClick={() => generateTicketPdf(booking)}
-                className="bg-blue-600 hover:bg-blue-700 px-6 py-2.5 rounded-xl font-bold text-sm text-white transition flex items-center gap-2 shadow-lg shadow-blue-600/20"
+                className="bg-blue-600 hover:bg-blue-700 px-6 py-2.5 rounded-xl font-bold text-sm text-white transition flex items-center gap-2 shadow-lg shadow-blue-600/20 cursor-pointer"
               >
-                <span>📥 Download PDF E-Ticket</span>
+                <span>{t("downloadPdf")}</span>
               </button>
               <Link
                 href="/search"
                 className="bg-gray-800 hover:bg-gray-700 border border-gray-700 px-5 py-2.5 rounded-xl text-sm font-semibold transition"
               >
-                Book Another Trip
+                {t("bookTicket")}
               </Link>
             </div>
           </div>
@@ -215,7 +217,7 @@ export default function PnrPage() {
 
       {/* Footer */}
       <footer className="text-center text-xs text-gray-600 py-6 mt-8">
-        RailX PNR Tracking System • Direct Integrated Railway Reservation Inquiry
+        GADDVYA PNR Tracking System • Indian Railways Direct Reservation Inquiry
       </footer>
     </div>
   );

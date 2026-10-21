@@ -27,4 +27,11 @@ if (typeof window !== "undefined") {
   if (saved && (saved === "en" || saved === "hi" || saved === "pa")) {
     useLanguageStore.setState({ lang: saved });
   }
+
+  // Cross-tab / cross-window sync
+  window.addEventListener("storage", (e) => {
+    if (e.key === "gaddvya_lang" && e.newValue && (e.newValue === "en" || e.newValue === "hi" || e.newValue === "pa")) {
+      useLanguageStore.setState({ lang: e.newValue as Language });
+    }
+  });
 }
