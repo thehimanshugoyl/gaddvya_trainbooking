@@ -84,7 +84,8 @@ export function ensureInitialUsers(): any[] {
         name: "Railway Fleet Admin",
         role: "admin",
         phone: "9876543210",
-        password_hash: "$2a$10$wTkyW0c12.o2vV2o5gVbV.3wQZ6R7sH8kF7yL8eX4/Z4Y5m9eG1iC", // admin123
+        password: "$2b$10$vAZgeUQnGUMu7roNtafYlOP1uxGLlk91FQ24FKbFOgzJ908ZcBJ1G",
+        password_hash: "$2b$10$vAZgeUQnGUMu7roNtafYlOP1uxGLlk91FQ24FKbFOgzJ908ZcBJ1G", // admin123
         created_at: new Date().toISOString(),
       },
       {
@@ -94,7 +95,8 @@ export function ensureInitialUsers(): any[] {
         name: "IRCTC Certified Agent",
         role: "agent",
         phone: "9812345678",
-        password_hash: "$2a$10$wTkyW0c12.o2vV2o5gVbV.3wQZ6R7sH8kF7yL8eX4/Z4Y5m9eG1iC",
+        password: "$2b$10$vAZgeUQnGUMu7roNtafYlOP1uxGLlk91FQ24FKbFOgzJ908ZcBJ1G",
+        password_hash: "$2b$10$vAZgeUQnGUMu7roNtafYlOP1uxGLlk91FQ24FKbFOgzJ908ZcBJ1G",
         created_at: new Date().toISOString(),
       },
       {
@@ -106,7 +108,8 @@ export function ensureInitialUsers(): any[] {
         phone: "9876501234",
         gender: "Male",
         dob: "2003-05-15",
-        password_hash: "$2a$10$wTkyW0c12.o2vV2o5gVbV.3wQZ6R7sH8kF7yL8eX4/Z4Y5m9eG1iC",
+        password: "$2b$10$vAZgeUQnGUMu7roNtafYlOP1uxGLlk91FQ24FKbFOgzJ908ZcBJ1G",
+        password_hash: "$2b$10$vAZgeUQnGUMu7roNtafYlOP1uxGLlk91FQ24FKbFOgzJ908ZcBJ1G",
         created_at: new Date().toISOString(),
       },
     ];
@@ -237,6 +240,16 @@ async function supabaseRequest(
   }
 }
 
+function normalizeUser(u: any): any {
+  if (!u) return null;
+  const hash = u.password || u.password_hash || u.passwordHash || "";
+  return {
+    ...u,
+    password: hash,
+    password_hash: hash,
+  };
+}
+
 // High-Level Resilient Database Interface for GADDVYA
 export const db = {
   users: {
@@ -246,10 +259,10 @@ export const db = {
         const res = await supabaseRequest(
           `users?email=eq.${encodeURIComponent(cleanEmail)}&limit=1`
         );
-        if (!res.error && res.data?.[0]) return res.data[0];
+        if (!res.error && res.data?.[0]) return normalizeUser(res.data[0]);
       }
       const list = ensureInitialUsers();
-      return list.find((u) => u.email?.toLowerCase() === cleanEmail) || null;
+      return normalizeUser(list.find((u) => u.email?.toLowerCase() === cleanEmail) || null);
     },
 
     async findByPhone(phone: string) {
@@ -258,10 +271,10 @@ export const db = {
         const res = await supabaseRequest(
           `users?phone=eq.${encodeURIComponent(cleanPhone)}&limit=1`
         );
-        if (!res.error && res.data?.[0]) return res.data[0];
+        if (!res.error && res.data?.[0]) return normalizeUser(res.data[0]);
       }
       const list = ensureInitialUsers();
-      return list.find((u) => u.phone === cleanPhone) || null;
+      return normalizeUser(list.find((u) => u.phone === cleanPhone) || null);
     },
 
     async findByIdentifier(id: string) {
@@ -272,10 +285,10 @@ export const db = {
             clean
           )},username.eq.${encodeURIComponent(clean)})&limit=1`
         );
-        if (!res.error && res.data?.[0]) return res.data[0];
+        if (!res.error && res.data?.[0]) return normalizeUser(res.data[0]);
       }
       const list = ensureInitialUsers();
-      return (
+      return normalizeUser(
         list.find(
           (u) =>
             u.email?.toLowerCase() === clean ||
@@ -288,16 +301,18 @@ export const db = {
     async findById(id: string) {
       if (isSupabaseConfigured) {
         const res = await supabaseRequest(`users?id=eq.${id}&limit=1`);
-        if (!res.error && res.data?.[0]) return res.data[0];
+        if (!res.error && res.data?.[0]) return normalizeUser(res.data[0]);
       }
       const list = ensureInitialUsers();
-      return list.find((u) => u.id === id || u._id === id) || null;
+      return normalizeUser(list.find((u) => u.id === id || u._id === id) || null);
     },
 
     async create(userData: any) {
+      const pwd = userData.password || userData.password_hash || userData.passwordHash || null;
       const record = {
         email: userData.email.trim().toLowerCase(),
-        password_hash: userData.passwordHash || userData.password_hash,
+        password: pwd,
+        password_hash: pwd,
         name: userData.name,
         role: userData.role || "user",
         phone: userData.phone || null,
@@ -315,7 +330,7 @@ export const db = {
           method: "POST",
           body: JSON.stringify(record),
         });
-        if (!res.error && res.data?.[0]) return res.data[0];
+        if (!res.error && res.data?.[0]) return normalizeUser(res.data[0]);
       }
 
       const list = ensureInitialUsers();
@@ -323,7 +338,7 @@ export const db = {
       const saved = { id: localId, _id: localId, ...record };
       list.push(saved);
       saveLocalData("users", list);
-      return saved;
+      return normalizeUser(saved);
     },
 
     async count() {
