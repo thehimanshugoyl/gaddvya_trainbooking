@@ -1220,6 +1220,7 @@ def create_report():
     meta_data = [
         ["Project Title", "Train Ticket Booking System (GADDVYA Indian Railways Reservation)"],
         ["Candidate Name", "Himanshu Goyal"],
+        ["Candidate Email", "goyalhimanshu1326@gmail.com"],
         ["University Roll No. (UID)", "24BDA70369"],
         ["Degree Programme", "B.E. (Hons.) Computer Science & Engineering (Data Science)"],
         ["Project Supervisor", "Mr. Dheeresh Aggarwal, Assistant Professor"],

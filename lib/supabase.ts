@@ -127,6 +127,19 @@ export function ensureInitialUsers(): any[] {
         password_hash: "$2b$10$vAZgeUQnGUMu7roNtafYlOP1uxGLlk91FQ24FKbFOgzJ908ZcBJ1G",
         created_at: new Date().toISOString(),
       },
+      {
+        id: "usr_himanshu",
+        _id: "usr_himanshu",
+        email: "goyalhimanshu1326@gmail.com",
+        name: "Himanshu Goyal",
+        role: "user",
+        phone: "9876501234",
+        gender: "Male",
+        dob: "2003-05-15",
+        password: "$2b$10$vAZgeUQnGUMu7roNtafYlOP1uxGLlk91FQ24FKbFOgzJ908ZcBJ1G",
+        password_hash: "$2b$10$vAZgeUQnGUMu7roNtafYlOP1uxGLlk91FQ24FKbFOgzJ908ZcBJ1G",
+        created_at: new Date().toISOString(),
+      },
     ];
     saveLocalData("users", list);
   }

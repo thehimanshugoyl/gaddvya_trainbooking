@@ -11,7 +11,7 @@ An advanced, production-grade, full-stack railway transit web application engine
 - **🌐 Live Production URL:** [https://train-booking-24bda70369-lgzn.vercel.app/](https://train-booking-24bda70369-lgzn.vercel.app/)
 - **📦 GitHub Repository:** [https://github.com/thehimanshugoyl/gaddvya_trainbooking](https://github.com/thehimanshugoyl/gaddvya_trainbooking)
 - **🎓 Institution:** Department of AIT-CSE, Chandigarh University
-- **👤 Candidate:** **Himanshu Goyal** (UID: 24BDA70369)
+- **👤 Candidate:** **Himanshu Goyal** (UID: 24BDA70369) — [goyalhimanshu1326@gmail.com](mailto:goyalhimanshu1326@gmail.com)
 - **👨‍🏫 Project Supervisor:** **Er. Dheeresh Aggarwal**, Assistant Professor, Dept. of AIT-CSE
 - **📅 Academic Session:** 2026 – 2027
 
@@ -220,7 +220,7 @@ train-booking-24bda70369/
 
 ## 👨‍💻 Author Information
 
-- **Author & Developer:** Himanshu Goyal (`24BDA70369`) — [himanshugoya786@gmail.com](mailto:himanshugoya786@gmail.com)
+- **Author & Developer:** Himanshu Goyal (`24BDA70369`) — [goyalhimanshu1326@gmail.com](mailto:goyalhimanshu1326@gmail.com)
 - **Institution:** Department of AIT-CSE, Chandigarh University
 - **Academic Session:** 2026 – 2027
 

@@ -981,7 +981,7 @@ def create_presentation():
 
     p3 = tf_ty.add_paragraph()
     p3.alignment = PP_ALIGN.CENTER
-    r3 = p3.add_run("Himanshu Goyal (UID: 24BDA70369)\nSole Author • Academic Session: 2026 – 2027\n\nSupervisor: Er. Dheeresh Aggarwal\nDept of AIT-CSE, Chandigarh University")
+    r3 = p3.add_run("Himanshu Goyal (UID: 24BDA70369)\nEmail: goyalhimanshu1326@gmail.com\nSole Author • Academic Session: 2026 – 2027\n\nSupervisor: Er. Dheeresh Aggarwal\nDept of AIT-CSE, Chandigarh University")
     r3.font.size = Pt(10)
     r3.font.color.rgb = RGBColor(203, 213, 225)
 

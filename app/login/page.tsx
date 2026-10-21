@@ -247,7 +247,7 @@ export default function Login() {
             <div className="flex gap-2">
               <button
                 type="button"
-                onClick={() => fillCredentials("user@railx.com", "user123")}
+                onClick={() => fillCredentials("goyalhimanshu1326@gmail.com", "user123")}
                 className="bg-zinc-800 hover:bg-zinc-700 text-blue-300 px-2.5 py-1 rounded-lg text-[11px] font-semibold border border-zinc-700 transition"
               >
                 Citizen User
@@ -396,7 +396,7 @@ export default function Login() {
                     value={identifier}
                     onChange={(e) => setIdentifier(e.target.value)}
                     className="flex-1 bg-zinc-950/80 dark:bg-zinc-950/80 light:bg-zinc-50 border border-zinc-750 dark:border-zinc-750 light:border-zinc-300 rounded-xl p-3 text-white dark:text-white light:text-zinc-900 text-sm focus:border-blue-500 focus:outline-none disabled:opacity-60"
-                    placeholder="user@railx.com or 9876543210"
+                    placeholder="goyalhimanshu1326@gmail.com or 9876501234"
                     required
                   />
                   <button
