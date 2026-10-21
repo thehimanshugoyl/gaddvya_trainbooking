@@ -21,19 +21,34 @@ export const isSupabaseConfigured = Boolean(
     !SUPABASE_KEY.includes("your_")
 );
 
-// Fallback Local Storage Path
-const LOCAL_DATA_DIR = path.join(process.cwd(), ".data");
+// Fallback Local Storage Path (Serverless & Vercel Safe)
+const IS_SERVERLESS = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME);
+const BUNDLED_DATA_DIR = path.join(process.cwd(), ".data");
+const WRITABLE_DATA_DIR = IS_SERVERLESS ? path.join("/tmp", ".data") : BUNDLED_DATA_DIR;
 
 function getLocalData(collection: string): any[] {
   try {
-    if (!fs.existsSync(LOCAL_DATA_DIR)) {
-      fs.mkdirSync(LOCAL_DATA_DIR, { recursive: true });
+    // 1. First check writable directory (/tmp on Vercel)
+    const writablePath = path.join(WRITABLE_DATA_DIR, `${collection}.json`);
+    if (fs.existsSync(writablePath)) {
+      return JSON.parse(fs.readFileSync(writablePath, "utf-8"));
     }
-    const filePath = path.join(LOCAL_DATA_DIR, `${collection}.json`);
-    if (!fs.existsSync(filePath)) {
-      return [];
+
+    // 2. Fallback to bundled project data directory
+    const bundledPath = path.join(BUNDLED_DATA_DIR, `${collection}.json`);
+    if (fs.existsSync(bundledPath)) {
+      const data = JSON.parse(fs.readFileSync(bundledPath, "utf-8"));
+      try {
+        if (!fs.existsSync(WRITABLE_DATA_DIR)) {
+          fs.mkdirSync(WRITABLE_DATA_DIR, { recursive: true });
+        }
+        fs.writeFileSync(writablePath, JSON.stringify(data, null, 2), "utf-8");
+      } catch {
+        // ignore write failure on read-only environments
+      }
+      return data;
     }
-    return JSON.parse(fs.readFileSync(filePath, "utf-8"));
+    return [];
   } catch (err) {
     return [];
   }
@@ -41,10 +56,10 @@ function getLocalData(collection: string): any[] {
 
 function saveLocalData(collection: string, data: any[]): void {
   try {
-    if (!fs.existsSync(LOCAL_DATA_DIR)) {
-      fs.mkdirSync(LOCAL_DATA_DIR, { recursive: true });
+    if (!fs.existsSync(WRITABLE_DATA_DIR)) {
+      fs.mkdirSync(WRITABLE_DATA_DIR, { recursive: true });
     }
-    const filePath = path.join(LOCAL_DATA_DIR, `${collection}.json`);
+    const filePath = path.join(WRITABLE_DATA_DIR, `${collection}.json`);
     fs.writeFileSync(filePath, JSON.stringify(data, null, 2), "utf-8");
   } catch (err) {
     console.error(`[Local DB] Error saving ${collection}:`, err);
