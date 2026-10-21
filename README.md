@@ -12,7 +12,7 @@ An advanced, production-grade, full-stack railway transit web application engine
 - **📦 GitHub Repository:** [https://github.com/thehimanshugoyl/gaddvya_trainbooking](https://github.com/thehimanshugoyl/gaddvya_trainbooking)
 - **🎓 Institution:** Department of AIT-CSE, Chandigarh University
 - **👤 Candidate:** **Himanshu Goyal** (UID: 24BDA70369) — [goyalhimanshu1326@gmail.com](mailto:goyalhimanshu1326@gmail.com)
-- **👨‍🏫 Project Supervisor:** **Er. Dheeresh Aggarwal**, Assistant Professor, Dept. of AIT-CSE
+- **👨‍🏫 Project Supervisor:** **Mrs. Pooja Bhatia**, Assistant Professor, Dept. of AIT-CSE
 - **📅 Academic Session:** 2026 – 2027
 
 ---
