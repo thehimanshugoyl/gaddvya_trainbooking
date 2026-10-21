@@ -1,6 +1,6 @@
 # GADDVYA: Next-Gen Indian Railways Reservation & Transit Platform 🚂🇮🇳
 
-[![Deployment Status](https://img.shields.io/badge/Deployment-Vercel%20Production-success?style=flat&logo=vercel)](https://train-booking-24bda70369-lgzn.vercel.app/)
+[![Deployment Status](https://img.shields.io/badge/Deployment-Vercel%20Production-success?style=flat&logo=vercel)](https://gaddvya-train-booking-lgzn.vercel.app/)
 [![Next.js](https://img.shields.io/badge/Next.js-16.2.3%20App%20Router-black?style=flat&logo=next.js)](https://nextjs.org/)
 [![Database](https://img.shields.io/badge/Database-Supabase%20PostgreSQL-3ECF8E?style=flat&logo=supabase)](https://supabase.com/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue?style=flat&logo=typescript)](https://www.typescriptlang.org/)
@@ -8,7 +8,7 @@
 
 An advanced, production-grade, full-stack railway transit web application engineered to solve chronic Tatkal concurrency timeouts, payment gateway dropouts, delayed refund lifecycles, and user interface complexity across Indian Railways.
 
-- **🌐 Live Production URL:** [https://train-booking-24bda70369-lgzn.vercel.app/](https://train-booking-24bda70369-lgzn.vercel.app/)
+- **🌐 Live Production URL:** [https://gaddvya-train-booking-lgzn.vercel.app/](https://gaddvya-train-booking-lgzn.vercel.app/)
 - **📦 GitHub Repository:** [https://github.com/thehimanshugoyl/gaddvya_trainbooking](https://github.com/thehimanshugoyl/gaddvya_trainbooking)
 - **🎓 Institution:** Department of AIT-CSE, Chandigarh University
 - **👤 Candidate:** **Himanshu Goyal** (UID: 24BDA70369) — [goyalhimanshu1326@gmail.com](mailto:goyalhimanshu1326@gmail.com)

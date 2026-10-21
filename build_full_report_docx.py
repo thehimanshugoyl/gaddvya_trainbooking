@@ -568,7 +568,7 @@ def create_report():
     add_bullet('SVG-Powered Admin Analytics: Replaces static summary tables with dynamic Scalable Vector Graphics (SVG) charts depicting daily revenue curves, booking timelines, travel class distribution donuts, and route occupancy capacity meters.')
 
     add_para(
-        'The platform is continuously integrated and deployed on Vercel with automated GitHub CI/CD pipelines, accessible publicly at: https://train-booking-24bda70369-lgzn.vercel.app',
+        'The platform is continuously integrated and deployed on Vercel with automated GitHub CI/CD pipelines, accessible publicly at: https://gaddvya-train-booking-lgzn.vercel.app',
         space_after=14
     )
 
@@ -1203,7 +1203,7 @@ def create_report():
         "JWT_SECRET=super_secure_jwt_secret_gaddvya_2026\n"
         "BCRYPT_SALT_ROUNDS=10\n\n"
         "# ── Application URLs ──\n"
-        "NEXT_PUBLIC_APP_URL=https://train-booking-24bda70369-lgzn.vercel.app\n"
+        "NEXT_PUBLIC_APP_URL=https://gaddvya-train-booking-lgzn.vercel.app\n"
         "NEXT_PUBLIC_API_URL=http://localhost:3000"
     )
 
@@ -1227,7 +1227,7 @@ def create_report():
         ["Academic Department", "Department of AIT-CSE, Chandigarh University"],
         ["Academic Session", "2026 – 2027"],
         ["GitHub Repository", "https://github.com/thehimanshugoyl/gaddvya_trainbooking"],
-        ["Production URL", "https://train-booking-24bda70369-lgzn.vercel.app"],
+        ["Production URL", "https://gaddvya-train-booking-lgzn.vercel.app"],
         ["Core Technology Stack", "Next.js 16, TypeScript, Supabase PostgreSQL, Tailwind CSS v4, Zustand, Vercel"]
     ]
     meta_table = doc.add_table(rows=len(meta_data) + 1, cols=2)
@@ -1240,7 +1240,7 @@ def create_report():
     add_para('This user manual provides step-by-step instructions for operating all passenger and administrative features of the GADDVYA platform:')
 
     steps = [
-        ("Step 1: Access the Application", "Open any standard modern web browser (Google Chrome, Mozilla Firefox, Microsoft Edge, Safari) and navigate to the live deployment URL: https://train-booking-24bda70369-lgzn.vercel.app"),
+        ("Step 1: Access the Application", "Open any standard modern web browser (Google Chrome, Mozilla Firefox, Microsoft Edge, Safari) and navigate to the live deployment URL: https://gaddvya-train-booking-lgzn.vercel.app"),
         ("Step 2: Dual-Factor Registration", "Click 'Register' in the top utility strip or hero section. Provide your Full Legal Name, a verified email address from approved domains (Gmail, Outlook, iCloud, Yahoo), and a 10-digit Indian mobile number (+91). Enter the 6-digit cryptographic OTPs dispatched to your email and phone to activate your account."),
         ("Step 3: User / Agent Login", "Click 'Login' to open the authentic IRCTC modal. Choose between 'User Login' or 'Agent Login' tabs. Enter your identifier and password to generate a secure, 7-day JWT stateless session token."),
         ("Step 4: Language & Theme Selection", "Use the top header tools to switch between English, Hindi (हिन्दी), and Punjabi (ਪੰਜਾਬੀ). Toggle between Dark (Midnight Slate), Light (Crisp White), and IRCTC Royal Blue themes to suit your viewing preference."),
