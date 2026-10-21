@@ -84,22 +84,22 @@ export default function IrctcNavBar() {
 
   return (
     <>
-      <header className="w-full bg-slate-900 border-b border-slate-800 text-white z-40 relative shadow-xl">
+      <header className="w-full bg-black border-b border-zinc-800 text-white z-40 relative shadow-xl">
         {/* ── 1. TOP RAIL SERVICE UTILITY STRIP ── */}
-        <div className="bg-slate-950/90 border-b border-slate-800/80 px-4 sm:px-8 py-1.5 text-[11px] text-slate-300 flex flex-wrap justify-between items-center gap-2">
+        <div className="bg-zinc-950/95 border-b border-zinc-850 px-4 sm:px-8 py-1.5 text-[11px] text-zinc-300 flex flex-wrap justify-between items-center gap-2">
           {/* Live Date / Time & Helpline */}
           <div className="flex items-center gap-4 flex-wrap">
             <span className="font-mono text-amber-300 font-semibold flex items-center gap-1">
               <span>🕒</span> {currentTime || "Live IST"}
             </span>
-            <span className="hidden sm:inline text-slate-600">•</span>
+            <span className="hidden sm:inline text-zinc-600">•</span>
             <button
               onClick={() => setShowContactUs(true)}
-              className="hidden sm:flex items-center gap-1 text-slate-300 hover:text-white cursor-pointer"
+              className="hidden sm:flex items-center gap-1 text-zinc-300 hover:text-white cursor-pointer"
             >
               <span>📞</span> {t("helplineText")}
             </button>
-            <span className="hidden md:inline text-slate-600">•</span>
+            <span className="hidden md:inline text-zinc-600">•</span>
             <button
               onClick={() => setShowAlerts(true)}
               className="text-amber-400 hover:text-amber-300 font-bold flex items-center gap-1 cursor-pointer"
@@ -127,10 +127,10 @@ export default function IrctcNavBar() {
             <ThemeToggle />
 
             {user ? (
-              <div className="flex items-center gap-2 pl-1 border-l border-slate-700">
+              <div className="flex items-center gap-2 pl-1 border-l border-zinc-800">
                 <Link
                   href="/profile"
-                  className="bg-slate-800 hover:bg-slate-700 px-2.5 py-0.5 rounded-full text-white font-medium flex items-center gap-1 transition"
+                  className="bg-zinc-850 hover:bg-zinc-750 px-2.5 py-0.5 rounded-full text-white font-medium flex items-center gap-1 transition"
                 >
                   <span>👤</span>
                   <span className="max-w-[100px] truncate">{user.name}</span>
@@ -156,16 +156,16 @@ export default function IrctcNavBar() {
                 </button>
               </div>
             ) : (
-              <div className="flex items-center gap-2 pl-1 border-l border-slate-700">
+              <div className="flex items-center gap-2 pl-1 border-l border-zinc-800">
                 <Link
                   href="/login"
-                  className="text-slate-300 hover:text-white font-semibold transition"
+                  className="text-zinc-300 hover:text-white font-semibold transition"
                 >
                   {t("login")}
                 </Link>
                 <Link
                   href="/register"
-                  className="bg-white text-black hover:bg-slate-200 px-2.5 py-0.5 rounded-full font-bold transition"
+                  className="bg-white text-black hover:bg-zinc-200 px-2.5 py-0.5 rounded-full font-bold transition"
                 >
                   {t("register")}
                 </Link>
@@ -181,11 +181,11 @@ export default function IrctcNavBar() {
             <Link href="/" className="transition hover:opacity-95">
               <Logo size="md" />
             </Link>
-            <div className="hidden lg:block border-l border-slate-700 pl-3">
+            <div className="hidden lg:block border-l border-zinc-800 pl-3">
               <span className="text-[10px] font-mono tracking-widest text-emerald-400 font-bold uppercase block">
                 {t("officialPlatform")}
               </span>
-              <span className="text-xs text-slate-300">
+              <span className="text-xs text-zinc-300">
                 {t("ministryRailways")}
               </span>
             </div>
@@ -196,9 +196,9 @@ export default function IrctcNavBar() {
             {/* Quick Live GPS Status Action Button */}
             <button
               onClick={() => setShowLiveTracker(true)}
-              className="bg-blue-600/20 hover:bg-blue-600/30 border border-blue-500/40 text-blue-300 text-xs px-3.5 py-1.5 rounded-xl font-bold flex items-center gap-1.5 transition cursor-pointer"
+              className="bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-zinc-200 text-xs px-3.5 py-1.5 rounded-xl font-bold flex items-center gap-1.5 transition cursor-pointer"
             >
-              <span className="w-2 h-2 rounded-full bg-blue-400 animate-ping" />
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
               <span>📡 {t("liveGpsTracker")}</span>
             </button>
 
@@ -222,13 +222,13 @@ export default function IrctcNavBar() {
 
         {/* ── 3. THE ICONIC IRCTC BLUE NAVIGATION PILL BAR (From User Screenshot) ── */}
         <div className="max-w-7xl mx-auto px-4 sm:px-8 pb-3" ref={dropdownRef}>
-          <nav className="w-full bg-gradient-to-r from-blue-700 via-blue-800 to-indigo-900 rounded-full px-4 sm:px-6 py-2 shadow-2xl border border-blue-400/30 flex items-center justify-between overflow-x-auto text-xs sm:text-sm font-bold tracking-wide">
+          <nav className="w-full bg-gradient-to-r from-black via-zinc-950 to-zinc-900 rounded-full px-4 sm:px-6 py-2 shadow-2xl border border-zinc-700/80 flex items-center justify-between overflow-x-auto text-xs sm:text-sm font-bold tracking-wide">
             <div className="flex items-center gap-1 sm:gap-4 shrink-0">
               {/* 1. HOME Tab */}
               <Link
                 href="/"
                 className={`px-3 py-1.5 uppercase transition relative whitespace-nowrap ${
-                  isHome ? "text-white" : "text-blue-100 hover:text-white"
+                  isHome ? "text-white" : "text-zinc-300 hover:text-white"
                 }`}
               >
                 {t("navHome")}
@@ -245,33 +245,33 @@ export default function IrctcNavBar() {
                   className={`px-3 py-1.5 uppercase flex items-center gap-1 transition cursor-pointer whitespace-nowrap ${
                     isSearch || isPnr || openDropdown === "trains"
                       ? "text-white"
-                      : "text-blue-100 hover:text-white"
+                      : "text-zinc-300 hover:text-white"
                   }`}
                 >
                   <span>{t("navTrains")}</span>
                   <span className="text-[10px]">⌄</span>
                 </button>
                 {openDropdown === "trains" && (
-                  <div className="absolute left-0 mt-2 w-72 rounded-2xl bg-slate-900 border border-slate-700 shadow-2xl p-2 z-50 animate-fadeIn">
+                  <div className="absolute left-0 mt-2 w-72 rounded-2xl bg-zinc-950 border border-zinc-800 shadow-2xl p-2 z-50 animate-fadeIn">
                     <Link
                       href="/search"
                       onClick={() => setOpenDropdown(null)}
-                      className="block p-2.5 rounded-xl hover:bg-slate-800 text-xs text-slate-200 hover:text-white font-medium"
+                      className="block p-2.5 rounded-xl hover:bg-zinc-900 text-xs text-zinc-200 hover:text-white font-medium"
                     >
                       <div className="font-bold text-white flex items-center gap-1.5">
                         <span>🔍</span> {t("searchTrains")}
                       </div>
-                      <span className="text-[11px] text-slate-400">{t("subSearchTrains")}</span>
+                      <span className="text-[11px] text-zinc-400">{t("subSearchTrains")}</span>
                     </Link>
                     <Link
                       href="/pnr"
                       onClick={() => setOpenDropdown(null)}
-                      className="block p-2.5 rounded-xl hover:bg-slate-800 text-xs text-slate-200 hover:text-white font-medium"
+                      className="block p-2.5 rounded-xl hover:bg-zinc-900 text-xs text-zinc-200 hover:text-white font-medium"
                     >
                       <div className="font-bold text-white flex items-center gap-1.5">
                         <span>🎫</span> {t("pnrStatus")}
                       </div>
-                      <span className="text-[11px] text-slate-400">{t("subPnrStatus")}</span>
+                      <span className="text-[11px] text-zinc-400">{t("subPnrStatus")}</span>
                     </Link>
                     <button
                       type="button"
@@ -279,12 +279,12 @@ export default function IrctcNavBar() {
                         setOpenDropdown(null);
                         setShowLiveTracker(true);
                       }}
-                      className="w-full text-left p-2.5 rounded-xl hover:bg-slate-800 text-xs text-slate-200 hover:text-white font-medium cursor-pointer"
+                      className="w-full text-left p-2.5 rounded-xl hover:bg-zinc-900 text-xs text-zinc-200 hover:text-white font-medium cursor-pointer"
                     >
                       <div className="font-bold text-emerald-400 flex items-center gap-1.5">
                         <span>📡</span> {t("liveRunningStatus")}
                       </div>
-                      <span className="text-[11px] text-slate-400">{t("subLiveTracker")}</span>
+                      <span className="text-[11px] text-zinc-400">{t("subLiveTracker")}</span>
                     </button>
                   </div>
                 )}
@@ -296,14 +296,14 @@ export default function IrctcNavBar() {
                   type="button"
                   onClick={() => toggleDropdown("meals")}
                   className={`px-3 py-1.5 uppercase flex items-center gap-1 transition cursor-pointer whitespace-nowrap ${
-                    openDropdown === "meals" ? "text-white" : "text-blue-100 hover:text-white"
+                    openDropdown === "meals" ? "text-white" : "text-zinc-300 hover:text-white"
                   }`}
                 >
                   <span>{t("navMeals")}</span>
                   <span className="text-[10px]">⌄</span>
                 </button>
                 {openDropdown === "meals" && (
-                  <div className="absolute left-0 mt-2 w-72 rounded-2xl bg-slate-900 border border-slate-700 shadow-2xl p-2 z-50 animate-fadeIn">
+                  <div className="absolute left-0 mt-2 w-72 rounded-2xl bg-zinc-950 border border-zinc-800 shadow-2xl p-2 z-50 animate-fadeIn">
                     <button
                       type="button"
                       onClick={() => {
@@ -311,12 +311,12 @@ export default function IrctcNavBar() {
                         setCateringCategory("all");
                         setShowECatering(true);
                       }}
-                      className="w-full text-left p-2.5 rounded-xl hover:bg-slate-800 text-xs text-slate-200 hover:text-white font-medium cursor-pointer"
+                      className="w-full text-left p-2.5 rounded-xl hover:bg-zinc-900 text-xs text-zinc-200 hover:text-white font-medium cursor-pointer"
                     >
                       <div className="font-bold text-orange-400 flex items-center gap-1.5">
                         <span>🍱</span> {t("eCateringMeals")}
                       </div>
-                      <span className="text-[11px] text-slate-400">{t("subEcatering")}</span>
+                      <span className="text-[11px] text-zinc-400">{t("subEcatering")}</span>
                     </button>
                     <button
                       type="button"
@@ -325,12 +325,12 @@ export default function IrctcNavBar() {
                         setCateringCategory("jain");
                         setShowECatering(true);
                       }}
-                      className="w-full text-left p-2.5 rounded-xl hover:bg-slate-800 text-xs text-slate-200 hover:text-white font-medium cursor-pointer"
+                      className="w-full text-left p-2.5 rounded-xl hover:bg-zinc-900 text-xs text-zinc-200 hover:text-white font-medium cursor-pointer"
                     >
                       <div className="font-bold text-emerald-400 flex items-center gap-1.5">
                         <span>🥗</span> {t("catJain")}
                       </div>
-                      <span className="text-[11px] text-slate-400">{t("subJainFood")}</span>
+                      <span className="text-[11px] text-zinc-400">{t("subJainFood")}</span>
                     </button>
                     <button
                       type="button"
@@ -339,12 +339,12 @@ export default function IrctcNavBar() {
                         setCateringCategory("snacks");
                         setShowECatering(true);
                       }}
-                      className="w-full text-left p-2.5 rounded-xl hover:bg-slate-800 text-xs text-slate-200 hover:text-white font-medium cursor-pointer"
+                      className="w-full text-left p-2.5 rounded-xl hover:bg-zinc-900 text-xs text-zinc-200 hover:text-white font-medium cursor-pointer"
                     >
                       <div className="font-bold text-amber-300 flex items-center gap-1.5">
                         <span>🍕</span> {t("catSnacks")}
                       </div>
-                      <span className="text-[11px] text-slate-400">{t("subSnacksDelivery")}</span>
+                      <span className="text-[11px] text-zinc-400">{t("subSnacksDelivery")}</span>
                     </button>
                   </div>
                 )}
@@ -356,22 +356,22 @@ export default function IrctcNavBar() {
                   type="button"
                   onClick={() => toggleDropdown("loyalty")}
                   className={`px-3 py-1.5 uppercase flex items-center gap-1 transition cursor-pointer whitespace-nowrap ${
-                    openDropdown === "loyalty" ? "text-white" : "text-blue-100 hover:text-white"
+                    openDropdown === "loyalty" ? "text-white" : "text-zinc-300 hover:text-white"
                   }`}
                 >
                   <span>{t("navLoyalty")}</span>
                   <span className="text-[10px]">⌄</span>
                 </button>
                 {openDropdown === "loyalty" && (
-                  <div className="absolute left-0 mt-2 w-72 rounded-2xl bg-slate-900 border border-slate-700 shadow-2xl p-3 z-50 animate-fadeIn text-xs">
+                  <div className="absolute left-0 mt-2 w-72 rounded-2xl bg-zinc-950 border border-zinc-800 shadow-2xl p-3 z-50 animate-fadeIn text-xs">
                     <p className="font-bold text-amber-300 flex items-center gap-1.5">
                       <span>👑</span> {t("loyaltyTitle")}
                     </p>
-                    <p className="text-[11px] text-slate-400 mt-1 leading-relaxed">
+                    <p className="text-[11px] text-zinc-400 mt-1 leading-relaxed">
                       {t("loyaltySubtitle")}
                     </p>
                     <div className="mt-2.5 pt-2.5 border-t border-slate-800 flex items-center justify-between text-[11px]">
-                      <span className="text-slate-300">
+                      <span className="text-zinc-300">
                         {t("rewardPoints")}: <strong className="text-amber-400 font-mono">580</strong>
                       </span>
                       <span className="bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded font-bold">
@@ -398,29 +398,29 @@ export default function IrctcNavBar() {
                   type="button"
                   onClick={() => toggleDropdown("wallet")}
                   className={`px-3 py-1.5 uppercase flex items-center gap-1 transition cursor-pointer whitespace-nowrap ${
-                    isWallet || openDropdown === "wallet" ? "text-white" : "text-blue-100 hover:text-white"
+                    isWallet || openDropdown === "wallet" ? "text-white" : "text-zinc-300 hover:text-white"
                   }`}
                 >
                   <span>{t("navEwallet")}</span>
                   <span className="text-[10px]">⌄</span>
                 </button>
                 {openDropdown === "wallet" && (
-                  <div className="absolute left-0 mt-2 w-72 rounded-2xl bg-slate-900 border border-slate-700 shadow-2xl p-2 z-50 animate-fadeIn">
+                  <div className="absolute left-0 mt-2 w-72 rounded-2xl bg-zinc-950 border border-zinc-800 shadow-2xl p-2 z-50 animate-fadeIn">
                     <Link
                       href="/wallet"
                       onClick={() => setOpenDropdown(null)}
-                      className="block p-2.5 rounded-xl hover:bg-slate-800 text-xs font-medium"
+                      className="block p-2.5 rounded-xl hover:bg-zinc-900 text-xs font-medium"
                     >
                       <div className="font-bold text-amber-300 flex items-center justify-between">
                         <span>💳 {t("walletTitle")}</span>
                         <span className="text-white font-mono">₹{balance.toLocaleString("en-IN")}</span>
                       </div>
-                      <span className="text-[11px] text-slate-400 block mt-0.5">{t("subWallet")}</span>
+                      <span className="text-[11px] text-zinc-400 block mt-0.5">{t("subWallet")}</span>
                     </Link>
                     <Link
                       href="/wallet"
                       onClick={() => setOpenDropdown(null)}
-                      className="block p-2.5 rounded-xl hover:bg-slate-800 text-xs font-medium text-emerald-300"
+                      className="block p-2.5 rounded-xl hover:bg-zinc-900 text-xs font-medium text-emerald-300"
                     >
                       <span>➕ {t("addMoney")}</span>
                     </Link>
@@ -432,7 +432,7 @@ export default function IrctcNavBar() {
               <button
                 type="button"
                 onClick={() => setShowAlerts(true)}
-                className="px-3 py-1.5 uppercase transition text-blue-100 hover:text-white cursor-pointer whitespace-nowrap flex items-center gap-1"
+                className="px-3 py-1.5 uppercase transition text-zinc-300 hover:text-white cursor-pointer whitespace-nowrap flex items-center gap-1"
               >
                 <span>{t("navAlerts")}</span>
                 <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
@@ -442,7 +442,7 @@ export default function IrctcNavBar() {
               <button
                 type="button"
                 onClick={() => setShowContactUs(true)}
-                className="px-3 py-1.5 uppercase transition text-blue-100 hover:text-white cursor-pointer whitespace-nowrap flex items-center gap-1"
+                className="px-3 py-1.5 uppercase transition text-zinc-300 hover:text-white cursor-pointer whitespace-nowrap flex items-center gap-1"
               >
                 <span>{t("navContact")}</span>
                 <span className="text-[10px]">📞</span>
@@ -450,7 +450,7 @@ export default function IrctcNavBar() {
             </div>
 
             {/* Role-Specific Right Action Pills */}
-            <div className="flex items-center gap-2 shrink-0 pl-4 border-l border-blue-500/40">
+            <div className="flex items-center gap-2 shrink-0 pl-4 border-l border-zinc-800">
               {user?.role === "admin" ? (
                 <Link
                   href="/admin"
@@ -469,7 +469,7 @@ export default function IrctcNavBar() {
                   </span>
                   <Link
                     href="/bookings"
-                    className="px-3 py-1.5 rounded-full text-xs font-bold bg-white text-blue-950 hover:bg-blue-50 transition shadow-md"
+                    className="px-3 py-1.5 rounded-full text-xs font-bold bg-white text-black hover:bg-zinc-200 transition shadow-md"
                   >
                     {t("clientSlips")}
                   </Link>
@@ -480,7 +480,7 @@ export default function IrctcNavBar() {
                   className={`px-3 py-1.5 rounded-full text-xs font-bold transition flex items-center gap-1 ${
                     isBookings
                       ? "bg-white text-black shadow-lg"
-                      : "bg-blue-900/60 hover:bg-blue-800 text-white border border-blue-400/40"
+                      : "bg-zinc-800 hover:bg-zinc-700 text-white border border-zinc-700"
                   }`}
                 >
                   <span>🎫 {t("myBookings")}</span>
@@ -488,7 +488,7 @@ export default function IrctcNavBar() {
               ) : (
                 <Link
                   href="/login"
-                  className="px-3 py-1.5 rounded-full text-xs font-bold bg-white text-blue-950 hover:bg-blue-50 transition shadow-md"
+                  className="px-3 py-1.5 rounded-full text-xs font-bold bg-white text-black hover:bg-zinc-200 transition shadow-md"
                 >
                   {t("signInPill")}
                 </Link>

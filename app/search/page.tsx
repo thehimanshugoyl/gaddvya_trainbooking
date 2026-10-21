@@ -173,7 +173,7 @@ export default function Search() {
                 <button
                   key={idx}
                   onClick={() => quickFilter(pill.from, pill.to)}
-                  className="text-xs bg-gray-800/80 hover:bg-blue-600/40 border border-gray-700 px-3 py-1.5 rounded-full transition text-gray-300 hover:text-white"
+                  className="text-xs bg-gray-800/80 hover:bg-zinc-700 border border-gray-700 px-3 py-1.5 rounded-full transition text-gray-300 hover:text-white"
                 >
                   {pill.label}
                 </button>
@@ -201,7 +201,7 @@ export default function Search() {
                   placeholder={t("originPlaceholder")}
                   value={form.from}
                   onChange={(e) => setForm({ ...form, from: e.target.value })}
-                  className="w-full bg-gray-900/90 border border-gray-700 rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none"
+                  className="w-full bg-gray-900/90 border border-gray-700 rounded-xl p-3 text-white text-sm focus:border-white focus:outline-none"
                 />
               </div>
 
@@ -211,7 +211,7 @@ export default function Search() {
                   type="button"
                   title="Swap Origin & Destination"
                   onClick={() => setForm((prev) => ({ ...prev, from: prev.to, to: prev.from }))}
-                  className="w-10 h-10 rounded-xl bg-gray-800 hover:bg-gray-700 text-blue-300 border border-gray-700 flex items-center justify-center font-bold text-lg transition cursor-pointer shadow"
+                  className="w-10 h-10 rounded-xl bg-gray-800 hover:bg-gray-700 text-zinc-200 border border-gray-700 flex items-center justify-center font-bold text-lg transition cursor-pointer shadow"
                 >
                   ⇄
                 </button>
@@ -227,7 +227,7 @@ export default function Search() {
                   placeholder={t("destinationPlaceholder")}
                   value={form.to}
                   onChange={(e) => setForm({ ...form, to: e.target.value })}
-                  className="w-full bg-gray-900/90 border border-gray-700 rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none"
+                  className="w-full bg-gray-900/90 border border-gray-700 rounded-xl p-3 text-white text-sm focus:border-white focus:outline-none"
                 />
               </div>
               <datalist id="stations-list">
@@ -243,7 +243,7 @@ export default function Search() {
                   type="date"
                   value={form.date}
                   onChange={(e) => setForm({ ...form, date: e.target.value })}
-                  className="w-full bg-gray-900/90 border border-gray-700 rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none"
+                  className="w-full bg-gray-900/90 border border-gray-700 rounded-xl p-3 text-white text-sm focus:border-white focus:outline-none"
                 />
               </div>
               <div className="md:col-span-3">
@@ -279,7 +279,7 @@ export default function Search() {
               onClick={() => setSelectedTypeFilter(f.id)}
               className={`text-xs px-3.5 py-1.5 rounded-full border transition cursor-pointer font-medium ${
                 selectedTypeFilter === f.id
-                  ? "bg-blue-600 text-white border-blue-500 font-bold shadow-md shadow-blue-600/30"
+                  ? "bg-white text-black border-white dark:bg-white dark:text-black dark:border-white light:bg-black light:text-white light:border-black font-bold shadow-md"
                   : "bg-gray-900 text-gray-300 border-gray-750 hover:bg-gray-800 hover:text-white"
               }`}
             >
@@ -334,7 +334,7 @@ export default function Search() {
                         #{train.trainNumber}
                       </span>
                       {train.trainType && (
-                        <span className="bg-blue-900/60 border border-blue-500/30 text-blue-300 text-xs px-2.5 py-0.5 rounded font-medium">
+                        <span className="bg-zinc-800 border border-zinc-700 text-zinc-200 text-xs px-2.5 py-0.5 rounded font-medium">
                           {train.trainType}
                         </span>
                       )}
@@ -348,7 +348,7 @@ export default function Search() {
                     {/* Route & Timings */}
                     <div className="flex gap-6 mt-3 items-center">
                       <div>
-                        <p className="text-blue-400 font-semibold text-lg">{train.from}</p>
+                        <p className="text-white font-semibold text-lg">{train.from}</p>
                         <p className="text-gray-300 text-sm font-mono">
                           {t("departs")}: {train.departureTime}
                         </p>
@@ -387,7 +387,7 @@ export default function Search() {
                               }}
                               className={`text-xs px-3 py-1.5 rounded-lg border font-medium transition ${
                                 isSelected
-                                  ? "bg-blue-600 text-white border-blue-500"
+                                  ? "bg-white text-black border-white dark:bg-white dark:text-black dark:border-white light:bg-black light:text-white light:border-black font-bold"
                                   : "bg-gray-900/80 text-gray-300 border-gray-700 hover:border-gray-500"
                               }`}
                             >
@@ -447,7 +447,7 @@ export default function Search() {
                         <button
                           type="button"
                           onClick={() => setShowCoachMap(!showCoachMap)}
-                          className="text-xs bg-gray-800 hover:bg-gray-700 border border-gray-700 text-blue-300 px-3 py-1.5 rounded-lg font-medium transition cursor-pointer"
+                          className="text-xs bg-gray-800 hover:bg-gray-700 border border-gray-700 text-zinc-200 px-3 py-1.5 rounded-lg font-medium transition cursor-pointer"
                         >
                           {showCoachMap ? `✕ ${t("closeSeatMap")}` : `🗺️ ${t("chooseSeats")}`}
                         </button>
@@ -475,7 +475,7 @@ export default function Search() {
                           key={pIdx}
                           className="bg-gray-950/90 border border-gray-800 p-3.5 rounded-xl flex flex-col md:flex-row gap-3 items-start md:items-center"
                         >
-                          <div className="text-xs text-blue-400 font-bold self-center">
+                          <div className="text-xs text-zinc-300 font-bold self-center">
                             P{pIdx + 1}
                           </div>
 
@@ -551,10 +551,10 @@ export default function Search() {
                           {/* Seat allocated */}
                           {passenger.seatNumber && (
                             <div className="w-full md:w-24">
-                              <label className="text-[11px] text-blue-400 block mb-1">
+                              <label className="text-[11px] text-zinc-300 block mb-1">
                                 {t("seatAssigned")}
                               </label>
-                              <span className="bg-blue-950 border border-blue-500/40 text-blue-300 font-mono text-xs px-2 py-1.5 rounded block text-center">
+                              <span className="bg-zinc-900 border border-zinc-700 text-zinc-200 font-mono text-xs px-2 py-1.5 rounded block text-center">
                                 {passenger.seatNumber}
                               </span>
                             </div>
@@ -581,7 +581,7 @@ export default function Search() {
                         type="button"
                         onClick={() => addPassenger(displayAvailable || 6)}
                         disabled={passengersList.length >= Math.min(6, displayAvailable || 6)}
-                        className="text-xs bg-gray-800 hover:bg-gray-750 disabled:opacity-40 border border-gray-700 text-blue-300 px-3.5 py-2 rounded-xl font-medium transition cursor-pointer"
+                        className="text-xs bg-gray-800 hover:bg-gray-750 disabled:opacity-40 border border-gray-700 text-zinc-200 px-3.5 py-2 rounded-xl font-medium transition cursor-pointer"
                       >
                         {t("addPassenger")} ({passengersList.length}/
                         {Math.min(6, displayAvailable || 6)})
@@ -648,7 +648,7 @@ export default function Search() {
 
           {loading && (
             <div className="text-center py-20">
-              <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-400 mx-auto mb-3"></div>
+              <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-white mx-auto mb-3"></div>
               <p className="text-gray-400 text-sm">{t("searching")}</p>
             </div>
           )}

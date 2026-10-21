@@ -66,7 +66,7 @@ export default function RailAlertsModal({ isOpen, onClose }: RailAlertsModalProp
           : lang === "pa"
           ? "QR ਕੋਡ ਸਕੈਨਰ ਅਤੇ ਆਟੋਮੈਟਿਕ ਟਿਕਟ ਗੇਟ ਹੁਣ ਪਲੇਟਫਾਰਮ 1 ਤੋਂ 16 ਤੱਕ ਤੇਜ਼ ਬੋਰਡਿੰਗ ਲਈ ਸ਼ੁਰੂ ਕੀਤੇ ਗਏ ਹਨ।"
           : "QR code scanners and facial-recognition automatic ticket gates are now active across Platforms 1 to 16 for swift, contactless boarding.",
-      color: "border-blue-500 bg-blue-950/20 text-blue-300",
+      color: "border-zinc-700 bg-zinc-900 text-zinc-300",
     },
     {
       id: 4,

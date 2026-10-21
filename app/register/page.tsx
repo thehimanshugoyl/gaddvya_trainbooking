@@ -490,11 +490,11 @@ export default function Register() {
             </div>
 
             {/* 1-Click Dual Verification Quick Banner */}
-            <div className="bg-gradient-to-r from-blue-950/60 via-indigo-950/40 to-purple-950/60 border border-blue-500/30 p-4 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-3 shadow-lg">
+            <div className="bg-gradient-to-r from-zinc-950 via-black to-zinc-900 border border-zinc-750 p-4 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-3 shadow-lg">
               <div>
-                <div className="text-xs font-bold text-blue-200 flex items-center gap-1.5">
+                <div className="text-xs font-bold text-white flex items-center gap-1.5">
                   <span>⚡ Quick 1-Click Verification</span>
-                  <span className="bg-blue-500/20 text-blue-300 text-[10px] px-2 py-0.5 rounded-full border border-blue-400/30">Dual Auth</span>
+                  <span className="bg-zinc-800 text-zinc-300 text-[10px] px-2 py-0.5 rounded-full border border-zinc-700">Dual Auth</span>
                 </div>
                 <p className="text-[11px] text-gray-300 mt-1">
                   Dispatch and verify both Email and Mobile number simultaneously in one step.
@@ -507,7 +507,7 @@ export default function Register() {
                       type="button"
                       onClick={handleSendBothOtp}
                       disabled={loading || !isEmailValidFormat || !isPhoneValidFormat}
-                      className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 disabled:opacity-40 text-white font-bold text-xs px-4 py-2.5 rounded-xl transition shadow-md whitespace-nowrap cursor-pointer"
+                      className="w-full sm:w-auto bg-white text-black hover:bg-zinc-200 dark:bg-white dark:text-black light:bg-black light:text-white disabled:opacity-40 font-bold text-xs px-4 py-2.5 rounded-xl transition shadow-md whitespace-nowrap cursor-pointer"
                     >
                       ⚡ Send OTP to Both
                     </button>
@@ -631,7 +631,7 @@ export default function Register() {
               </div>
 
               {/* Phone allowed hint banner */}
-              <div className="mb-2 text-[11px] text-blue-300/90 bg-blue-950/30 border border-blue-800/40 px-2.5 py-1 rounded-lg flex items-center gap-1.5">
+              <div className="mb-2 text-[11px] text-zinc-300 bg-zinc-900/60 border border-zinc-750 px-2.5 py-1 rounded-lg flex items-center gap-1.5">
                 <span>🇮🇳</span>
                 <span>{t("indianPhoneOnly")}</span>
               </div>

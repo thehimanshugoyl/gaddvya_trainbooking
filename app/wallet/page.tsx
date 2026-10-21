@@ -298,7 +298,7 @@ export default function WalletPage() {
                   </div>
 
                   <div className="flex gap-3">
-                    <div className="w-8 h-8 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center font-bold text-base shrink-0">
+                    <div className="w-8 h-8 rounded-xl bg-zinc-800 text-zinc-300 flex items-center justify-center font-bold text-base shrink-0">
                       🛡️
                     </div>
                     <div>

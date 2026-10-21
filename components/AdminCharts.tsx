@@ -139,10 +139,10 @@ export default function AdminCharts({ stats, charts, onRefresh }: AdminChartsPro
       {/* ── TOP KPI METRIC CARDS WITH SPARKLINES ── */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Card 1: Total Users */}
-        <div className="bg-gray-900/90 border border-zinc-750 hover:border-blue-500/60 transition p-5 rounded-2xl shadow-xl flex items-center justify-between">
+        <div className="bg-gray-900/90 border border-zinc-750 hover:border-zinc-500 transition p-5 rounded-2xl shadow-xl flex items-center justify-between">
           <div>
             <div className="flex items-center gap-2 mb-1">
-              <span className="w-2 h-2 rounded-full bg-blue-400 animate-ping" />
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
               <span className="text-xs text-gray-400 font-medium">Registered Citizens</span>
             </div>
             <div className="text-3xl font-extrabold text-white font-mono">
@@ -154,7 +154,7 @@ export default function AdminCharts({ stats, charts, onRefresh }: AdminChartsPro
             </div>
           </div>
           <div className="flex flex-col items-end">
-            <span className="p-2.5 rounded-xl bg-blue-500/10 text-blue-400 text-xl mb-1">👥</span>
+            <span className="p-2.5 rounded-xl bg-zinc-800 text-zinc-300 text-xl mb-1">👥</span>
             {renderSparkline([4, 6, 8, 12, 14, 18, 22], "#3b82f6")}
           </div>
         </div>
@@ -269,7 +269,7 @@ export default function AdminCharts({ stats, charts, onRefresh }: AdminChartsPro
                 onClick={() => setMetricView("visits")}
                 className={`px-3 py-1.5 rounded-lg font-semibold transition cursor-pointer ${
                   metricView === "visits"
-                    ? "bg-blue-600 text-white shadow-md font-bold"
+                    ? "bg-white text-black shadow-md font-bold"
                     : "text-gray-400 hover:text-white"
                 }`}
               >
@@ -455,7 +455,7 @@ export default function AdminCharts({ stats, charts, onRefresh }: AdminChartsPro
               <div className="space-y-0.5 font-mono">
                 <p className="text-purple-300">₹{points[hoveredPoint].revenue.toLocaleString("en-IN")}</p>
                 <p className="text-amber-300">{points[hoveredPoint].bookings} Bookings</p>
-                <p className="text-blue-300">{points[hoveredPoint].visits} Site Visits</p>
+                <p className="text-zinc-300">{points[hoveredPoint].visits} Site Visits</p>
               </div>
             </div>
           )}
@@ -529,7 +529,7 @@ export default function AdminCharts({ stats, charts, onRefresh }: AdminChartsPro
 
           <div className="mt-6 pt-4 border-t border-gray-800 text-[11px] text-gray-400 flex justify-between">
             <span>⚡ Highest revenue density: <strong>3A & 2A Coaches</strong></span>
-            <span className="text-blue-400">View Manifest →</span>
+            <span className="text-zinc-300">View Manifest →</span>
           </div>
         </div>
 
@@ -564,7 +564,7 @@ export default function AdminCharts({ stats, charts, onRefresh }: AdminChartsPro
                       r.occupancy >= 90
                         ? "bg-gradient-to-r from-emerald-500 to-teal-400"
                         : r.occupancy >= 80
-                        ? "bg-gradient-to-r from-blue-500 to-cyan-400"
+                        ? "bg-gradient-to-r from-zinc-300 to-white"
                         : "bg-gradient-to-r from-amber-500 to-yellow-400"
                     }`}
                     style={{ width: `${r.occupancy}%` }}

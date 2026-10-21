@@ -134,12 +134,12 @@ export default function NetworkRouteVisualizer({ onTrackTrain }: NetworkRouteVis
       {/* ── HEADER BANNER WITH REAL-TIME CLOCK ── */}
       <div className="bg-gradient-to-r from-slate-900 via-indigo-950/80 to-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl mb-8 relative overflow-hidden">
         {/* Glow backdrop circles */}
-        <div className="absolute -top-24 -right-24 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -top-24 -right-24 w-72 h-72 bg-zinc-500/10 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute -bottom-24 -left-24 w-72 h-72 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 bg-blue-950/80 border border-blue-700/60 text-blue-300 text-xs px-3 py-1 rounded-full mb-3">
+            <div className="inline-flex items-center gap-2 bg-zinc-900 border border-zinc-700 text-zinc-200 text-xs px-3 py-1 rounded-full mb-3">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
               <span className="font-mono tracking-widest font-bold">NTES LIVE TELEMETRY</span>
               <span className="text-zinc-500">•</span>
@@ -159,7 +159,7 @@ export default function NetworkRouteVisualizer({ onTrackTrain }: NetworkRouteVis
               onClick={() => setActiveTab("corridors")}
               className={`px-4 py-2 rounded-xl font-bold transition flex items-center gap-2 cursor-pointer ${
                 activeTab === "corridors"
-                  ? "bg-blue-600 text-white shadow-md shadow-blue-600/30"
+                  ? "bg-white text-black shadow-md font-bold"
                   : "text-slate-400 hover:text-white"
               }`}
             >
@@ -169,7 +169,7 @@ export default function NetworkRouteVisualizer({ onTrackTrain }: NetworkRouteVis
               onClick={() => setActiveTab("board")}
               className={`px-4 py-2 rounded-xl font-bold transition flex items-center gap-2 cursor-pointer ${
                 activeTab === "board"
-                  ? "bg-blue-600 text-white shadow-md shadow-blue-600/30"
+                  ? "bg-white text-black shadow-md font-bold"
                   : "text-slate-400 hover:text-white"
               }`}
             >
@@ -192,7 +192,7 @@ export default function NetworkRouteVisualizer({ onTrackTrain }: NetworkRouteVis
           <div className="bg-slate-950/60 border border-slate-800/80 rounded-2xl p-3.5">
             <div className="flex items-center justify-between text-slate-400 text-[11px] mb-1">
               <span>{t("punctualityRate")}</span>
-              <span className="text-blue-400 font-bold">98.6%</span>
+              <span className="text-zinc-300 font-bold">98.6%</span>
             </div>
             <div className="text-xl sm:text-2xl font-black text-emerald-400 font-mono">98.6%</div>
             <div className="text-[10px] text-slate-500 mt-0.5">Zero Major Delays Recorded</div>
@@ -234,12 +234,12 @@ export default function NetworkRouteVisualizer({ onTrackTrain }: NetworkRouteVis
                   onClick={() => setSelectedCorridor(c)}
                   className={`p-4 rounded-2xl border transition cursor-pointer text-left ${
                     isSelected
-                      ? "bg-slate-900 border-blue-500 shadow-xl shadow-blue-500/10 ring-1 ring-blue-500/30"
+                      ? "bg-slate-900 border-zinc-600 shadow-xl ring-1 ring-zinc-500/30"
                       : "bg-slate-950/70 border-slate-850 hover:border-slate-700 hover:bg-slate-900/60"
                   }`}
                 >
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-slate-800 text-blue-300 border border-slate-700">
+                    <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-slate-800 text-zinc-300 border border-slate-700">
                       {c.type}
                     </span>
                     <span
@@ -247,7 +247,7 @@ export default function NetworkRouteVisualizer({ onTrackTrain }: NetworkRouteVis
                         c.status === "on-time"
                           ? "bg-emerald-950 text-emerald-300 border border-emerald-700/50"
                           : c.status === "boarding"
-                          ? "bg-blue-950 text-blue-300 border border-blue-700/50"
+                          ? "bg-zinc-900 text-zinc-300 border border-zinc-750"
                           : "bg-amber-950 text-amber-300 border border-amber-700/50"
                       }`}
                     >
@@ -285,7 +285,7 @@ export default function NetworkRouteVisualizer({ onTrackTrain }: NetworkRouteVis
             <div>
               <div className="flex flex-wrap justify-between items-start gap-4 mb-6 pb-6 border-b border-slate-800">
                 <div>
-                  <span className="text-xs font-mono uppercase text-blue-400 font-bold tracking-widest">
+                  <span className="text-xs font-mono uppercase text-zinc-300 font-bold tracking-widest">
                     ACTIVE ROUTE TELEMETRY
                   </span>
                   <h3 className="text-2xl font-black text-white mt-1">
@@ -296,7 +296,7 @@ export default function NetworkRouteVisualizer({ onTrackTrain }: NetworkRouteVis
                   </p>
                 </div>
                 <div className="text-right">
-                  <span className="bg-blue-950 border border-blue-800 text-blue-300 px-3 py-1 rounded-full text-xs font-bold font-mono">
+                  <span className="bg-zinc-900 border border-zinc-750 text-zinc-300 px-3 py-1 rounded-full text-xs font-bold font-mono">
                     {selectedCorridor.platform}
                   </span>
                   <p className="text-xs text-slate-400 mt-2 font-mono">
@@ -309,15 +309,15 @@ export default function NetworkRouteVisualizer({ onTrackTrain }: NetworkRouteVis
               <div className="my-8">
                 <div className="flex justify-between items-center text-xs text-slate-400 font-semibold mb-2">
                   <span>{t("journeyProgress")}</span>
-                  <span className="text-blue-400 font-mono">68% Enroute (Passing CNB)</span>
+                  <span className="text-zinc-300 font-mono">68% Enroute (Passing CNB)</span>
                 </div>
                 {/* Animated Track Line */}
                 <div className="relative w-full h-3 bg-slate-950 rounded-full border border-slate-800 overflow-hidden mb-6">
                   <div
-                    className="h-full bg-gradient-to-r from-blue-600 via-indigo-500 to-emerald-400 rounded-full transition-all duration-1000 relative"
+                    className="h-full bg-gradient-to-r from-zinc-200 via-white to-emerald-400 rounded-full transition-all duration-1000 relative"
                     style={{ width: "68%" }}
                   >
-                    <span className="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-white shadow-lg shadow-blue-500/50 animate-ping" />
+                    <span className="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-white shadow-lg shadow-white/50 animate-ping" />
                   </div>
                 </div>
 
@@ -330,7 +330,7 @@ export default function NetworkRouteVisualizer({ onTrackTrain }: NetworkRouteVis
                         idx < 2
                           ? "bg-slate-950/70 border-emerald-700/40 text-emerald-300"
                           : idx === 2
-                          ? "bg-blue-950/70 border-blue-600 text-blue-200 ring-1 ring-blue-500/40"
+                          ? "bg-zinc-900 border-zinc-600 text-white ring-1 ring-zinc-500/40"
                           : "bg-slate-950/40 border-slate-850 text-slate-500"
                       }`}
                     >
@@ -355,7 +355,7 @@ export default function NetworkRouteVisualizer({ onTrackTrain }: NetworkRouteVis
                 </div>
                 <div>
                   <span className="text-slate-500 block text-[10px] uppercase">Pantry Type</span>
-                  <span className="text-blue-300 font-bold">Hot Satvik</span>
+                  <span className="text-zinc-300 font-bold">Hot Satvik</span>
                 </div>
               </div>
             </div>
@@ -366,7 +366,7 @@ export default function NetworkRouteVisualizer({ onTrackTrain }: NetworkRouteVis
                 href={`/search?from=${encodeURIComponent(selectedCorridor.from.split(" (")[0])}&to=${encodeURIComponent(
                   selectedCorridor.to.split(" (")[0]
                 )}`}
-                className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-3 px-6 rounded-2xl text-center text-sm transition shadow-lg shadow-blue-600/20 cursor-pointer"
+                className="flex-1 bg-white text-black hover:bg-zinc-200 font-bold py-3 px-6 rounded-2xl text-center text-sm transition shadow-lg shadow-white/10 cursor-pointer"
               >
                 <span>⚡ {t("bookNowShortcut")}</span>
               </Link>
@@ -374,7 +374,7 @@ export default function NetworkRouteVisualizer({ onTrackTrain }: NetworkRouteVis
                 <button
                   type="button"
                   onClick={() => onTrackTrain(selectedCorridor.trainNumber)}
-                  className="bg-slate-800 hover:bg-slate-700 text-blue-300 border border-slate-700 font-semibold py-3 px-5 rounded-2xl text-sm transition cursor-pointer"
+                  className="bg-slate-800 hover:bg-slate-700 text-zinc-300 border border-slate-700 font-semibold py-3 px-5 rounded-2xl text-sm transition cursor-pointer"
                 >
                   <span>📡 {t("liveRunningStatus")}</span>
                 </button>
@@ -419,7 +419,7 @@ export default function NetworkRouteVisualizer({ onTrackTrain }: NetworkRouteVis
                 {corridors.map((c) => (
                   <tr key={c.id} className="hover:bg-slate-900/60 transition group font-mono">
                     <td className="py-3 px-3 font-bold text-amber-300">{c.trainNumber}</td>
-                    <td className="py-3 px-3 font-sans font-bold text-white group-hover:text-blue-300 transition">
+                    <td className="py-3 px-3 font-sans font-bold text-white group-hover:text-zinc-300 transition">
                       {c.trainName}
                     </td>
                     <td className="py-3 px-3 font-sans text-xs text-slate-300">
@@ -433,7 +433,7 @@ export default function NetworkRouteVisualizer({ onTrackTrain }: NetworkRouteVis
                           c.status === "on-time"
                             ? "bg-emerald-950 text-emerald-300 border border-emerald-700/50"
                             : c.status === "boarding"
-                            ? "bg-blue-950 text-blue-300 border border-blue-700/50"
+                            ? "bg-zinc-900 text-zinc-300 border border-zinc-750"
                             : "bg-amber-950 text-amber-300 border border-amber-700/50"
                         }`}
                       >
@@ -449,7 +449,7 @@ export default function NetworkRouteVisualizer({ onTrackTrain }: NetworkRouteVis
                         href={`/search?from=${encodeURIComponent(
                           c.from.split(" (")[0]
                         )}&to=${encodeURIComponent(c.to.split(" (")[0])}`}
-                        className="bg-blue-600 hover:bg-blue-500 text-white font-bold px-3 py-1.5 rounded-lg text-xs transition inline-block"
+                        className="bg-white text-black hover:bg-zinc-200 font-bold px-3 py-1.5 rounded-lg text-xs transition inline-block"
                       >
                         {t("bookTicket")}
                       </Link>

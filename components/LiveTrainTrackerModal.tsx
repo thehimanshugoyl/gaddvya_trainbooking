@@ -153,7 +153,7 @@ export default function LiveTrainTrackerModal({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fadeIn">
       <div className="w-full max-w-2xl bg-gray-900 border border-zinc-700 rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
         {/* Header */}
-        <div className="bg-gradient-to-r from-blue-900 via-blue-800 to-indigo-950 p-6 text-white flex justify-between items-start shrink-0">
+        <div className="bg-gradient-to-r from-black via-zinc-950 to-zinc-900 p-6 text-white flex justify-between items-start shrink-0">
           <div>
             <div className="flex items-center gap-2 mb-1">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
@@ -164,7 +164,7 @@ export default function LiveTrainTrackerModal({
             <h3 className="text-xl sm:text-2xl font-black flex items-center gap-2">
               <span>📡 {t("liveRunningStatus")}</span>
             </h3>
-            <p className="text-xs text-blue-200 mt-1">
+            <p className="text-xs text-zinc-300 mt-1">
               Real-time Indian Railways location, speed, and platform tracker
             </p>
           </div>
@@ -184,11 +184,11 @@ export default function LiveTrainTrackerModal({
               value={trainNumber}
               onChange={(e) => setTrainNumber(e.target.value)}
               placeholder={t("enterTrainNumber")}
-              className="flex-1 bg-gray-900 border border-zinc-700 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm focus:border-blue-500 focus:outline-none font-mono"
+              className="flex-1 bg-gray-900 border border-zinc-700 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm focus:border-white focus:outline-none font-mono"
             />
             <button
               type="submit"
-              className="bg-blue-600 hover:bg-blue-500 text-white font-bold px-5 py-2.5 rounded-xl text-xs transition cursor-pointer flex items-center gap-1.5"
+              className="bg-white text-black hover:bg-zinc-200 font-bold px-5 py-2.5 rounded-xl text-xs transition cursor-pointer flex items-center gap-1.5"
             >
               <span>🔍 {t("trackLiveBtn")}</span>
             </button>
@@ -209,7 +209,7 @@ export default function LiveTrainTrackerModal({
                 onClick={() => handleSelectQuickTrain(p.num)}
                 className={`px-2.5 py-1 rounded-lg border font-mono transition cursor-pointer ${
                   trainNumber === p.num
-                    ? "bg-blue-600 text-white border-blue-500 font-bold"
+                    ? "bg-white text-black border-white font-bold"
                     : "bg-zinc-900 text-zinc-300 border-zinc-750 hover:bg-zinc-800"
                 }`}
               >
@@ -268,7 +268,7 @@ export default function LiveTrainTrackerModal({
                     <div
                       className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0 ${
                         st.current
-                          ? "bg-blue-500 text-white ring-4 ring-blue-500/30 animate-pulse"
+                          ? "bg-white text-black ring-4 ring-white/30 animate-pulse"
                           : st.passed
                           ? "bg-emerald-500 text-black"
                           : "bg-zinc-800 text-zinc-500 border border-zinc-700"
@@ -289,7 +289,7 @@ export default function LiveTrainTrackerModal({
                         <span
                           className={`font-semibold px-2 py-0.5 rounded text-[11px] ${
                             st.current
-                              ? "bg-blue-950 text-blue-300 border border-blue-800"
+                              ? "bg-zinc-850 text-zinc-200 border border-zinc-700"
                               : st.passed
                               ? "text-emerald-400"
                               : "text-zinc-500"

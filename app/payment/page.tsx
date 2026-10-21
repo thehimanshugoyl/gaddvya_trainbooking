@@ -224,7 +224,7 @@ Thank you for traveling with Indian Railways!
                       <span className="text-gray-300">
                         {idx + 1}. {p.name} ({p.age}y, {p.gender})
                       </span>
-                      <span className="text-blue-300 font-mono">
+                      <span className="text-zinc-200 font-mono">
                         {p.seatNumber || `Berth: ${p.berthPreference || "Auto"}`}
                       </span>
                     </div>
@@ -245,7 +245,7 @@ Thank you for traveling with Indian Railways!
 
               <div className="flex justify-between text-sm pt-2 border-t border-gray-800">
                 <span className="text-gray-400">Travel Class</span>
-                <span className="text-blue-400 font-bold">{classType}</span>
+                <span className="text-white font-bold">{classType}</span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-gray-400">{t("seatQuantity")}</span>
@@ -510,7 +510,7 @@ Thank you for traveling with Indian Railways!
             <div className="space-y-3">
               <button
                 onClick={() => generateTicketPdf(booking)}
-                className="w-full bg-blue-600 hover:bg-blue-500 text-white py-3 rounded-xl font-bold text-sm transition shadow-lg shadow-blue-600/30 flex items-center justify-center gap-2"
+                className="w-full bg-white text-black hover:bg-zinc-200 dark:bg-white dark:text-black light:bg-black light:text-white py-3 rounded-xl font-extrabold text-sm transition shadow-lg shadow-white/10 flex items-center justify-center gap-2"
               >
                 <span>📥 Download IRCTC PDF Slip</span>
               </button>

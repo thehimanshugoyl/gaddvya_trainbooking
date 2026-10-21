@@ -151,7 +151,7 @@ export default function Login() {
             onClick={() => setUserType("user")}
             className={`py-3.5 px-4 text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition cursor-pointer border-b-2 ${
               userType === "user"
-                ? "text-blue-400 dark:text-blue-400 light:text-blue-600 border-blue-500 bg-zinc-900/40 dark:bg-zinc-900/40 light:bg-white"
+                ? "text-white dark:text-white light:text-black border-white dark:border-white light:border-black bg-zinc-900/60 dark:bg-zinc-900/60 light:bg-white"
                 : "text-gray-400 dark:text-gray-400 light:text-zinc-600 border-transparent hover:text-white"
             }`}
           >
@@ -249,7 +249,7 @@ export default function Login() {
               <button
                 type="button"
                 onClick={() => fillCredentials("goyalhimanshu1326@gmail.com", "user123")}
-                className="bg-zinc-800 hover:bg-zinc-700 text-blue-300 px-2.5 py-1 rounded-lg text-[11px] font-semibold border border-zinc-700 transition"
+                className="bg-zinc-800 hover:bg-zinc-700 text-zinc-200 px-2.5 py-1 rounded-lg text-[11px] font-semibold border border-zinc-700 transition"
               >
                 Citizen Mail
               </button>
@@ -288,7 +288,7 @@ export default function Login() {
                         ? "Enter Agent ID or admin@railx.com"
                         : "Enter Username or Email / Phone"
                     }
-                    className="w-full bg-zinc-950/80 dark:bg-zinc-950/80 light:bg-zinc-50 border border-zinc-750 dark:border-zinc-750 light:border-zinc-300 rounded-xl py-3 pl-4 pr-11 text-white dark:text-white light:text-zinc-900 text-sm focus:border-blue-500 focus:outline-none transition"
+                    className="w-full bg-zinc-950/80 dark:bg-zinc-950/80 light:bg-zinc-50 border border-zinc-750 dark:border-zinc-750 light:border-zinc-300 rounded-xl py-3 pl-4 pr-11 text-white dark:text-white light:text-zinc-900 text-sm focus:border-white focus:outline-none transition"
                     required
                   />
                   {/* Right-aligned User Icon */}
@@ -316,7 +316,7 @@ export default function Login() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder={t("enterPassword")}
-                    className="w-full bg-zinc-950/80 dark:bg-zinc-950/80 light:bg-zinc-50 border border-zinc-750 dark:border-zinc-750 light:border-zinc-300 rounded-xl py-3 pl-4 pr-11 text-white dark:text-white light:text-zinc-900 text-sm focus:border-blue-500 focus:outline-none transition"
+                    className="w-full bg-zinc-950/80 dark:bg-zinc-950/80 light:bg-zinc-50 border border-zinc-750 dark:border-zinc-750 light:border-zinc-300 rounded-xl py-3 pl-4 pr-11 text-white dark:text-white light:text-zinc-900 text-sm focus:border-white focus:outline-none transition"
                     required
                   />
                   {/* Right-aligned Eye Toggle Icon */}
@@ -362,7 +362,7 @@ export default function Login() {
                   onClick={() =>
                     alert("For security, please use Instant OTP Login or contact Railway Helpline 139.")
                   }
-                  className="text-xs font-semibold text-blue-400 hover:text-blue-300 dark:text-blue-400 light:text-blue-600 underline cursor-pointer"
+                  className="text-xs font-semibold text-zinc-400 hover:text-white dark:text-zinc-400 light:text-black underline cursor-pointer"
                 >
                   {t("forgotDetails")}
                 </button>
@@ -372,7 +372,7 @@ export default function Login() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 rounded-full text-sm transition shadow-lg shadow-blue-600/30 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                className="w-full bg-white text-black hover:bg-zinc-200 dark:bg-white dark:text-black light:bg-black light:text-white font-bold py-3.5 rounded-full text-sm transition shadow-lg shadow-white/10 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
               >
                 {/* Arrow inside circle icon matching the screenshot */}
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -403,7 +403,7 @@ export default function Login() {
                     disabled={otpSent}
                     value={identifier}
                     onChange={(e) => setIdentifier(e.target.value)}
-                    className="flex-1 bg-zinc-950/80 dark:bg-zinc-950/80 light:bg-zinc-50 border border-zinc-750 dark:border-zinc-750 light:border-zinc-300 rounded-xl p-3 text-white dark:text-white light:text-zinc-900 text-sm focus:border-blue-500 focus:outline-none disabled:opacity-60"
+                    className="flex-1 bg-zinc-950/80 dark:bg-zinc-950/80 light:bg-zinc-50 border border-zinc-750 dark:border-zinc-750 light:border-zinc-300 rounded-xl p-3 text-white dark:text-white light:text-zinc-900 text-sm focus:border-white focus:outline-none disabled:opacity-60"
                     placeholder="goyalhimanshu1326@gmail.com or 9877043187"
                     required
                   />
@@ -411,7 +411,7 @@ export default function Login() {
                     type="button"
                     onClick={handleSendLoginOtp}
                     disabled={loading || otpTimer > 0}
-                    className="bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white text-xs px-4 rounded-xl font-bold transition whitespace-nowrap cursor-pointer"
+                    className="bg-white text-black hover:bg-zinc-200 dark:bg-white dark:text-black light:bg-black light:text-white disabled:opacity-50 text-xs px-4 rounded-xl font-bold transition whitespace-nowrap cursor-pointer"
                   >
                     {otpTimer > 0 ? `Resend (${otpTimer}s)` : otpSent ? "Resend" : t("sendOtp")}
                   </button>
@@ -442,7 +442,7 @@ export default function Login() {
                     maxLength={6}
                     value={otp}
                     onChange={(e) => setOtp(e.target.value.replace(/\D/g, ""))}
-                    className="w-full bg-zinc-950 border border-zinc-750 rounded-xl p-3 text-white font-mono text-center tracking-widest text-lg focus:border-blue-500 focus:outline-none"
+                    className="w-full bg-zinc-950 border border-zinc-750 rounded-xl p-3 text-white font-mono text-center tracking-widest text-lg focus:border-white focus:outline-none"
                     placeholder="••••••"
                     required
                   />
@@ -453,7 +453,7 @@ export default function Login() {
                 <button
                   type="submit"
                   disabled={loading || otp.length !== 6}
-                  className="w-full bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white font-bold py-3.5 rounded-full text-sm transition shadow-lg shadow-blue-600/30 flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full bg-white text-black hover:bg-zinc-200 dark:bg-white dark:text-black light:bg-black light:text-white disabled:opacity-50 text-white font-bold py-3.5 rounded-full text-sm transition shadow-lg shadow-white/10 flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path
@@ -487,7 +487,7 @@ export default function Login() {
             className="w-full block text-center py-3 px-4 rounded-full border border-zinc-700 dark:border-zinc-700 light:border-zinc-300 bg-zinc-950/60 dark:bg-zinc-950/60 light:bg-zinc-50 hover:bg-zinc-800/80 dark:hover:bg-zinc-800/80 light:hover:bg-zinc-100 transition shadow-sm text-xs sm:text-sm text-gray-300 dark:text-gray-300 light:text-zinc-800"
           >
             {t("dontHaveAccount")}{" "}
-            <span className="font-bold text-blue-400 dark:text-blue-400 light:text-blue-600 ml-1">
+            <span className="font-bold text-white dark:text-white light:text-black ml-1">
               {t("signUp")}
             </span>
           </Link>

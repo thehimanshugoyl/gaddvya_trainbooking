@@ -68,7 +68,7 @@ export default function ProfilePage() {
                     <span className="inline-flex items-center gap-1.5 bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 text-xs px-2.5 py-1 rounded-full font-medium">
                       <span>✓</span> Mobile OTP Verified
                     </span>
-                    <span className="inline-flex items-center gap-1.5 bg-blue-950/80 border border-blue-500/40 text-blue-300 text-xs px-2.5 py-1 rounded-full font-medium">
+                    <span className="inline-flex items-center gap-1.5 bg-zinc-900 border border-zinc-750 text-zinc-200 text-xs px-2.5 py-1 rounded-full font-medium">
                       <span>🇮🇳</span> KYC Certified
                     </span>
                   </div>
@@ -91,7 +91,7 @@ export default function ProfilePage() {
 
                 <div className="bg-gray-900/80 border border-gray-800 rounded-2xl p-4 text-center min-w-[130px]">
                   <p className="text-xs text-gray-400 font-medium">{t("totalBookingsCount")}</p>
-                  <p className="text-2xl font-extrabold text-blue-400 mt-1">
+                  <p className="text-2xl font-extrabold text-white mt-1">
                     {bookingsCount !== null ? bookingsCount : "—"}
                   </p>
                   <Link
@@ -179,7 +179,7 @@ export default function ProfilePage() {
             <div className="flex gap-3">
               <Link
                 href="/search"
-                className="bg-blue-600 hover:bg-blue-500 text-white px-5 py-2.5 rounded-xl text-xs font-bold transition shadow-lg shadow-blue-600/30"
+                className="bg-white text-black hover:bg-zinc-200 dark:bg-white dark:text-black light:bg-black light:text-white px-5 py-2.5 rounded-xl text-xs font-bold transition shadow-lg shadow-white/10"
               >
                 {t("searchTrains")}
               </Link>

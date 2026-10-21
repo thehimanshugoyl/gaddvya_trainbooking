@@ -71,7 +71,7 @@ export default function PnrPage() {
                 placeholder={t("enterPnrInput")}
                 value={pnr}
                 onChange={(e) => setPnr(e.target.value.replace(/\D/g, ""))}
-                className="w-full bg-gray-950 border border-gray-700 rounded-xl p-3.5 text-white font-mono text-base tracking-widest placeholder:tracking-normal focus:border-blue-500 focus:outline-none"
+                className="w-full bg-gray-950 border border-gray-700 rounded-xl p-3.5 text-white font-mono text-base tracking-widest placeholder:tracking-normal focus:border-white focus:outline-none"
                 required
               />
               <span className="absolute right-4 top-4 text-xs text-gray-500 font-mono">
@@ -93,7 +93,7 @@ export default function PnrPage() {
             <button
               type="button"
               onClick={() => handleQuickPnr("8429103941")}
-              className="bg-zinc-800 hover:bg-zinc-700 text-blue-300 font-mono px-3 py-1 rounded-lg border border-zinc-700 transition cursor-pointer"
+              className="bg-zinc-800 hover:bg-zinc-700 text-zinc-200 font-mono px-3 py-1 rounded-lg border border-zinc-700 transition cursor-pointer"
             >
               8429103941 (Vande Bharat)
             </button>
@@ -146,7 +146,7 @@ export default function PnrPage() {
                 >
                   ● {booking.status === "confirmed" ? t("confirmed") : t("cancelled")}
                 </span>
-                <p className="text-xs text-blue-300 font-semibold mt-2 font-mono">
+                <p className="text-xs text-zinc-300 font-semibold mt-2 font-mono">
                   {t("classType")}: {booking.class_type || booking.classType || "CC"} • {booking.seats} {t("seats")}
                 </p>
               </div>
@@ -170,7 +170,7 @@ export default function PnrPage() {
             <div className="bg-slate-950 border border-gray-800 rounded-2xl p-6">
               <div className="flex justify-between items-center mb-4">
                 <div>
-                  <span className="text-[10px] text-blue-400 font-mono font-bold uppercase">TRAIN ROUTE</span>
+                  <span className="text-[10px] text-zinc-300 font-mono font-bold uppercase">TRAIN ROUTE</span>
                   <h3 className="text-lg font-bold text-white">
                     {booking.train?.trainName || booking.train_name || "Express Train"}
                   </h3>
@@ -189,7 +189,7 @@ export default function PnrPage() {
                 </div>
                 <div className="relative w-full h-2.5 bg-gray-900 rounded-full border border-gray-800 overflow-hidden">
                   <div
-                    className="h-full bg-gradient-to-r from-blue-500 via-indigo-500 to-emerald-400 rounded-full transition-all duration-1000 relative"
+                    className="h-full bg-gradient-to-r from-zinc-200 via-white to-emerald-400 rounded-full transition-all duration-1000 relative"
                     style={{ width: "72%" }}
                   >
                     <span className="absolute right-0 top-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full bg-white shadow-md shadow-emerald-500 animate-ping" />
@@ -200,7 +200,7 @@ export default function PnrPage() {
               <div className="flex justify-between items-center text-sm">
                 <div>
                   <p className="text-xs text-gray-400">{t("originStation")}</p>
-                  <p className="text-blue-400 font-bold text-base">{booking.train?.from || booking.from_station}</p>
+                  <p className="text-white font-bold text-base">{booking.train?.from || booking.from_station}</p>
                   <p className="text-gray-300 text-xs font-mono">{booking.train?.departureTime || "06:00"}</p>
                 </div>
                 <div className="text-center text-gray-500 font-bold px-2">
@@ -241,7 +241,7 @@ export default function PnrPage() {
                         key={seatNum}
                         className={`p-2.5 rounded-lg text-center border transition ${
                           isAllocated
-                            ? "bg-blue-600 border-blue-400 text-white font-bold ring-2 ring-blue-400/50 scale-105 shadow-lg shadow-blue-600/40"
+                            ? "bg-white border-white text-black font-bold ring-2 ring-white/50 scale-105 shadow-lg"
                             : "bg-gray-800/80 border-gray-700 text-gray-400"
                         }`}
                       >
@@ -250,7 +250,7 @@ export default function PnrPage() {
                         </span>
                         <span className="text-sm">{seatNum}</span>
                         {isAllocated && (
-                          <span className="block text-[9px] bg-white text-blue-900 font-extrabold rounded px-1 mt-0.5">
+                          <span className="block text-[9px] bg-black text-white font-extrabold rounded px-1 mt-0.5">
                             YOURS
                           </span>
                         )}
@@ -299,7 +299,7 @@ export default function PnrPage() {
                         <td className="p-3 text-gray-400 text-xs">
                           {p.age} yrs • {p.gender || "Male"}
                         </td>
-                        <td className="p-3 font-mono text-blue-300 font-bold">
+                        <td className="p-3 font-mono text-zinc-200 font-bold">
                           {p.seatNumber || `C1-${22 + idx * 2}`}
                         </td>
                         <td className="p-3 text-xs text-slate-300">
@@ -319,7 +319,7 @@ export default function PnrPage() {
             <div className="flex flex-wrap gap-3 pt-4 border-t border-gray-800">
               <button
                 onClick={() => generateTicketPdf(booking)}
-                className="bg-blue-600 hover:bg-blue-500 px-6 py-3 rounded-2xl font-bold text-sm text-white transition flex items-center gap-2 shadow-lg shadow-blue-600/30 cursor-pointer"
+                className="bg-white text-black hover:bg-zinc-200 dark:bg-white dark:text-black light:bg-black light:text-white px-6 py-3 rounded-2xl font-bold text-sm transition flex items-center gap-2 shadow-lg shadow-white/10 cursor-pointer"
               >
                 <span>📥 {t("downloadPdf")}</span>
               </button>

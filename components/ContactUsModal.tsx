@@ -40,9 +40,9 @@ export default function ContactUsModal({ isOpen, onClose }: ContactUsModalProps)
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fadeIn">
-      <div className="w-full max-w-2xl bg-gray-900 border border-blue-600/50 rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+      <div className="w-full max-w-2xl bg-gray-900 border border-zinc-800 rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
         {/* Header */}
-        <div className="bg-gradient-to-r from-blue-900 via-indigo-900 to-slate-900 p-6 text-white flex justify-between items-start shrink-0">
+        <div className="bg-gradient-to-r from-black via-zinc-950 to-zinc-900 p-6 text-white flex justify-between items-start shrink-0">
           <div>
             <div className="flex items-center gap-2 mb-1">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
@@ -53,7 +53,7 @@ export default function ContactUsModal({ isOpen, onClose }: ContactUsModalProps)
             <h3 className="text-xl sm:text-2xl font-black flex items-center gap-2">
               <span>{t("contactTitle")}</span>
             </h3>
-            <p className="text-xs text-blue-200 mt-1 max-w-lg">
+            <p className="text-xs text-zinc-300 mt-1 max-w-lg">
               {t("contactSubtitle")}
             </p>
           </div>
@@ -93,20 +93,20 @@ export default function ContactUsModal({ isOpen, onClose }: ContactUsModalProps)
             {/* 139 Call Tile */}
             <a
               href="tel:139"
-              className="bg-zinc-950 border border-zinc-800 hover:border-blue-500/60 p-4 rounded-2xl flex flex-col justify-between transition group shadow-md"
+              className="bg-zinc-950 border border-zinc-800 hover:border-zinc-500 p-4 rounded-2xl flex flex-col justify-between transition group shadow-md"
             >
               <div>
-                <div className="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-xl mb-2 group-hover:scale-110 transition">
+                <div className="w-10 h-10 rounded-xl bg-zinc-800 text-zinc-300 flex items-center justify-center text-xl mb-2 group-hover:scale-110 transition">
                   📞
                 </div>
-                <h4 className="text-sm font-bold text-white group-hover:text-blue-300 transition">
+                <h4 className="text-sm font-bold text-white group-hover:text-white transition">
                   {t("callHelpline")}
                 </h4>
                 <p className="text-[11px] text-gray-400 mt-1 leading-relaxed">
                   {t("call139Desc")}
                 </p>
               </div>
-              <span className="text-xs font-bold text-blue-400 mt-3 inline-block">
+              <span className="text-xs font-bold text-zinc-300 mt-3 inline-block">
                 Dial 139 Now →
               </span>
             </a>
@@ -174,7 +174,7 @@ export default function ContactUsModal({ isOpen, onClose }: ContactUsModalProps)
                   <select
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
-                    className="w-full bg-gray-900 border border-zinc-700 rounded-xl p-2.5 text-white focus:border-blue-500 focus:outline-none"
+                    className="w-full bg-gray-900 border border-zinc-700 rounded-xl p-2.5 text-white focus:border-white focus:outline-none"
                   >
                     <option value="booking">{t("catBooking")}</option>
                     <option value="cleanliness">{t("catCleanliness")}</option>
@@ -195,7 +195,7 @@ export default function ContactUsModal({ isOpen, onClose }: ContactUsModalProps)
                     value={pnrInput}
                     onChange={(e) => setPnrInput(e.target.value.replace(/\D/g, ""))}
                     placeholder="e.g. 8429103941"
-                    className="w-full bg-gray-900 border border-zinc-700 rounded-xl p-2.5 text-white font-mono focus:border-blue-500 focus:outline-none"
+                    className="w-full bg-gray-900 border border-zinc-700 rounded-xl p-2.5 text-white font-mono focus:border-white focus:outline-none"
                   />
                 </div>
               </div>
@@ -210,7 +210,7 @@ export default function ContactUsModal({ isOpen, onClose }: ContactUsModalProps)
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   placeholder={t("grievancePlaceholder")}
-                  className="w-full bg-gray-900 border border-zinc-700 rounded-xl p-3 text-white focus:border-blue-500 focus:outline-none resize-none"
+                  className="w-full bg-gray-900 border border-zinc-700 rounded-xl p-3 text-white focus:border-white focus:outline-none resize-none"
                   required
                 />
               </div>
@@ -223,7 +223,7 @@ export default function ContactUsModal({ isOpen, onClose }: ContactUsModalProps)
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white font-bold px-5 py-2.5 rounded-xl transition cursor-pointer shadow-lg shadow-blue-600/20"
+                  className="bg-white text-black hover:bg-zinc-200 dark:bg-white dark:text-black light:bg-black light:text-white disabled:opacity-50 font-bold px-5 py-2.5 rounded-xl transition cursor-pointer shadow-lg shadow-white/10"
                 >
                   {submitting ? "Submitting..." : `${t("submitBtn")} →`}
                 </button>

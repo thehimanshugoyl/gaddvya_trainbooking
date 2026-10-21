@@ -130,7 +130,7 @@ export default function Bookings() {
                         </Link>
                       )}
                       {booking.classType && (
-                        <span className="bg-blue-900/60 text-blue-300 text-xs px-2 py-0.5 rounded font-semibold">
+                        <span className="bg-zinc-800 text-zinc-300 text-xs px-2 py-0.5 rounded font-semibold">
                           {t("classType")}: {booking.classType}
                         </span>
                       )}
@@ -138,7 +138,7 @@ export default function Bookings() {
 
                     <div className="flex gap-6 mt-3 items-center">
                       <div>
-                        <p className="text-blue-400 font-semibold text-lg">{booking.train?.from}</p>
+                        <p className="text-white font-semibold text-lg">{booking.train?.from}</p>
                         <p className="text-gray-300 text-sm font-mono">
                           {t("departs")}: {booking.train?.departureTime}
                         </p>
@@ -199,7 +199,7 @@ export default function Bookings() {
                       <div className="flex flex-col gap-2 mt-2 w-full sm:w-auto">
                         <button
                           onClick={() => generateTicketPdf(booking)}
-                          className="bg-blue-600 hover:bg-blue-700 text-white text-xs px-3.5 py-1.5 rounded-lg font-semibold transition flex items-center justify-center gap-1.5 shadow cursor-pointer"
+                          className="bg-white text-black hover:bg-zinc-200 text-xs px-3.5 py-1.5 rounded-lg font-bold transition flex items-center justify-center gap-1.5 shadow cursor-pointer"
                         >
                           <span>{t("downloadPdf")}</span>
                         </button>

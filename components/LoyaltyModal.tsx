@@ -25,7 +25,7 @@ export default function LoyaltyModal({ isOpen, onClose }: LoyaltyModalProps) {
       title: t("perkUpgrade"),
       cost: 200,
       icon: "💺",
-      color: "from-blue-600 to-indigo-700",
+      color: "from-zinc-900 to-black",
       desc: "Instant berth upgrade from Sleeper to 3A or 2A to 1A on chart prep.",
     },
     {

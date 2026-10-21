@@ -43,7 +43,7 @@ export default function Home() {
         {/* Hero Title */}
         <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight mb-4 max-w-4xl leading-tight">
           {t("heroTitle1")} <br />
-          <span className="bg-gradient-to-r from-blue-400 via-sky-300 to-indigo-300 bg-clip-text text-transparent dark:from-white dark:via-zinc-200 dark:to-zinc-400 light:from-blue-700 light:via-indigo-800 light:to-sky-700">
+          <span className="bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text text-transparent dark:from-white dark:via-zinc-200 dark:to-zinc-400 light:from-zinc-900 light:via-black light:to-zinc-800">
             {t("heroTitle2")}
           </span>
         </h1>
@@ -61,15 +61,15 @@ export default function Home() {
         <div className="flex flex-wrap gap-3 sm:gap-4 justify-center mb-12">
           <Link
             href="/search"
-            className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white px-8 py-3.5 rounded-2xl font-bold text-base sm:text-lg transition shadow-xl shadow-blue-600/20 flex items-center gap-2 cursor-pointer"
+            className="bg-white text-black hover:bg-zinc-200 px-8 py-3.5 rounded-2xl font-extrabold text-base sm:text-lg transition shadow-xl shadow-white/10 dark:bg-white dark:text-black light:bg-black light:text-white flex items-center gap-2 cursor-pointer"
           >
             <span>🔍 {t("searchBtn")}</span>
           </Link>
           <button
             onClick={() => handleTrackSpecificTrain("22436")}
-            className="bg-slate-900 hover:bg-slate-800 text-blue-300 border border-blue-500/40 px-6 py-3.5 rounded-2xl font-semibold text-base sm:text-lg transition flex items-center gap-2 cursor-pointer shadow-lg"
+            className="bg-zinc-900 hover:bg-zinc-850 text-white border border-zinc-700 px-6 py-3.5 rounded-2xl font-semibold text-base sm:text-lg transition flex items-center gap-2 cursor-pointer shadow-lg"
           >
-            <span className="w-2 h-2 rounded-full bg-blue-400 animate-ping" />
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
             <span>📡 {t("liveRunningStatus")}</span>
           </button>
           <button
@@ -96,15 +96,15 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 w-full text-left mt-2">
           <div
             onClick={() => handleTrackSpecificTrain("22436")}
-            className="bg-slate-900/70 border border-slate-800 hover:border-blue-500/50 p-5 rounded-2xl transition cursor-pointer hover:bg-slate-850/80 group"
+            className="bg-zinc-950/80 border border-zinc-800 hover:border-zinc-500 p-5 rounded-2xl transition cursor-pointer hover:bg-zinc-900 group"
           >
             <div className="flex items-center justify-between mb-3">
               <span className="text-2xl">📡</span>
-              <span className="text-[10px] font-bold bg-blue-900/60 text-blue-300 px-2 py-0.5 rounded-full border border-blue-700/50">
+              <span className="text-[10px] font-bold bg-zinc-850 text-zinc-200 px-2 py-0.5 rounded-full border border-zinc-700">
                 GPS LIVE
               </span>
             </div>
-            <h3 className="text-base font-bold text-white group-hover:text-blue-300 transition mb-1">
+            <h3 className="text-base font-bold text-white group-hover:text-zinc-200 transition mb-1">
               {t("liveGpsTracker")}
             </h3>
             <p className="text-xs text-gray-400">
@@ -172,7 +172,7 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-slate-850 bg-slate-950/80 py-6 px-4 text-center text-xs text-slate-500">
+      <footer className="border-t border-zinc-850 bg-black py-6 px-4 text-center text-xs text-slate-500">
         <p className="max-w-2xl mx-auto">
           {t("officialPlatform")} • {t("ministryRailways")}
         </p>

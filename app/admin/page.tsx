@@ -191,7 +191,7 @@ export default function Admin() {
               <h2 className="text-2xl font-bold text-yellow-400">📊 Platform Statistics</h2>
               <button
                 onClick={fetchStats}
-                className="text-xs text-blue-400 hover:underline cursor-pointer"
+                className="text-xs text-zinc-300 hover:underline cursor-pointer"
               >
                 🔄 Refresh Data
               </button>
@@ -213,7 +213,7 @@ export default function Admin() {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                   <div className="bg-gray-800 p-5 rounded-xl border border-gray-700">
                     <p className="text-gray-400 text-xs">Total Registered Users</p>
-                    <p className="text-3xl font-extrabold text-blue-400 mt-1">
+                    <p className="text-3xl font-extrabold text-white mt-1">
                       {stats?.totalUsers || 0}
                     </p>
                   </div>
@@ -253,7 +253,7 @@ export default function Admin() {
               </div>
               <button
                 onClick={() => setActiveTab("add")}
-                className="bg-blue-600 hover:bg-blue-700 text-xs px-3 py-2 rounded-lg font-semibold cursor-pointer"
+                className="bg-white text-black hover:bg-zinc-200 text-xs px-3 py-2 rounded-lg font-bold cursor-pointer"
               >
                 ➕ Add New Train
               </button>
@@ -298,7 +298,7 @@ export default function Admin() {
                           </div>
                         </td>
                         <td className="p-3">
-                          <span className="text-blue-400">{train.from}</span>
+                          <span className="text-zinc-200">{train.from}</span>
                           <span className="text-gray-500"> → </span>
                           <span className="text-green-400">{train.to}</span>
                         </td>
@@ -508,7 +508,7 @@ export default function Admin() {
                         </td>
                         <td className="p-3 text-white">{b.train?.trainName || b.train_name || "Vande Bharat Express"}</td>
                         <td className="p-3">
-                          <span className="text-blue-400">{b.train?.from || b.from_station || "New Delhi"}</span>
+                          <span className="text-zinc-200">{b.train?.from || b.from_station || "New Delhi"}</span>
                           <span className="text-gray-500"> → </span>
                           <span className="text-green-400">{b.train?.to || b.to_station || "Varanasi"}</span>
                         </td>
@@ -565,7 +565,7 @@ export default function Admin() {
                             className={`px-2 py-1 rounded-full text-xs font-semibold ${
                               u.role === "admin"
                                 ? "bg-purple-900 text-purple-400"
-                                : "bg-blue-900 text-blue-400"
+                                : "bg-zinc-800 text-zinc-200 border border-zinc-700"
                             }`}
                           >
                             {u.role}
